@@ -1,6 +1,6 @@
 package property;
 
-import Models.CSVLines;
+import Models.CsvCinematic;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
 import Controller.CsvImporter;
@@ -18,15 +18,14 @@ class CsvImporterTest {
             @ForAll @Size(min = 100) List<@From("validCSVLine") String> csvLines) throws IOException {
 
         String tempFilePath = createTempCSVFile(csvLines);
-        CsvImporter csvImporter = new CsvImporter();
+        Path path = Paths.get(tempFilePath);
+        CsvImporter csvImporter = new CsvImporter(path.toString());
 
-        List<CSVLines> result = csvImporter.importData(tempFilePath);
+        List<CsvCinematic> cinematics = csvImporter.importData();
 
-        assertEquals(csvLines.size() - 1, result.size(), "Number of records should match number of input lines");
-        assertTrue(result.stream().allMatch(record -> record.getSize() >= 3 && record.getSize() <= 4),
-                "All records should have between 3 and 4 columns");
+        assertEquals(csvLines.size() - 1, cinematics.size(), "Number of records should match number of input lines");
 
-        Files.delete(Paths.get(tempFilePath));
+        Files.delete(path);
     }
 
     @Provide

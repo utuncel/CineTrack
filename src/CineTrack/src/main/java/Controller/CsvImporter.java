@@ -1,14 +1,12 @@
 package Controller;
 
 import Models.CsvCinematic;
-import Models.CSVLines;
 import Models.State;
 import Models.Type;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.io.BufferedReader;
 
@@ -48,8 +46,8 @@ public class CsvImporter {
     }
 
     private CsvCinematic createPersonFromCsvLine(String[] columns) {
-        if(validator.isValidRecord(columns)){
-            throw new RuntimeException("CSV line ist valide at line:" + lineNumber);
+        if(!validator.isValidRecord(columns)){
+            throw new RuntimeException("CSV line is Invalid at line:" + lineNumber);
         }
 
         if (columns.length == 3) {
@@ -130,10 +128,6 @@ class LineValidator {
             return false;
         }
 
-        if (size == MAX_COLUMNS && columns[3].isBlank()) {
-            return false;
-        }
-
-        return true;
+        return size != MAX_COLUMNS || !columns[3].isBlank();
     }
 }
