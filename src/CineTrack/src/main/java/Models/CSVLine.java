@@ -2,10 +2,10 @@ package Models;
 
 import java.util.List;
 
-public class CSVLines {
+public class CSVLine {
     private List<String> columns;
 
-    public CSVLines(List<String> columns) {
+    public CSVLine(List<String> columns) {
         this.columns = columns;
     }
 

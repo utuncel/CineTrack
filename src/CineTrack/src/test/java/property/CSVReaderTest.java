@@ -1,9 +1,9 @@
 package property;
 
-import Models.CSVLines;
+import Models.CSVLine;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
-import Controller.CSVReader;
+import Service.CSVReader;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -20,7 +20,7 @@ class CSVReaderTest {
         String tempFilePath = createTempCSVFile(csvLines);
         CSVReader csvReader = new CSVReader();
 
-        List<CSVLines> result = csvReader.readCSV(tempFilePath);
+        List<CSVLine> result = csvReader.readCSV(tempFilePath);
 
         assertEquals(csvLines.size() - 1, result.size(), "Number of records should match number of input lines");
         assertTrue(result.stream().allMatch(record -> record.getSize() >= 3 && record.getSize() <= 4),

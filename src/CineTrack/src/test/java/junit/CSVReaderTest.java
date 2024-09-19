@@ -1,7 +1,7 @@
 package junit;
 
-import Controller.CSVReader;
-import Models.CSVLines;
+import Service.CSVReader;
+import Models.CSVLine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,7 @@ class CSVReaderTest {
 
         writeToFile(validCSVContent);
 
-        List<CSVLines> records = csvReader.readCSV(tempFile.getAbsolutePath());
+        List<CSVLine> records = csvReader.readCSV(tempFile.getAbsolutePath());
 
         assertEquals(2, records.size());
         assertEquals(List.of("value1", "value2", "value3", "value4"), records.get(0).getColumns());
@@ -48,7 +48,7 @@ class CSVReaderTest {
         writeToFile(invalidCSVContent);
 
         assertThrows(RuntimeException.class, () -> {
-            List<CSVLines> lines = csvReader.readCSV(tempFile.getAbsolutePath());
+            List<CSVLine> lines = csvReader.readCSV(tempFile.getAbsolutePath());
         });
     }
 
