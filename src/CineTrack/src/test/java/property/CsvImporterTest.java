@@ -3,7 +3,7 @@ package property;
 import Models.CSVLines;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
-import Controller.CSVReader;
+import Controller.CsvImporter;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,15 +12,15 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-class CSVReaderTest {
+class CsvImporterTest {
     @Property
-    void testReadCSV(
+    void testImportData(
             @ForAll @Size(min = 100) List<@From("validCSVLine") String> csvLines) throws IOException {
 
         String tempFilePath = createTempCSVFile(csvLines);
-        CSVReader csvReader = new CSVReader();
+        CsvImporter csvImporter = new CsvImporter();
 
-        List<CSVLines> result = csvReader.readCSV(tempFilePath);
+        List<CSVLines> result = csvImporter.importData(tempFilePath);
 
         assertEquals(csvLines.size() - 1, result.size(), "Number of records should match number of input lines");
         assertTrue(result.stream().allMatch(record -> record.getSize() >= 3 && record.getSize() <= 4),

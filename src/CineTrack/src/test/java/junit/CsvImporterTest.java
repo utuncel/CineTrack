@@ -1,6 +1,6 @@
 package junit;
 
-import Controller.CSVReader;
+import Controller.CsvImporter;
 import Models.CSVLines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +12,19 @@ import java.io.FileWriter;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
-class CSVReaderTest {
+class CsvImporterTest {
 
-    private CSVReader csvReader;
+    private CsvImporter csvImporter;
     private File tempFile;
 
     @BeforeEach
     void setUp() throws IOException {
-        csvReader = new CSVReader();
+        csvImporter = new CsvImporter();
         tempFile = File.createTempFile("Test", ".csv");
     }
 
     @Test
-    void testReadCSVValid() throws IOException {
+    void testImportDataValid() throws IOException {
         String validCSVContent = "column1,column2,column3,column4\n" +
                 "value1,value2,value3,value4\n" +
                 "data1,data2,data3\n" +
@@ -32,7 +32,7 @@ class CSVReaderTest {
 
         writeToFile(validCSVContent);
 
-        List<CSVLines> records = csvReader.readCSV(tempFile.getAbsolutePath());
+        List<CSVLines> records = csvImporter.importData(tempFile.getAbsolutePath());
 
         assertEquals(2, records.size());
         assertEquals(List.of("value1", "value2", "value3", "value4"), records.get(0).getColumns());
@@ -40,7 +40,7 @@ class CSVReaderTest {
     }
 
     @Test
-    void testReadCSVInvalid() throws IOException {
+    void testImportDataInvalid() throws IOException {
         String invalidCSVContent = "tooFew\n" +
                 "justTwo,columns\n" +
                 "valid1,valid2,valid3\n";
@@ -48,13 +48,13 @@ class CSVReaderTest {
         writeToFile(invalidCSVContent);
 
         assertThrows(RuntimeException.class, () -> {
-            List<CSVLines> lines = csvReader.readCSV(tempFile.getAbsolutePath());
+            List<CSVLines> lines = csvImporter.importData(tempFile.getAbsolutePath());
         });
     }
 
     @Test
-    void testReadCSV_ExceptionOnFileNotFound() {
-        assertThrows(RuntimeException.class, () -> csvReader.readCSV("non_existent_file.csv"));
+    void testImportData_ExceptionOnFileNotFound() {
+        assertThrows(RuntimeException.class, () -> csvImporter.importData("non_existent_file.csv"));
     }
 
     // help-method that I can write some csv content into a file
