@@ -1,9 +1,9 @@
 package property;
 
-import Models.CSVLine;
+import Models.CsvCinematic;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
-import Service.CSVReader;
+import Controller.CsvImporter;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,21 +12,20 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-class CSVReaderTest {
+class CsvImporterTest {
     @Property
-    void testReadCSV(
+    void testImportData(
             @ForAll @Size(min = 100) List<@From("validCSVLine") String> csvLines) throws IOException {
 
         String tempFilePath = createTempCSVFile(csvLines);
-        CSVReader csvReader = new CSVReader();
+        Path path = Paths.get(tempFilePath);
+        CsvImporter csvImporter = new CsvImporter(path.toString());
 
-        List<CSVLine> result = csvReader.readCSV(tempFilePath);
+        List<CsvCinematic> cinematics = csvImporter.importData();
 
-        assertEquals(csvLines.size() - 1, result.size(), "Number of records should match number of input lines");
-        assertTrue(result.stream().allMatch(record -> record.getSize() >= 3 && record.getSize() <= 4),
-                "All records should have between 3 and 4 columns");
+        assertEquals(csvLines.size() - 1, cinematics.size(), "Number of records should match number of input lines");
 
-        Files.delete(Paths.get(tempFilePath));
+        Files.delete(path);
     }
 
     @Provide
