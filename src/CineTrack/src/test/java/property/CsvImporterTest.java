@@ -1,14 +1,13 @@
 package property;
 
-import Models.CsvCinematic;
+import Models.Helper.CsvCinematic;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
-import Controller.CsvImporter;
+import Service.CsvImporter;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 

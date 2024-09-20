@@ -1,8 +1,21 @@
 package Models;
 
-public class Series extends Cinematic{
-    public Series(){
-        super();
-        setType(Type.SERIES);
+import Models.Helper.ApiCinematic;
+import Models.Helper.CsvCinematic;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Series extends Cinematic {
+    private List<String> actors;
+
+    public Series(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {
+        super(apiCinematic, csvCinematic);
+
+        String actors = apiCinematic.getActors();
+        this.actors = (actors != null && !actors.isEmpty())
+                ? Arrays.asList(actors.split(", "))
+                : new ArrayList<>();
     }
 }

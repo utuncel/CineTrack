@@ -1,42 +1,43 @@
 package junit;
 
+import Service.CsvImporter;
+import Models.Helper.CsvCinematic;
 import Service.ApiData;
-import Service.CSVReader;
 import Service.CineFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.List;
 
 public class ApiDataTest {
     private CineFactory cineFactory;
-    private CSVReader csvReader;
+    private CsvImporter csvImporter;
     private File tempFile;
 
     @BeforeEach
     void setUp() throws IOException {
-       csvReader = new CSVReader();
         tempFile = File.createTempFile("Test", ".csv");
+        csvImporter = new CsvImporter(tempFile.getAbsolutePath());
     }
 
     @Test
     void testReadCSVValid() throws IOException {
-        String validCSVContent = "Name,Type,State,Value\n" +
-                "The%20Fighter,MOVIE,FINISHED,6\n" +
+        String validCSVContent = "Title,Type,State,Rating\n" +
+                "The Fighter,MOVIE,FINISHED,6\n" +
                 "Up,MOVIE,FINISHED,8\n" +
-                "Benjamin%20Button,MOVIE,TOWATCH\n"+
+                "The Curious Case of Benjamin Button,MOVIE,TOWATCH\n"+
                 "Oppenheimer,MOVIE,FINISHED,6\n";
 
         writeToFile(validCSVContent);
 
-        var csvLines = csvReader.readCSV(tempFile.getAbsolutePath());
-        ApiData apiData = new ApiData(csvLines);
-        apiData.fillMoviesAndSeries();
+        List<CsvCinematic> cinematics = csvImporter.importData();
+        ApiData apiData = new ApiData();
+        for(CsvCinematic csvCinematic : cinematics) {
+            apiData.fetchMoviesOrSeries(csvCinematic.getTitle());
+        }
     }
 
     private void writeToFile(String content) throws IOException {

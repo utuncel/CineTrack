@@ -1,30 +1,47 @@
 package Models;
 
-import java.awt.image.BufferedImage;
+import Models.Helper.ApiCinematic;
+import Models.Helper.CsvCinematic;
 
-public class Cinematic {
-    private String name;
-    private int value;
+import java.util.Optional;
+
+public abstract class Cinematic {
+    private String title;
+    private int myRating;
     private String description;
-    private BufferedImage image;
+    private String imageUrl;
+    private String runtime;
+    private double otherRating;
+    private String directorName;
     private State state;
     private Type type;
 
-
-    public String getName() {
-        return name;
+    public Cinematic(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {
+        this.title = csvCinematic.getTitle();
+        this.myRating = csvCinematic.getRating();
+        this.state = csvCinematic.getState();
+        this.type = csvCinematic.getType();
+        this.runtime = Optional.ofNullable(apiCinematic.getRuntime()).orElse("Unknown runtime");
+        this.otherRating = Optional.ofNullable(apiCinematic.getImdbRating()).orElse(0.0);
+        this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
+        this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
+        this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTitle() {
+        return title;
     }
 
-    public int getValue() {
-        return value;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public int getMyRating() {
+        return myRating;
+    }
+
+    public void setMyRating(int myRating) {
+        this.myRating = myRating;
     }
 
     public State getState() {
@@ -43,12 +60,12 @@ public class Cinematic {
         this.type = type;
     }
 
-    public BufferedImage getImage() {
-        return image;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImage(BufferedImage image) {
-        this.image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getDescription() {
@@ -58,5 +75,6 @@ public class Cinematic {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }
 
