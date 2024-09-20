@@ -1,5 +1,6 @@
 package junit;
 
+import Service.ApiData;
 import Service.CSVReader;
 import Service.CineFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CineFactoryTest {
+public class ApiDataTest {
     private CineFactory cineFactory;
     private CSVReader csvReader;
     private File tempFile;
@@ -34,8 +35,8 @@ public class CineFactoryTest {
         writeToFile(validCSVContent);
 
         var csvLines = csvReader.readCSV(tempFile.getAbsolutePath());
-        cineFactory = new CineFactory(csvLines);
-        cineFactory.fillMoviesAndSeries();
+        ApiData apiData = new ApiData(csvLines);
+        apiData.fillMoviesAndSeries();
     }
 
     private void writeToFile(String content) throws IOException {
