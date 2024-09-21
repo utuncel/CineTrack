@@ -1,8 +1,8 @@
 package Service;
 
 import Models.Helper.CsvCinematic;
-import Models.State;
-import Models.Type;
+import Models.Enums.State;
+import Models.Enums.Type;
 
 import java.io.FileReader;
 import java.io.IOException;

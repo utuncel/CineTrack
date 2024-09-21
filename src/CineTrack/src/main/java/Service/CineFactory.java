@@ -1,7 +1,7 @@
 package Service;
 
-import Models.*;
 import Models.Helper.ApiCinematic;
+import Models.Helper.Cinematic;
 import Models.Helper.CinematicCreator;
 import Models.Helper.CsvCinematic;
 

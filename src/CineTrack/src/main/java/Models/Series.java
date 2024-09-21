@@ -1,6 +1,7 @@
 package Models;
 
 import Models.Helper.ApiCinematic;
+import Models.Helper.Cinematic;
 import Models.Helper.CsvCinematic;
 
 import java.util.ArrayList;

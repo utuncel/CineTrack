@@ -1,13 +1,14 @@
 package Models;
 
 import Models.Helper.ApiCinematic;
+import Models.Helper.Cinematic;
 import Models.Helper.CsvCinematic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Movie extends Cinematic{
+public class Movie extends Cinematic {
     private List<String> actors;
 
     public Movie(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {

@@ -1,8 +1,11 @@
-package Models;
+package Models.Helper;
 
-import Models.Helper.ApiCinematic;
-import Models.Helper.CsvCinematic;
+import Models.Enums.State;
+import Models.Enums.Type;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class Cinematic {
@@ -13,6 +16,7 @@ public abstract class Cinematic {
     private String runtime;
     private double otherRating;
     private String directorName;
+    private List<String> genre;
     private State state;
     private Type type;
 
@@ -26,6 +30,11 @@ public abstract class Cinematic {
         this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
         this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
         this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");
+
+        String genres = apiCinematic.getGenre();
+        this.genre = (genres != null && !genres.isEmpty())
+                ? Arrays.asList(genres.split(", "))
+                : new ArrayList<>();
     }
 
     public String getTitle() {
