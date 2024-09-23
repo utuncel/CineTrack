@@ -1,7 +1,7 @@
-package Models.Helper;
+package org.com.Models.Helper;
 
-import Models.Enums.State;
-import Models.Enums.Type;
+import org.com.Models.Enums.State;
+import org.com.Models.Enums.Type;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ public abstract class Cinematic {
     private String description;
     private String imageUrl;
     private String runtime;
-    private double otherRating;
+    private String otherRating;
     private String directorName;
     private List<String> genre;
     private State state;
@@ -26,7 +26,7 @@ public abstract class Cinematic {
         this.state = csvCinematic.getState();
         this.type = csvCinematic.getType();
         this.runtime = Optional.ofNullable(apiCinematic.getRuntime()).orElse("Unknown runtime");
-        this.otherRating = Optional.ofNullable(apiCinematic.getImdbRating()).orElse(0.0);
+        this.otherRating = Optional.ofNullable(apiCinematic.getImdbRating()).orElse("Unknown Rating");
         this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
         this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
         this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");

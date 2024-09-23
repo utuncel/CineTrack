@@ -1,8 +1,8 @@
-package Service;
+package org.com.Service;
 
-import Models.Helper.CsvCinematic;
-import Models.Enums.State;
-import Models.Enums.Type;
+import org.com.Models.Helper.CsvCinematic;
+import org.com.Models.Enums.State;
+import org.com.Models.Enums.Type;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -72,7 +72,7 @@ public class CsvImporter {
             case "ANIME" -> Type.ANIME;
             case "SERIES" -> Type.SERIES;
             default ->
-                    throw new IllegalArgumentException("Invalid Type:" + typeString + "- valid are MOVIE,ANIME,SERIES");
+                    throw new IllegalArgumentException("Invalid Type:" + typeString + "at index:" + lineNumber +  "- valid are MOVIE,ANIME,SERIES");
         };
     }
 
@@ -83,7 +83,7 @@ public class CsvImporter {
             case "DROPPED" -> State.DROPPED;
             case "TOWATCH" -> State.TOWATCH;
             default ->
-                    throw new IllegalArgumentException("Invalid State:" + stateString + "- valid are FINISHED,WATCHING,DROPPED,TOWATCH");
+                    throw new IllegalArgumentException("Invalid State:" + stateString + "at index:" + lineNumber +   "- valid are FINISHED,WATCHING,DROPPED,TOWATCH");
         };
     }
 
@@ -92,12 +92,12 @@ public class CsvImporter {
             int number = Integer.parseInt(input);
 
             if (number < 1 || number > 10) {
-                throw new IllegalArgumentException("Invalid input: " + input + " is not between 1 and 10.");
+                throw new IllegalArgumentException("Invalid input: " + input + "at index:" + lineNumber +   " is not between 1 and 10.");
             }
 
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid input: " + input + " is not a valid number.");
+            throw new IllegalArgumentException("Invalid input: " + input + "at index:" + lineNumber +   " is not a valid number.");
         }
     }
 }

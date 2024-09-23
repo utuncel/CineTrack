@@ -1,7 +1,7 @@
 package junit;
 
-import Service.CsvImporter;
-import Models.Helper.CsvCinematic;
+import org.com.Service.CsvImporter;
+import org.com.Models.Helper.CsvCinematic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;

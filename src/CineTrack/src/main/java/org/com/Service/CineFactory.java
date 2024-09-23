@@ -1,9 +1,9 @@
-package Service;
+package org.com.Service;
 
-import Models.Helper.ApiCinematic;
-import Models.Helper.Cinematic;
-import Models.Helper.CinematicCreator;
-import Models.Helper.CsvCinematic;
+import org.com.Models.Helper.ApiCinematic;
+import org.com.Models.Helper.Cinematic;
+import org.com.Models.Helper.CinematicCreator;
+import org.com.Models.Helper.CsvCinematic;
 
 import java.io.IOException;
 import java.util.ArrayList;
