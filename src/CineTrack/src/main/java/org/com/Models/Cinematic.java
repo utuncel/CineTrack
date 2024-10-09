@@ -1,24 +1,28 @@
-package org.com.Models.Helper;
+package org.com.Models;
 
 import org.com.Models.Enums.State;
 import org.com.Models.Enums.Type;
+import org.com.Models.Helper.ApiCinematic;
+import org.com.Models.Helper.CsvCinematic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class Cinematic {
+public class Cinematic {
     private String title;
     private int myRating;
     private String description;
     private String imageUrl;
     private String runtime;
-    private String otherRating;
+    private double ImdbRating;
+    private int imdbVotes;
     private String directorName;
-    private List<String> genre;
     private State state;
     private Type type;
+    private List<String> actors;
+    private List<String> genres;
 
     public Cinematic(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {
         this.title = csvCinematic.getTitle();
@@ -26,14 +30,20 @@ public abstract class Cinematic {
         this.state = csvCinematic.getState();
         this.type = csvCinematic.getType();
         this.runtime = Optional.ofNullable(apiCinematic.getRuntime()).orElse("Unknown runtime");
-        this.otherRating = Optional.ofNullable(apiCinematic.getImdbRating()).orElse("Unknown Rating");
+        this.ImdbRating = parseStringToDouble(apiCinematic.getImdbRating());
+        this.imdbVotes = parseImdbVotes(apiCinematic.getImdbVotes());
         this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
         this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
         this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");
 
         String genres = apiCinematic.getGenre();
-        this.genre = (genres != null && !genres.isEmpty())
+        this.genres = (genres != null && !genres.isEmpty())
                 ? Arrays.asList(genres.split(", "))
+                : new ArrayList<>();
+
+        String actors = apiCinematic.getActors();
+        this.actors = (actors != null && !actors.isEmpty())
+                ? Arrays.asList(actors.split(", "))
                 : new ArrayList<>();
     }
 
@@ -85,5 +95,69 @@ public abstract class Cinematic {
         this.description = description;
     }
 
+    public String getRuntime() {
+        return runtime;
+    }
+
+    public void setRuntime(String runtime) {
+        this.runtime = runtime;
+    }
+
+    public double getImdbRating() {
+        return ImdbRating;
+    }
+
+    public void setImdbRating(double imdbRating) {
+        this.ImdbRating = imdbRating;
+    }
+
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public List<String> getActors() {
+        return actors;
+    }
+
+    public void setActors(List<String> actors) {
+        this.actors = actors;
+    }
+
+    private double parseStringToDouble(String str) {
+        try {
+            return Double.parseDouble(str);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
+    public int getImdbVotes() {
+        return imdbVotes;
+    }
+
+    public void setImdbVotes(int imdbVotes) {
+        this.imdbVotes = imdbVotes;
+    }
+
+    private int parseImdbVotes(String imdbVotesStr) {
+        if (imdbVotesStr == null || imdbVotesStr.isEmpty()) {
+            return 0;
+        }
+
+        String cleanedVotes = imdbVotesStr.replace(",", "");
+        return Integer.parseInt(cleanedVotes);
+    }
 }
 

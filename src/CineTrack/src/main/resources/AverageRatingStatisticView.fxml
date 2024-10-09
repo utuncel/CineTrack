@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<HBox fx:id="averageRating" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.Controller.Dashboard.AverageRatingStatisticController" spacing="20" alignment="CENTER">
+    <stylesheets>
+        <URL value="@AverageRatingStatisticStyle.css" />
+    </stylesheets>
+    <children>
+        <!-- Box für MyRating -->
+        <VBox alignment="CENTER" spacing="10" styleClass="rating-box">
+            <Label styleClass="rating-name" text="MyRating" />
+            <Label fx:id="myRatingValue" styleClass="rating-value"/>
+        </VBox>
+
+        <!-- Box für IMDbRating -->
+        <VBox alignment="CENTER" spacing="10" styleClass="rating-box">
+            <Label styleClass="rating-name" text="IMDbRating" />
+            <Label fx:id="imdbRatingValue" styleClass="rating-value" />
+        </VBox>
+    </children>
+</HBox>
+

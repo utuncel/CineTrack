@@ -1,7 +1,35 @@
-Title,Type,State,Value
-Oppenheimer,MOVIE,FINISHED,6
+Title,Type,State,Rating
 The Fighter,MOVIE,FINISHED,6
-Oben,MOVIE,FINISHED,8
-Das ist das Ende,MOVIE,DROPPED
-Benjamin Button,MOVIE,TOWATCH
-
+Up,MOVIE,FINISHED,8
+The Curious Case of Benjamin Button,MOVIE,TOWATCH
+Solo Leveling,ANIME,WATCHING,8
+One Piece,ANIME,WATCHING,9
+The Big Bang Theory,SERIES,FINISHED,8
+Harry Potter and the Sorcerer's Stone,MOVIE,FINISHED,6
+Harry Potter and the Chamber of Secrets,MOVIE,FINISHED,6
+Harry Potter and the Prisoner of Azkaban,MOVIE,FINISHED,7
+Harry Potter and the Goblet of Fire,MOVIE,FINISHED,7
+Harry Potter and the Order of the Phoenix,MOVIE,FINISHED,7
+Harry Potter and the Half-Blood Prince,MOVIE,FINISHED,7
+Harry Potter and the Deathly Hallows: Part 1,MOVIE,FINISHED,8
+Harry Potter and the Deathly Hallows: Part 2,MOVIE,FINISHED,8
+Minions: The Rise of Gru,MOVIE,FINISHED,7
+Oppenheimer,MOVIE,FINISHED,6
+The Imitation Game,MOVIE,FINISHED,7
+Luca,MOVIE,FINISHED,6
+Dungeons & Dragons: Honor Among Thieves,MOVIE,FINISHED,6
+The Fighter,MOVIE,FINISHED,6
+Venom,MOVIE,FINISHED,6
+Pirates of the Caribbean: Dead Men Tell No Tales,MOVIE,FINISHED,6
+Pirates of the Caribbean: The Curse of the Black Pearl,MOVIE,FINISHED,6
+Pirates of the Caribbean: Dead Man's Chest,MOVIE,FINISHED,7
+The Hangover,MOVIE,FINISHED,5
+The Hangover Part II,MOVIE,FINISHED,5
+The Hangover Part III,MOVIE,FINISHED,3
+Pirates of the Caribbean: At World's End,MOVIE,FINISHED,8
+Joker,MOVIE,FINISHED,6
+Southpaw,MOVIE,FINISHED,5
+Jujutsu Kaisen 0,MOVIE,FINISHED,6
+Up,MOVIE,FINISHED,8
+Kong: Skull Island,MOVIE,FINISHED,7
+Fast X,MOVIE,FINISHED,7

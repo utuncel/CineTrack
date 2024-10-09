@@ -1,0 +1,10 @@
+package org.com.Models.Enums;
+
+public enum StatisticStrategy {
+    GENRE_COUNT_STRATEGY,
+    STATE_COUNT_STRATEGY,
+    TYPE_COUNT_STRATEGY,
+    ACTOR_RATING_STRATEGY,
+    GENRE_RATING_STRATEGY,
+    AVERAGE_RATING_STRATEGY,
+}

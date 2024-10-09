@@ -1,8 +1,7 @@
 package org.com.Service;
 
 import org.com.Models.Helper.ApiCinematic;
-import org.com.Models.Helper.Cinematic;
-import org.com.Models.Helper.CinematicCreator;
+import org.com.Models.Cinematic;
 import org.com.Models.Helper.CsvCinematic;
 
 import java.io.IOException;
@@ -12,12 +11,10 @@ import java.util.List;
 public class CineFactory {
     private final CsvImporter csvImporter;
     private final ApiData apiData;
-    CinematicCreator cinematicCreator;
 
     public CineFactory(CsvImporter csvImporter, ApiData apiData) {
         this.csvImporter = csvImporter;
         this.apiData = apiData;
-        cinematicCreator = new CinematicCreator();
     }
 
     public List<Cinematic> createCinematics() throws IOException {
@@ -40,8 +37,7 @@ public class CineFactory {
         if (apiCinematic == null) {
             notFoundTitles.add(csvCinematic.getTitle());
         } else {
-            Cinematic cinematic = cinematicCreator.createCinematic(apiCinematic, csvCinematic);
-            createdCinematics.add(cinematic);
+            createdCinematics.add(new Cinematic(apiCinematic, csvCinematic));
         }
     }
 

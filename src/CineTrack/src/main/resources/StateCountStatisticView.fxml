@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+
+<HBox fx:id="stateCount" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.Controller.Dashboard.StateCountStatisticController" spacing="20" alignment="CENTER">
+    <stylesheets>
+        <URL value="@StateCountStatisticStyle.css" />
+    </stylesheets>
+    <children>
+        <!-- Box für Block 1 -->
+        <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+            <Label styleClass="statistic-name" text="Finished" />
+            <Label fx:id="finished" styleClass="statistic-value"/>
+        </VBox>
+
+        <!-- Box für Block 2 -->
+        <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+            <Label styleClass="statistic-name" text="Currently Watching" />
+            <Label fx:id="watching" styleClass="statistic-value"/>
+        </VBox>
+
+        <!-- Box für Block 3 -->
+        <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+            <Label styleClass="statistic-name" text="Dropped" />
+            <Label fx:id="dropped" styleClass="statistic-value"/>
+        </VBox>
+
+        <!-- Box für Block 4 -->
+        <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+            <Label styleClass="statistic-name" text="On Watchlist" />
+            <Label fx:id="toWatch" styleClass="statistic-value"/>
+        </VBox>
+    </children>
+</HBox>
