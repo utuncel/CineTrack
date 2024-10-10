@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<HBox fx:id="genreRating" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.com.Controller.Dashboard.GenreRatingStatisticController" spacing="20" alignment="CENTER">
+
+    <VBox spacing="10" alignment="CENTER">
+
+        <HBox spacing="5" alignment="CENTER">
+            <Label text="Minimales Rating: " styleClass="label-min-rating"/>
+            <TextField fx:id="minRatingInput" styleClass="input-min-rating"/>
+        </HBox>
+
+        <BarChart fx:id="genreRatingBarChart" styleClass="bar-chart" prefHeight="400" prefWidth="900">
+            <xAxis>
+                <CategoryAxis fx:id="xAxis" label="Genre"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" label="Rating" upperBound="10" tickUnit="1"/>
+            </yAxis>
+        </BarChart>
+
+    </VBox>
+
+    <stylesheets>
+        <URL value="@GenreRatingStatisticStyle.css"/>
+    </stylesheets>
+
+</HBox>

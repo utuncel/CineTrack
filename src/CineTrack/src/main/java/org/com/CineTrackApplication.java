@@ -36,8 +36,6 @@ public class CineTrackApplication extends Application {
 
         stage.setScene(new Scene(root));
         stage.show();
-
-        dashboardModel.getTypes().stream().forEach(System.out::println);
     }
 
     public static void main(String[] args) {

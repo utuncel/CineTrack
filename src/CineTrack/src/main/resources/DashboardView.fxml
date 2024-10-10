@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.FlowPane?>
@@ -16,7 +17,7 @@
    <children>
       <AnchorPane prefHeight="827.0" prefWidth="1492.0">
          <children>
-            <BorderPane layoutX="-2.0" prefHeight="827.0" prefWidth="1778.0" styleClass="semi-top-form" stylesheets="@DasboardStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <BorderPane layoutX="-2.0" layoutY="139.0" prefHeight="1039.0" prefWidth="1901.0" styleClass="semi-top-form" stylesheets="@DasboardStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0">
                <top>
                   <AnchorPane prefHeight="37.0" prefWidth="928.0" BorderPane.alignment="CENTER">
                      <children>
@@ -27,8 +28,6 @@
                                     <Font name="Tahoma Bold" size="28.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1730.0" layoutY="1.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="85.0" styleClass="minimize" stylesheets="@DasboardStyle.css" text="miimize" />
-                              <Button layoutX="1807.0" layoutY="2.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="85.0" styleClass="close" stylesheets="@DasboardStyle.css" text="close" />
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>
@@ -78,7 +77,7 @@
                      <children>
                         <AnchorPane prefHeight="854.0" prefWidth="1649.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="110.0" prefWidth="1653.0" AnchorPane.bottomAnchor="849.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-18.0" AnchorPane.topAnchor="14.0">
+                              <AnchorPane layoutX="14.0" layoutY="34.0" prefHeight="110.0" prefWidth="1654.0" AnchorPane.bottomAnchor="849.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="-18.0" AnchorPane.topAnchor="34.0">
                                  <children>
                                     <AnchorPane layoutX="20.0" prefHeight="110.0" prefWidth="294.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="1339.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -103,35 +102,49 @@
                                              </children>
                                           </StackPane>
                                        </children></AnchorPane>
-                                    <FlowPane hgap="30.0" layoutX="1384.0" layoutY="13.0" prefHeight="98.0" prefWidth="269.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1384.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <AnchorPane layoutX="1384.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1384.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <CheckBox fx:id="averageRatingCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Average Ratings" />
-                                          <CheckBox fx:id="actorRatingCheckBox" mnemonicParsing="false" text="Actor Ratings" />
-                                          <CheckBox fx:id="genreRatingCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Genre Ratings" />
-                                          <CheckBox fx:id="genreCountCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="111.0" text="Genre Count" />
-                                          <CheckBox fx:id="typeCountCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Type Count" />
-                                          <CheckBox fx:id="stateCountCheckBox" mnemonicParsing="false" text="State Count" />
+                                          <FlowPane hgap="30.0" prefHeight="98.0" prefWidth="269.0" vgap="5.0">
+                                             <children>
+                                                <CheckBox fx:id="averageRatingCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Average Ratings" />
+                                                <CheckBox fx:id="actorRatingCheckBox" mnemonicParsing="false" text="Actor Ratings" />
+                                                <CheckBox fx:id="genreRatingCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Genre Ratings" />
+                                                <CheckBox fx:id="genreCountCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="111.0" text="Genre Count" />
+                                                <CheckBox fx:id="typeCountCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="110.0" text="Type Count" />
+                                                <CheckBox fx:id="stateCountCheckBox" mnemonicParsing="false" text="State Count" />
+                                             </children>
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                          </FlowPane>
                                        </children>
-                                       <opaqueInsets>
-                                          <Insets />
-                                       </opaqueInsets>
-                                    </FlowPane>
-                                    <StackPane layoutX="238.0" layoutY="-37.0" prefHeight="98.0" prefWidth="122.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1531.0" AnchorPane.topAnchor="0.0">
+                                    </AnchorPane>
+                                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1531.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <CheckBox fx:id="seriesCheckBox" mnemonicParsing="false" selected="true" text="Series" />
-                                          <CheckBox fx:id="movieCheckBox" mnemonicParsing="false" selected="true" text="Movie">
-                                             <StackPane.margin>
-                                                <Insets top="-50.0" />
-                                             </StackPane.margin></CheckBox>
-                                          <CheckBox fx:id="animeCheckBox" mnemonicParsing="false" selected="true" text="Anime">
-                                             <StackPane.margin>
-                                                <Insets top="50.0" />
-                                             </StackPane.margin></CheckBox>
+                                          <StackPane prefHeight="98.0" prefWidth="122.0">
+                                             <children>
+                                                <CheckBox fx:id="seriesCheckBox" mnemonicParsing="false" selected="true" text="Series" />
+                                                <CheckBox fx:id="movieCheckBox" mnemonicParsing="false" selected="true" text="Movie">
+                                                   <StackPane.margin>
+                                                      <Insets top="-50.0" />
+                                                   </StackPane.margin>
+                                                </CheckBox>
+                                                <CheckBox fx:id="animeCheckBox" mnemonicParsing="false" selected="true" text="Anime">
+                                                   <StackPane.margin>
+                                                      <Insets top="50.0" />
+                                                   </StackPane.margin>
+                                                </CheckBox>
+                                             </children>
+                                          </StackPane>
                                        </children>
-                                    </StackPane>
+                                    </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <VBox fx:id="chartContainer" layoutX="476.0" layoutY="145.0" prefHeight="828.0" prefWidth="1649.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="145.0" />
+                              <ScrollPane layoutY="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="145.0">
+                                 <content>
+                                    <VBox fx:id="chartContainer" prefHeight="828.0" prefWidth="1736.0" />
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </AnchorPane>
                      </children>

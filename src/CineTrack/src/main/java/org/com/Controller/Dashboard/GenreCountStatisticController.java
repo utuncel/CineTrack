@@ -1,8 +1,10 @@
 package org.com.Controller.Dashboard;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -13,16 +15,21 @@ import org.com.Models.Enums.Type;
 import org.com.Models.Statistic.GenreCountStrategy;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class GenreCountStatisticController {
+
     @FXML
     private BarChart<String, Number> genreBarChart;
-    @FXML
-    public TextField minGenreCountInput;
 
-    private Map<String, Integer> genreCountData;
+    @FXML
+    private TextField minGenreCountInput;
+
+    @FXML
+    private CategoryAxis xAxis;
+
     private VBox chartContainer;
 
     public GenreCountStatisticController() {
@@ -38,69 +45,58 @@ public class GenreCountStatisticController {
 
     public void addGenreCountStatistic(List<Cinematic> cinematics, List<Type> types, List<State> states) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GenreCountStatisticView.fxml"));
-        HBox genreCountBlock = loader.load();
+        HBox genreCountStatistic = loader.load();
 
         GenreCountStatisticController controller = loader.getController();
         controller.setChartContainer(this.chartContainer);
 
-        GenreCountStrategy genreCountStrategy = new GenreCountStrategy();
-        Map<String, Integer> genreCountData = genreCountStrategy.calculate(cinematics, types,states);
-
-        controller.setData(genreCountData, getMinGenreCountInput());
+        controller.initializeChart(cinematics, types, states);
 
         if (chartContainer != null) {
-            chartContainer.getChildren().add(genreCountBlock);
+            chartContainer.getChildren().add(genreCountStatistic);
         }
     }
 
-    public void setData(Map<String, Integer> genreCountData, int minCount) {
-        this.genreCountData = genreCountData;
-        updateChartData(minCount);
-    }
+    private void initializeChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
+        updateChart(cinematics, types, states);
 
-    @FXML
-    private void initialize() {
-        initializeMinGenreCountListener();
-    }
-
-    private void initializeMinGenreCountListener() {
         minGenreCountInput.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.equals(oldValue)) {
-                updateChart();
+            if (!newValue.matches("\\d*")) {
+                minGenreCountInput.setText(newValue.replaceAll("\\D", ""));
+            } else {
+                updateChart(cinematics, types, states);
             }
         });
     }
 
-    private void updateChart() {
-        if (genreCountData != null) {
-            setData(genreCountData, getMinGenreCountInput());
-        }
-    }
+    private void updateChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
+        GenreCountStrategy genreCountStrategy = new GenreCountStrategy();
+        Map<String, Integer> genreCountData = genreCountStrategy.calculate(cinematics, types, states);
 
-    private void updateChartData(int minCount) {
-        if (genreBarChart == null) {
-            return;
+        int minCount = 0;
+        try {
+            minCount = Integer.parseInt(minGenreCountInput.getText());
+        } catch (NumberFormatException e) {
         }
-
-        genreBarChart.getData().clear();
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (Map.Entry<String, Integer> entry : genreCountData.entrySet()) {
-            if (entry.getValue() >= minCount) {
-                series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
-            }
-        }
-        genreBarChart.getData().add(series);
-    }
+        List<String> categories = new ArrayList<>();
 
-    private int getMinGenreCountInput() {
-        if (minGenreCountInput == null) {
-            return 0;
-        }
-        try {
-            return Integer.parseInt(minGenreCountInput.getText());
-        } catch (NumberFormatException e) {
-            return 0;
-        }
+        int finalMinCount = minCount;
+        genreCountData.entrySet().stream()
+                .filter(entry -> entry.getValue() >= finalMinCount)
+                .forEach(entry -> {
+                    series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+                    categories.add(entry.getKey());
+                });
+
+        xAxis.getCategories().clear();
+        xAxis.setCategories(FXCollections.observableArrayList(categories));
+
+        genreBarChart.getData().clear();
+        genreBarChart.getData().add(series);
+
+        genreBarChart.setCategoryGap(0);
+        genreBarChart.setBarGap(0.1);
     }
 }

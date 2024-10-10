@@ -16,15 +16,15 @@
 
         <HBox spacing="5" alignment="CENTER">
             <Label text="Minimale Anzahl: " styleClass="label-min-count"/>
-            <TextField fx:id="minGenreCountInput" text="0" styleClass="input-min-count"/>
+            <TextField fx:id="minGenreCountInput" styleClass="input-min-count"/>
         </HBox>
 
-        <BarChart fx:id="genreBarChart" styleClass="bar-chart" prefHeight="400" prefWidth="600" legendVisible="false">
+        <BarChart fx:id="genreBarChart" styleClass="bar-chart" prefHeight="400" prefWidth="900" legendVisible="false">
             <xAxis>
-                <CategoryAxis label="Genre"/>
+                <CategoryAxis fx:id="xAxis" label="Genre"/>/>
             </xAxis>
             <yAxis>
-                <NumberAxis label="Count"/>
+                <NumberAxis label="Count" upperBound="50" tickUnit="1"/>
             </yAxis>
         </BarChart>
 

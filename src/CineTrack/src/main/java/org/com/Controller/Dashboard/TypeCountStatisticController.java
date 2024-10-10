@@ -8,9 +8,7 @@ import javafx.scene.layout.VBox;
 import org.com.Models.Cinematic;
 import org.com.Models.Enums.State;
 import org.com.Models.Enums.Type;
-import org.com.Models.Records.StateCount;
 import org.com.Models.Records.TypeCount;
-import org.com.Models.Statistic.StateCountStrategy;
 import org.com.Models.Statistic.TypeCountStrategy;
 
 import java.io.IOException;

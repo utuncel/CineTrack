@@ -30,10 +30,6 @@ public class DashboardModel {
         states.add(State.DROPPED);
     }
 
-    public void addListener(Listener listener) {
-        listeners.add(listener);
-    }
-
     public List<Cinematic> getCinematics() {
         return cinematics;
     }

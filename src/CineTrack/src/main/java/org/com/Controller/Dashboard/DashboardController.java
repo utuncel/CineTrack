@@ -54,8 +54,8 @@ public class DashboardController {
         stateCheckBoxMap.put(State.TOWATCH, toWatchCheckBox);
 
         strategyCheckBoxMap.put(StatisticStrategy.AVERAGE_RATING_STRATEGY, averageRatingCheckBox);
-        //strategyCheckBoxMap.put(StatisticStrategy.ACTOR_RATING_STRATEGY, actorRatingCheckBox);
-        //strategyCheckBoxMap.put(StatisticStrategy.GENRE_RATING_STRATEGY, genreRatingCheckBox);
+        strategyCheckBoxMap.put(StatisticStrategy.ACTOR_RATING_STRATEGY, actorRatingCheckBox);
+        strategyCheckBoxMap.put(StatisticStrategy.GENRE_RATING_STRATEGY, genreRatingCheckBox);
         strategyCheckBoxMap.put(StatisticStrategy.GENRE_COUNT_STRATEGY, genreCountCheckBox);
         strategyCheckBoxMap.put(StatisticStrategy.TYPE_COUNT_STRATEGY, typeCountCheckBox);
         strategyCheckBoxMap.put(StatisticStrategy.STATE_COUNT_STRATEGY, stateCountCheckBox);
@@ -126,6 +126,12 @@ public class DashboardController {
                 case TYPE_COUNT_STRATEGY:
                     addTypeCountChart();
                     break;
+                case GENRE_RATING_STRATEGY:
+                    addGenreRatingChart();
+                    break;
+                case ACTOR_RATING_STRATEGY:
+                    addActorRatingChart();
+                    break;
                 // Add other cases as needed
             }
         } catch (IOException e) {
@@ -153,6 +159,16 @@ public class DashboardController {
         typeCountController.addTypeCountStatistic(dashboardModel.getCinematics(), dashboardModel.getTypes(), dashboardModel.getStates());
     }
 
+    private void addGenreRatingChart() throws IOException {
+        GenreRatingStatisticController genreRatingController = new GenreRatingStatisticController(chartContainer);
+        genreRatingController.addGenreRatingStatistic(dashboardModel.getCinematics(), dashboardModel.getTypes(), dashboardModel.getStates());
+    }
+
+    private void addActorRatingChart() throws IOException {
+        ActorRatingStatisticController actorRatingController = new ActorRatingStatisticController(chartContainer);
+        actorRatingController.addActorRatingStatistic(dashboardModel.getCinematics(), dashboardModel.getTypes(), dashboardModel.getStates());
+    }
+
     private void removeChart(String chartId) {
         chartContainer.getChildren().removeIf(node -> node.getId() != null && node.getId().equals(chartId));
     }
@@ -167,7 +183,10 @@ public class DashboardController {
                 return "stateCount";
             case TYPE_COUNT_STRATEGY:
                 return "typeCount";
-            // Add other cases as needed
+            case GENRE_RATING_STRATEGY:
+                return "genreRating";
+            case ACTOR_RATING_STRATEGY:
+                return "actorRating";
             default:
                 return "";
         }

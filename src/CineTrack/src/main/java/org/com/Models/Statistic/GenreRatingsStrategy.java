@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO filter genres with x mapsize out
 public class GenreRatingsStrategy implements StatisticStrategy<Map<String, List<Double>>> {
     @Override
     public Map<String, List<Double>> calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
