@@ -18,7 +18,7 @@
 
         <!-- Box für Block 2 -->
         <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
-            <Label styleClass="statistic-name" text="Currently Watching" />
+            <Label styleClass="statistic-name" text="Watching" />
             <Label fx:id="watching" styleClass="statistic-value"/>
         </VBox>
 
@@ -30,7 +30,7 @@
 
         <!-- Box für Block 4 -->
         <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
-            <Label styleClass="statistic-name" text="On Watchlist" />
+            <Label styleClass="statistic-name" text="ToWatch" />
             <Label fx:id="toWatch" styleClass="statistic-value"/>
         </VBox>
     </children>

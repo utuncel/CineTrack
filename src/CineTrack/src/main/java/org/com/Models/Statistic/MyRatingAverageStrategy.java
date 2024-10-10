@@ -8,12 +8,12 @@ import java.util.List;
 
 public class MyRatingAverageStrategy implements StatisticStrategy<Double> {
     @Override
-    public Double calculate(List<Cinematic> cinematics, List<Type> types) {
+    public Double calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
         double averageRating = 0.0;
         int count = 0;
 
         for (Cinematic cinematic : cinematics) {
-            if (types.contains(cinematic.getType()) && cinematic.getState() != State.TOWATCH && cinematic.getMyRating() != 0) {
+            if (types.contains(cinematic.getType()) && states.contains(cinematic.getState()) && cinematic.getMyRating() != 0) {
                 averageRating = averageRating + (cinematic.getMyRating());
                 count++;
             }

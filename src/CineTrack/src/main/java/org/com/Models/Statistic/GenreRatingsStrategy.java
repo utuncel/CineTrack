@@ -12,12 +12,12 @@ import java.util.Map;
 //TODO filter genres with x mapsize out
 public class GenreRatingsStrategy implements StatisticStrategy<Map<String, List<Double>>> {
     @Override
-    public Map<String, List<Double>> calculate(List<Cinematic> cinematics, List<Type> types) {
+    public Map<String, List<Double>> calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
 
         Map<String, List<Double>> genreRatings = new HashMap<>();
 
         for (Cinematic cinematic : cinematics) {
-            if (types.contains(cinematic.getType()) && cinematic.getState() != State.TOWATCH) {
+            if (types.contains(cinematic.getType()) && states.contains(cinematic.getState())) {
                 for (String genre : cinematic.getGenres()) {
                     List<Double> ratingData = genreRatings.getOrDefault(genre, Arrays.asList(0.0, 0.0, 0.0, 0.0));
 

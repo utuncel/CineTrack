@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.Models.Cinematic;
+import org.com.Models.Enums.State;
 import org.com.Models.Enums.Type;
 import org.com.Models.Records.StateCount;
 import org.com.Models.Statistic.StateCountStrategy;
@@ -36,7 +37,7 @@ public class StateCountStatisticController {
         this.chartContainer = chartContainer;
     }
 
-    public void addStateCountStatistic(List<Cinematic> cinematics, List<Type> types) throws IOException {
+    public void addStateCountStatistic(List<Cinematic> cinematics, List<Type> types, List<State> states) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/StateCountStatisticView.fxml"));
         HBox fourBlockStatistic = loader.load();
 
@@ -44,7 +45,7 @@ public class StateCountStatisticController {
         controller.setChartContainer(this.chartContainer);
 
         StateCountStrategy stateCountStrategy = new StateCountStrategy();
-        StateCount genreCountData = stateCountStrategy.calculate(cinematics, types);
+        StateCount genreCountData = stateCountStrategy.calculate(cinematics, types,states);
 
         controller.setBlockValues(String.valueOf(genreCountData.finished()), String.valueOf(genreCountData.watching()), String.valueOf(genreCountData.dropped()), String.valueOf(genreCountData.towatch()));
 
@@ -53,31 +54,10 @@ public class StateCountStatisticController {
         }
     }
 
-    public void setBlockValues(String value1, String value2, String value3, String value4) {
-        finished.setText(value1);
-        watching.setText(value2);
-        dropped.setText(value3);
-        toWatch.setText(value4);
-    }
-
-    @FXML
-    private void initialize() {
-        // Initialisierungen oder Listener hinzufügen, falls nötig
-    }
-
-    public void updateBlock1(String newValue) {
-        finished.setText(newValue);
-    }
-
-    public void updateBlock2(String newValue) {
-        watching.setText(newValue);
-    }
-
-    public void updateBlock3(String newValue) {
-        dropped.setText(newValue);
-    }
-
-    public void updateBlock4(String newValue) {
-        toWatch.setText(newValue);
+    public void setBlockValues(String finishedCount, String watchedCount, String droppedCount, String toWatchCount) {
+        finished.setText(finishedCount);
+        watching.setText(watchedCount);
+        dropped.setText(droppedCount);
+        toWatch.setText(toWatchCount);
     }
 }

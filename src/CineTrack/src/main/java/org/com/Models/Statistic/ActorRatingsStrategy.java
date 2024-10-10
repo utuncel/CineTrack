@@ -11,12 +11,12 @@ import java.util.Map;
 
 public class ActorRatingsStrategy implements StatisticStrategy<Map<String, List<Double>>> {
     @Override
-    public Map<String, List<Double>> calculate(List<Cinematic> cinematics, List<Type> types) {
+    public Map<String, List<Double>> calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
 
         Map<String, List<Double>> actorsRatings = new HashMap<>();
 
         for (Cinematic cinematic : cinematics) {
-            if (types.contains(cinematic.getType()) && cinematic.getState() != State.TOWATCH) {
+            if (types.contains(cinematic.getType()) && states.contains(cinematic.getState())) {
                 for (String actors : cinematic.getActors()) {
                     List<Double> ratingData = actorsRatings.getOrDefault(actors, Arrays.asList(0.0, 0.0, 0.0, 0.0));
 

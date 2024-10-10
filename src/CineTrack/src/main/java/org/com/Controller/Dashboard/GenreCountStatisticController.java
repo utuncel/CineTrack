@@ -3,13 +3,12 @@ package org.com.Controller.Dashboard;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.Models.Cinematic;
+import org.com.Models.Enums.State;
 import org.com.Models.Enums.Type;
 import org.com.Models.Statistic.GenreCountStrategy;
 
@@ -21,11 +20,8 @@ public class GenreCountStatisticController {
     @FXML
     private BarChart<String, Number> genreBarChart;
     @FXML
-    private CategoryAxis genreAxis;
-    @FXML
-    private NumberAxis countAxis;
-    @FXML
     public TextField minGenreCountInput;
+
     private Map<String, Integer> genreCountData;
     private VBox chartContainer;
 
@@ -40,7 +36,7 @@ public class GenreCountStatisticController {
         this.chartContainer = chartContainer;
     }
 
-    public void addGenreCountStatistic(List<Cinematic> cinematics, List<Type> types) throws IOException {
+    public void addGenreCountStatistic(List<Cinematic> cinematics, List<Type> types, List<State> states) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/GenreCountStatisticView.fxml"));
         HBox genreCountBlock = loader.load();
 
@@ -48,7 +44,7 @@ public class GenreCountStatisticController {
         controller.setChartContainer(this.chartContainer);
 
         GenreCountStrategy genreCountStrategy = new GenreCountStrategy();
-        Map<String, Integer> genreCountData = genreCountStrategy.calculate(cinematics, types);
+        Map<String, Integer> genreCountData = genreCountStrategy.calculate(cinematics, types,states);
 
         controller.setData(genreCountData, getMinGenreCountInput());
 
