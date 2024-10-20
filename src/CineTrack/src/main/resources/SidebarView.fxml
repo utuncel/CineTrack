@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.com.Controller.SidebarController"
+            fx:id="mainContentPane">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <Button text="Dashboard" onAction="#loadDashboardView"/>
+            <Button text="Filme" onAction="#loadMovieView"/>
+            <Button text="Serien" onAction="#loadSeriesView"/>
+            <Button text="Anime" onAction="#loadAnimeView"/>
+        </VBox>
+    </left>
+
+    <center>
+        <!-- Der Hauptinhalt wird hier dynamisch geladen -->
+    </center>
+
+</BorderPane>
