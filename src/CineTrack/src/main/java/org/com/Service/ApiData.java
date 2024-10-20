@@ -17,13 +17,15 @@ public class ApiData {
 
     public ApiCinematic fetchMoviesOrSeries(String title) {
         try {
-            HttpClient client = HttpClient.newHttpClient();
+            HttpResponse<String> response;
+            try (HttpClient client = HttpClient.newHttpClient()) {
 
-            String req = String.format("https://www.omdbapi.com/?apikey=%s&t=%s", MovieAndSeriesAPI, formatTitleForApiRequest(title));
+                String req = String.format("https://www.omdbapi.com/?apikey=%s&t=%s", MovieAndSeriesAPI, formatTitleForApiRequest(title));
 
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(req)).build();
+                HttpRequest request = HttpRequest.newBuilder().uri(URI.create(req)).build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            }
 
             String responseBody = response.body();
             System.out.println(responseBody);

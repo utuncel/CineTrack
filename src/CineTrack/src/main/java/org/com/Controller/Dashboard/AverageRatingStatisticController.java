@@ -39,7 +39,7 @@ public class AverageRatingStatisticController {
     }
 
     public void addAverageRatingStatistic(List<Cinematic> cinematics, List<Type> types, List<State> states) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AverageRatingStatisticView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard/AverageRatingStatisticView.fxml"));
         HBox personalRatingBlock = loader.load();
 
         AverageRatingStatisticController controller = loader.getController();

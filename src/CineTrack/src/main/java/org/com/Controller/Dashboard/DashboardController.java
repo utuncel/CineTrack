@@ -1,6 +1,10 @@
 package org.com.Controller.Dashboard;
 
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.com.Models.DashboardModel;
 import org.com.Models.Enums.State;
@@ -10,6 +14,7 @@ import org.com.Models.Enums.Type;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class DashboardController {
@@ -28,6 +33,7 @@ public class DashboardController {
     public CheckBox watchingCheckBox;
 
     public VBox chartContainer;
+    public StackPane contentPane;
 
     private DashboardModel dashboardModel;
 
@@ -199,5 +205,10 @@ public class DashboardController {
         } catch (Exception e) {
             throw new RuntimeException("Failed to update dashboard", e);
         }
+    }
+
+    private void loadPage(String fxmlFile) throws IOException {
+        AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
+        contentPane.getChildren().setAll(pane);
     }
 }
