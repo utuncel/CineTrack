@@ -31,4 +31,6 @@ module CineTrack {
     exports org.com.Controller;
     opens org.com.Controller to javafx.fxml;
     opens org.com.Controller.Cinematics to javafx.fxml;
+    exports org.com.Controller.Cinematics.Helper;
+    opens org.com.Controller.Cinematics.Helper to javafx.fxml;
 }
