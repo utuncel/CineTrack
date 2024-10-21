@@ -6,7 +6,7 @@
 
 <ScrollPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.com.Controller.Cinematics.Helper.CinematicBoxListingController"
+            fx:controller="org.com.controller.cinematics.helper.CinematicBoxListingController"
             fitToWidth="true"
             styleClass="cinematic-listing-scroll">
 

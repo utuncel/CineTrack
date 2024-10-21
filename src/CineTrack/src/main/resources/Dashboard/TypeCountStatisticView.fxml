@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 
-<HBox fx:id="typeCount" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.Controller.Dashboard.TypeCountStatisticController" spacing="20" alignment="CENTER">
+<HBox fx:id="typeCount" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.dashboard.TypeCountStatisticController" spacing="20" alignment="CENTER">
     <stylesheets>
         <URL value="@TypeCountStatisticStyle.css" />
     </stylesheets>

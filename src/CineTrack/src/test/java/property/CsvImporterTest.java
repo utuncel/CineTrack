@@ -1,9 +1,9 @@
 package property;
 
-import org.com.Models.Helper.CsvCinematic;
+import org.com.models.helper.CsvCinematic;
 import net.jqwik.api.*;
 import net.jqwik.api.constraints.Size;
-import org.com.Service.CsvImporter;
+import org.com.service.CsvImporter;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;

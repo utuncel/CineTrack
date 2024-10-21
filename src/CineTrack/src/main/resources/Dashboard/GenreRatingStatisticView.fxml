@@ -10,7 +10,7 @@
 
 <?import java.net.URL?>
 <HBox fx:id="genreRating" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.com.Controller.Dashboard.GenreRatingStatisticController" spacing="20" alignment="CENTER">
+      fx:controller="org.com.controller.dashboard.GenreRatingStatisticController" spacing="20" alignment="CENTER">
 
     <VBox spacing="10" alignment="CENTER">
 

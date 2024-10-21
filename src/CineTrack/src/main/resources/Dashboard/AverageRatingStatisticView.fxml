@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import java.net.URL?>
-<HBox fx:id="averageRating" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.Controller.Dashboard.AverageRatingStatisticController" spacing="20" alignment="CENTER">
+<HBox fx:id="averageRating" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.dashboard.AverageRatingStatisticController" spacing="20" alignment="CENTER">
     <stylesheets>
         <URL value="@AverageRatingStatisticStyle.css" />
     </stylesheets>

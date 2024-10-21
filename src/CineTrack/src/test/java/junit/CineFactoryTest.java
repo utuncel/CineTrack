@@ -1,9 +1,9 @@
 package junit;
 
-import org.com.Models.Cinematic;
-import org.com.Service.ApiData;
-import org.com.Service.CineFactory;
-import org.com.Service.CsvImporter;
+import org.com.models.Cinematic;
+import org.com.service.ApiData;
+import org.com.service.CineFactory;
+import org.com.service.CsvImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

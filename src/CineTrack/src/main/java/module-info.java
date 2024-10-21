@@ -1,36 +1,35 @@
 module CineTrack {
 
+  requires javafx.controls;
+  requires javafx.fxml;
+  requires javafx.web;
 
-    requires javafx.controls;
-    requires javafx.fxml;
-    requires javafx.web;
+  requires org.controlsfx.controls;
+  requires com.dlsc.formsfx;
+  requires org.kordamp.ikonli.javafx;
+  requires org.kordamp.bootstrapfx.core;
+  requires eu.hansolo.tilesfx;
+  requires javafx.graphics;
+  requires com.fasterxml.jackson.databind;
+  requires java.net.http;
 
-    requires org.controlsfx.controls;
-    requires com.dlsc.formsfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires javafx.graphics;
-    requires com.fasterxml.jackson.databind;
-    requires java.net.http;
-
-    opens org.com to javafx.fxml;
-    opens org.com.Models.Helper to  com.fasterxml.jackson.databind;
-    exports org.com to javafx.graphics;
-    exports org.com.Controller.Dashboard;
-    exports org.com.Controller.Cinematics;
-    exports org.com.Models.Helper;
-    exports org.com.Models;
-    opens org.com.Models to com.fasterxml.jackson.databind;
-    exports org.com.Models.Statistic;
-    opens org.com.Models.Statistic to com.fasterxml.jackson.databind;
-    exports org.com.Models.Records;
-    opens org.com.Models.Records to com.fasterxml.jackson.databind;
-    opens org.com.Controller.Dashboard to javafx.fxml;
-    exports org.com.Models.Enums;
-    exports org.com.Controller;
-    opens org.com.Controller to javafx.fxml;
-    opens org.com.Controller.Cinematics to javafx.fxml;
-    exports org.com.Controller.Cinematics.Helper;
-    opens org.com.Controller.Cinematics.Helper to javafx.fxml;
+  opens org.com to javafx.fxml;
+  opens org.com.models.helper to com.fasterxml.jackson.databind;
+  exports org.com to javafx.graphics;
+  exports org.com.controller.dashboard;
+  exports org.com.controller.cinematics;
+  exports org.com.models.helper;
+  exports org.com.models;
+  opens org.com.models to com.fasterxml.jackson.databind;
+  exports org.com.models.statistics;
+  opens org.com.models.statistics to com.fasterxml.jackson.databind;
+  exports org.com.models.records;
+  opens org.com.models.records to com.fasterxml.jackson.databind;
+  opens org.com.controller.dashboard to javafx.fxml;
+  exports org.com.models.enums;
+  exports org.com.controller;
+  opens org.com.controller to javafx.fxml;
+  opens org.com.controller.cinematics to javafx.fxml;
+  exports org.com.controller.cinematics.helper;
+  opens org.com.controller.cinematics.helper to javafx.fxml;
 }

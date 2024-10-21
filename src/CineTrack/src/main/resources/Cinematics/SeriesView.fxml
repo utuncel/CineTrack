@@ -8,7 +8,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.com.Controller.Cinematics.SeriesController"
+            fx:controller="org.com.controller.cinematics.SeriesController"
             prefHeight="400.0" prefWidth="600.0">
     <left>
         <fx:include source="../SidebarView.fxml" />
