@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+  prefHeight="400.0"
+  prefWidth="600.0"
+  styleClass="movie-preview" xmlns="http://javafx.com/javafx"
+  fx:controller="org.com.controller.cinematics.helper.CinematicBoxController">
+
+  <VBox AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10"
+    spacing="10">
+    <HBox spacing="20">
+      <ImageView fitHeight="300" fitWidth="200" preserveRatio="true" fx:id="posterImage"/>
+      <VBox spacing="10">
+        <Label styleClass="title" fx:id="titleLabel"/>
+        <Label styleClass="info" fx:id="runtimeLabel"/>
+        <Label styleClass="rating" fx:id="imdbRatingLabel"/>
+        <Label styleClass="my-rating" fx:id="myRatingLabel"/>
+        <Label styleClass="info" fx:id="directorLabel"/>
+        <Label styleClass="state" fx:id="stateLabel"/>
+      </VBox>
+    </HBox>
+    <HBox spacing="10">
+      <FlowPane hgap="10" vgap="5" fx:id="genresPane"/>
+      <Label styleClass="section-title" text="Genres:"/>
+    </HBox>
+    <HBox spacing="10">
+      <FlowPane hgap="10" vgap="5" fx:id="actorsPane"/>
+      <Label styleClass="section-title" text="Actors:"/>
+    </HBox>
+    <TextArea editable="false" prefHeight="100" wrapText="true" fx:id="descriptionArea"/>
+  </VBox>
+</AnchorPane>

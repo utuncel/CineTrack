@@ -1,0 +1,24 @@
+.cinematic-listing-scroll {
+  -fx-background-color: #141414;
+}
+
+.cinematic-listing-container {
+  -fx-background-color: #141414;
+}
+
+.cinematics-tile-pane {
+  -fx-background-color: transparent;
+}
+
+.cinematic-preview {
+  -fx-background-color: #2f2f2f;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+  -fx-background-radius: 5;
+  -fx-transition: all 0.3s;
+}
+
+.cinematic-preview:hover {
+  -fx-scale-x: 1.05;
+  -fx-scale-y: 1.05;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 15, 0, 0, 0);
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+  prefHeight="400.0"
+  prefWidth="600.0"
+  xmlns="http://javafx.com/javafx" fx:controller="org.com.controller.cinematics.MovieController">
+  <center>
+    <fx:include source="helper/CinematicBoxListingView.fxml" fx:id="cinematicListing"/>
+  </center>
+
+  <left>
+    <fx:include source="../SidebarView.fxml"/>
+  </left>
+</BorderPane>

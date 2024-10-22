@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
+  xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.TypeCountStatisticController"
+  fx:id="typeCount">
+  <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+    <Label styleClass="statistic-name" text="Movies"/>
+    <Label styleClass="statistic-value" fx:id="movie"/>
+  </VBox>
+  <!-- Box für Block 1 -->
+  <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+    <Label styleClass="statistic-name" text="Series"/>
+    <Label styleClass="statistic-value" fx:id="series"/>
+  </VBox>
+
+  <!-- Box für Block 2 -->
+  <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
+    <Label styleClass="statistic-name" text="Anime"/>
+    <Label styleClass="statistic-value" fx:id="anime"/>
+  </VBox>
+
+  <!-- Box für Block 3 -->
+  <stylesheets>
+    <URL value="@TypeCountStatisticStyle.css"/>
+  </stylesheets>
+</HBox>

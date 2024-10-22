@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="org.com.controller.SidebarController"
-            fx:id="mainContentPane">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+  xmlns="http://javafx.com/javafx"
+  fx:controller="org.com.controller.SidebarController"
+  fx:id="mainContentPane">
 
-    <left>
-        <VBox spacing="10" styleClass="sidebar">
-            <Button text="Dashboard" onAction="#loadDashboardView"/>
-            <Button text="Filme" onAction="#loadMovieView"/>
-            <Button text="Serien" onAction="#loadSeriesView"/>
-            <Button text="Anime" onAction="#loadAnimeView"/>
-        </VBox>
-    </left>
+  <center>
+    <!-- Der Hauptinhalt wird hier dynamisch geladen -->
+  </center>
 
-    <center>
-        <!-- Der Hauptinhalt wird hier dynamisch geladen -->
-    </center>
+  <left>
+    <VBox spacing="10" styleClass="sidebar">
+      <Button onAction="#loadDashboardView" text="Dashboard"/>
+      <Button onAction="#loadMovieView" text="Filme"/>
+      <Button onAction="#loadSeriesView" text="Serien"/>
+      <Button onAction="#loadAnimeView" text="Anime"/>
+    </VBox>
+  </left>
 
 </BorderPane>

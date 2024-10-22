@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
+  xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.GenreCountStatisticController"
+  fx:id="genreCount">
+
+  <VBox alignment="CENTER" spacing="10">
+
+    <BarChart legendVisible="false" prefHeight="400" prefWidth="900" styleClass="bar-chart"
+      fx:id="genreBarChart">
+      <xAxis>
+        <CategoryAxis label="Genre" fx:id="xAxis"/>/>
+      </xAxis>
+      <yAxis>
+        <NumberAxis label="Count" tickUnit="1" upperBound="50"/>
+      </yAxis>
+    </BarChart>
+
+    <HBox alignment="CENTER" spacing="5">
+      <Label styleClass="label-min-count" text="Minimale Anzahl: "/>
+      <TextField styleClass="input-min-count" fx:id="minGenreCountInput"/>
+    </HBox>
+
+  </VBox>
+
+  <stylesheets>
+    <URL value="@GenreCountStatisticStyle.css"/>
+  </stylesheets>
+
+</HBox>

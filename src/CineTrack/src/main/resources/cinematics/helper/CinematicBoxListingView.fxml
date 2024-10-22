@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+  fitToWidth="true"
+  styleClass="cinematic-listing-scroll"
+  xmlns="http://javafx.com/javafx"
+  fx:controller="org.com.controller.cinematics.helper.CinematicBoxListingController">
+
+  <content>
+    <VBox spacing="20" styleClass="cinematic-listing-container">
+      <!-- Search and Sort Controls -->
+      <HBox spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="searchField"
+          promptText="Search..."
+          HBox.hgrow="ALWAYS"/>
+
+        <ComboBox fx:id="sortComboBox"
+          prefWidth="150"/>
+      </HBox>
+
+      <TilePane hgap="20"
+        prefColumns="3"
+        styleClass="cinematics-tile-pane"
+        vgap="20"
+        fx:id="cinematicsContainer"/>
+
+      <padding>
+        <Insets bottom="20" left="20" right="20" top="20"/>
+      </padding>
+    </VBox>
+  </content>
+</ScrollPane>

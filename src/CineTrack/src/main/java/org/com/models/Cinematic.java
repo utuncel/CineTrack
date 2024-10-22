@@ -16,7 +16,7 @@ public class Cinematic {
   private String description;
   private String imageUrl;
   private String runtime;
-  private double ImdbRating;
+  private double imdbRating;
   private int imdbVotes;
   private String directorName;
   private State state;
@@ -30,7 +30,7 @@ public class Cinematic {
     this.state = csvCinematic.getState();
     this.type = csvCinematic.getType();
     this.runtime = Optional.ofNullable(apiCinematic.getRuntime()).orElse("Unknown runtime");
-    this.ImdbRating = parseStringToDouble(apiCinematic.getImdbRating());
+    this.imdbRating = parseStringToDouble(apiCinematic.getImdbRating());
     this.imdbVotes = parseImdbVotes(apiCinematic.getImdbVotes());
     this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
     this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
@@ -104,11 +104,11 @@ public class Cinematic {
   }
 
   public double getImdbRating() {
-    return ImdbRating;
+    return imdbRating;
   }
 
   public void setImdbRating(double imdbRating) {
-    this.ImdbRating = imdbRating;
+    this.imdbRating = imdbRating;
   }
 
   public String getDirectorName() {

@@ -1,0 +1,46 @@
+.movie-preview {
+  -fx-background-color: #141414;
+  -fx-text-fill: white;
+}
+
+.title {
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+}
+
+.info {
+  -fx-font-size: 14px;
+}
+
+.rating {
+  -fx-font-size: 16px;
+  -fx-text-fill: #FFD700;
+}
+
+.my-rating {
+  -fx-font-size: 16px;
+  -fx-text-fill: #1ED760;
+}
+
+.state {
+  -fx-font-size: 14px;
+  -fx-text-fill: #E50914;
+}
+
+.section-title {
+  -fx-font-size: 16px;
+  -fx-font-weight: bold;
+}
+
+#descriptionArea {
+  -fx-background-color: #2F2F2F;
+  -fx-text-fill: white;
+  -fx-font-size: 14px;
+}
+
+.genre-chip, .actor-chip {
+  -fx-background-color: #2F2F2F;
+  -fx-text-fill: white;
+  -fx-padding: 5 10 5 10;
+  -fx-background-radius: 15;
+}

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+  minWidth="-Infinity" prefHeight="1176.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.com.controller.dashboard.DashboardController"
+  fx:id="contentPane">
+  <AnchorPane prefHeight="827.0" prefWidth="1492.0">
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0"
+      layoutX="-2.0" layoutY="139.0" prefHeight="1039.0"
+      prefWidth="1901.0" styleClass="semi-top-form" stylesheets="@DasboardStyle.css">
+      <center>
+        <AnchorPane BorderPane.alignment="CENTER" prefHeight="839.0" prefWidth="1632.0">
+          <children>
+            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0"
+              AnchorPane.topAnchor="0.0" prefHeight="854.0" prefWidth="1649.0">
+              <children>
+                <AnchorPane AnchorPane.bottomAnchor="894.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0"
+                  layoutX="14.0" layoutY="2.0"
+                  prefHeight="99.0" prefWidth="1717.0">
+                  <children>
+                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1438.0" AnchorPane.topAnchor="0.0"
+                      layoutX="3.0" layoutY="-3.0"
+                      prefHeight="110.0" prefWidth="283.0">
+                      <children>
+                        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="0.0"
+                          AnchorPane.topAnchor="0.0" layoutX="142.0"
+                          layoutY="-14.0" prefHeight="118.0"
+                          prefWidth="141.0">
+                          <children>
+                            <CheckBox mnemonicParsing="false" selected="true"
+                              text="Watching" fx:id="watchingCheckBox">
+                              <StackPane.margin>
+                                <Insets top="-25.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                            <CheckBox mnemonicParsing="false" selected="true"
+                              text="Dropped" fx:id="droppedCheckBox">
+                              <StackPane.margin>
+                                <Insets top="25.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                            <CheckBox layoutX="43.0" layoutY="88.0" mnemonicParsing="false"
+                              text="ToWatch" fx:id="toWatchCheckBox">
+                              <StackPane.margin>
+                                <Insets top="75.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                            <CheckBox mnemonicParsing="false" selected="true"
+                              text="Finished" fx:id="finishedCheckBox">
+                              <StackPane.margin>
+                                <Insets top="-75.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                          </children>
+                        </StackPane>
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1384.0"
+                      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                      layoutX="1384.0">
+                      <children>
+                        <FlowPane hgap="30.0" prefHeight="98.0" prefWidth="269.0" vgap="5.0">
+                          <children>
+                            <CheckBox mnemonicParsing="false" prefHeight="17.0"
+                              prefWidth="110.0" text="Average Ratings" fx:id="averageRatingCheckBox"/>
+                            <CheckBox mnemonicParsing="false" text="Actor Ratings"
+                              fx:id="actorRatingCheckBox"/>
+                            <CheckBox mnemonicParsing="false" prefHeight="17.0"
+                              prefWidth="110.0" text="Genre Ratings" fx:id="genreRatingCheckBox"/>
+                            <CheckBox mnemonicParsing="false" prefHeight="17.0"
+                              prefWidth="111.0" text="Genre Count" fx:id="genreCountCheckBox"/>
+                            <CheckBox mnemonicParsing="false" prefHeight="17.0"
+                              prefWidth="110.0" text="Type Count" fx:id="typeCountCheckBox"/>
+                            <CheckBox mnemonicParsing="false" text="State Count"
+                              fx:id="stateCountCheckBox"/>
+                          </children>
+                          <opaqueInsets>
+                            <Insets/>
+                          </opaqueInsets>
+                        </FlowPane>
+                      </children>
+                    </AnchorPane>
+                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="1531.0" AnchorPane.topAnchor="0.0">
+                      <children>
+                        <StackPane prefHeight="98.0" prefWidth="122.0">
+                          <children>
+                            <CheckBox mnemonicParsing="false" selected="true" text="Series"
+                              fx:id="seriesCheckBox"/>
+                            <CheckBox mnemonicParsing="false" selected="true" text="Movie"
+                              fx:id="movieCheckBox">
+                              <StackPane.margin>
+                                <Insets top="-50.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                            <CheckBox mnemonicParsing="false" selected="true" text="Anime"
+                              fx:id="animeCheckBox">
+                              <StackPane.margin>
+                                <Insets top="50.0"/>
+                              </StackPane.margin>
+                            </CheckBox>
+                          </children>
+                        </StackPane>
+                      </children>
+                    </AnchorPane>
+                  </children>
+                </AnchorPane>
+                <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="107.0" layoutY="107.0"
+                  prefHeight="886.0" prefWidth="1717.0">
+                  <content>
+                    <VBox prefHeight="871.0" prefWidth="1734.0" fx:id="chartContainer"/>
+                  </content>
+                </ScrollPane>
+              </children>
+            </AnchorPane>
+          </children>
+        </AnchorPane>
+      </center>
+      <left>
+        <fx:include source="../SidebarView.fxml"/>
+      </left>
+      <top>
+        <AnchorPane BorderPane.alignment="CENTER" prefHeight="37.0" prefWidth="928.0">
+          <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+            layoutX="-7.0" layoutY="-137.0" prefHeight="174.0"
+            prefWidth="1900.0" styleClass="top-form" stylesheets="@DasboardStyle.css">
+            <Label layoutX="73.0" layoutY="1.0" prefHeight="45.0" prefWidth="173.0"
+              text="CineTracker" textAlignment="CENTER">
+              <font>
+                <Font name="Tahoma Bold" size="28.0"/>
+              </font>
+            </Label>
+          </AnchorPane>
+        </AnchorPane>
+      </top>
+    </BorderPane>
+  </AnchorPane>
+</StackPane>

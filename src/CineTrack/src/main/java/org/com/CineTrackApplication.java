@@ -34,7 +34,7 @@ public class CineTrackApplication extends Application {
     DashboardModel dashboardModel = DashboardModelSingleton.getInstance();
     dashboardModel.setCinematics(cinematics);
 
-    var loader = new FXMLLoader(getClass().getResource("/Dashboard/DashboardView.fxml"));
+    var loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
     Parent root = loader.load();
     DashboardController dashboardController = loader.getController();
     dashboardController.setDashboardModel(dashboardModel);

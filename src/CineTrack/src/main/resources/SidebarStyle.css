@@ -1,10 +1,10 @@
 .sidebar {
-    -fx-background-color: #1a1a1a;
-    -fx-padding: 10;
-    -fx-spacing: 10;
-    -fx-min-width: 200;
+  -fx-background-color: #1a1a1a;
+  -fx-padding: 10;
+  -fx-spacing: 10;
+  -fx-min-width: 200;
 }
 
 .sidebar Button {
-    -fx-min-width: 180;
+  -fx-min-width: 180;
 }

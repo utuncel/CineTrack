@@ -12,7 +12,6 @@ import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.DashboardModel;
-import org.com.models.enums.Type;
 
 public class SidebarController {
 
@@ -28,23 +27,23 @@ public class SidebarController {
 
   @FXML
   public void loadMovieView(ActionEvent event) {
-    loadCinematicView("/Cinematics/MovieView.fxml", Type.MOVIE);
+    loadCinematicView("/cinematics/MovieView.fxml");
   }
 
   @FXML
   public void loadSeriesView(ActionEvent event) {
-    loadCinematicView("/Cinematics/SeriesView.fxml", Type.SERIES);
+    loadCinematicView("/cinematics/SeriesView.fxml");
   }
 
   @FXML
   public void loadAnimeView(ActionEvent event) {
-    loadCinematicView("/Cinematics/AnimeView.fxml", Type.ANIME);
+    loadCinematicView("/cinematics/AnimeView.fxml");
   }
 
   @FXML
   public void loadDashboardView(ActionEvent event) {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard/dashboardView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));
       Parent view = loader.load();
 
       DashboardController controller = loader.getController();
@@ -56,9 +55,9 @@ public class SidebarController {
     }
   }
 
-  private void loadCinematicView(String ViewPath, Type type) {
+  private void loadCinematicView(String viewPath) {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(ViewPath));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
       Parent view = loader.load();
 
       CinematicController controller = loader.getController();

@@ -38,7 +38,7 @@ public class TypeCountStatisticController {
   public void addTypeCountStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/Dashboard/TypeCountStatisticView.fxml"));
+        getClass().getResource("/dashboard/TypeCountStatisticView.fxml"));
     HBox fourBlockStatistic = loader.load();
 
     TypeCountStatisticController controller = loader.getController();
