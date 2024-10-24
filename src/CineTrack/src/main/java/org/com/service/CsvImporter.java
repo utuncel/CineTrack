@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
 import org.com.models.helper.CsvCinematic;
 
 public class CsvImporter {
@@ -15,9 +13,11 @@ public class CsvImporter {
   private final LineValidator validator = new LineValidator();
   private final String filePath;
   private int lineNumber = 2; // 2 because we read the header and first time in the while loop
+  private final ParserUtil parser;
 
   public CsvImporter(String filePath) {
     this.filePath = filePath;
+    parser = new ParserUtil(lineNumber);
   }
 
   public List<CsvCinematic> importData() throws IOException {
@@ -54,56 +54,17 @@ public class CsvImporter {
     if (columns.length == 3) {
       return new CsvCinematic.Builder()
           .withTitle(columns[0])
-          .withType(parseTypes(columns[1]))
-          .withState(parseStates(columns[2]))
+          .withType(parser.parseTypes(columns[1]))
+          .withState(parser.parseStates(columns[2]))
           .build();
     }
 
     return new CsvCinematic.Builder()
         .withTitle(columns[0])
-        .withType(parseTypes(columns[1]))
-        .withState(parseStates(columns[2]))
-        .withRating(parseStringToInt(columns[3]))
+        .withType(parser.parseTypes(columns[1]))
+        .withState(parser.parseStates(columns[2]))
+        .withRating(parser.parseStringToInt(columns[3]))
         .build();
-  }
-
-  private Type parseTypes(String typeString) {
-    return switch (typeString) {
-      case "MOVIE" -> Type.MOVIE;
-      case "ANIME" -> Type.ANIME;
-      case "SERIES" -> Type.SERIES;
-      default -> throw new IllegalArgumentException(
-          "Invalid Type:" + typeString + "at index:" + lineNumber
-              + "- valid are MOVIE,ANIME,SERIES");
-    };
-  }
-
-  private State parseStates(String stateString) {
-    return switch (stateString) {
-      case "FINISHED" -> State.FINISHED;
-      case "WATCHING" -> State.WATCHING;
-      case "DROPPED" -> State.DROPPED;
-      case "TOWATCH" -> State.TOWATCH;
-      default -> throw new IllegalArgumentException(
-          "Invalid State:" + stateString + "at index:" + lineNumber
-              + "- valid are FINISHED,WATCHING,DROPPED,TOWATCH");
-    };
-  }
-
-  public int parseStringToInt(String input) {
-    try {
-      int number = Integer.parseInt(input);
-
-      if (number < 1 || number > 10) {
-        throw new IllegalArgumentException(
-            "Invalid input: " + input + "at index:" + lineNumber + " is not between 1 and 10.");
-      }
-
-      return number;
-    } catch (NumberFormatException e) {
-      throw new IllegalArgumentException(
-          "Invalid input: " + input + "at index:" + lineNumber + " is not a valid number.");
-    }
   }
 }
 

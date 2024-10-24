@@ -20,6 +20,7 @@
       <Button onAction="#loadSeriesView" text="Series"/>
       <Button onAction="#loadAnimeView" text="Anime"/>
       <Button onAction="#loadDataImporterView" text="DataImporter"/>
+      <Button onAction="#loadAddCinematicView" text="Add Cinematic"/>
     </VBox>
   </left>
 

@@ -76,6 +76,12 @@ public class DashboardModel {
     statisticStrategies.remove(statisticStrategy);
   }
 
+  public void addCinematic(Cinematic cinematic) {
+    if (!cinematics.contains(cinematic)) {
+      cinematics.add(cinematic);
+    }
+  }
+
   public List<StatisticStrategy> getStatisticStrategy() {
     return statisticStrategies;
   }

@@ -50,6 +50,16 @@ public class SidebarController {
   }
 
   @FXML
+  public void loadAddCinematicView() throws IOException {
+    var loader = new FXMLLoader(getClass().getResource("/addcinematic/AddCinematicView.fxml"));
+    Parent view = loader.load();
+
+    Stage stage = (Stage) mainContentPane.getScene().getWindow();
+    Scene newScene = new Scene(view);
+    stage.setScene(newScene);
+  }
+
+  @FXML
   public void loadDashboardView() {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));

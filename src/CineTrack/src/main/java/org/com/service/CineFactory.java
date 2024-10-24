@@ -9,12 +9,16 @@ import org.com.models.helper.CsvCinematic;
 
 public class CineFactory {
 
-  private final CsvImporter csvImporter;
+  private CsvImporter csvImporter;
   private final ApiData apiData;
 
   public CineFactory(CsvImporter csvImporter, ApiData apiData) {
     this.csvImporter = csvImporter;
     this.apiData = apiData;
+  }
+
+  public CineFactory() {
+    this.apiData = new ApiData();
   }
 
   public List<Cinematic> createCinematics() throws IOException {
@@ -29,6 +33,13 @@ public class CineFactory {
     handleNotFoundTitles(notFoundTitles);
 
     return createdCinematics;
+  }
+
+  public Cinematic createCinematic(CsvCinematic csvCinematic) {
+    ApiCinematic apiCinematic = new ApiCinematic();
+    apiCinematic = apiData.fetchMoviesOrSeries(csvCinematic.getTitle());
+
+    return new Cinematic(apiCinematic, csvCinematic);
   }
 
   private void cinematicMerge(CsvCinematic csvCinematic, List<Cinematic> createdCinematics,

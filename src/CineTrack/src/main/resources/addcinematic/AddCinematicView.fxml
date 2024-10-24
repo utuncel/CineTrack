@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+  prefHeight="300"
+  prefWidth="400" fx:controller="org.com.controller.addcinematic.AddCinematicController">
+
+  <!-- Label im oberen Bereich des BorderPane -->
+  <center>
+    <VBox alignment="CENTER" spacing="10">
+
+      <!-- Title Input Field -->
+      <Button onAction="#handleAddCinematic" text="Add Cinematic"/>
+
+      <!-- Type Dropdown -->
+      <HBox alignment="CENTER" spacing="10">
+        <ComboBox fx:id="typeComboBox">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="ANIME"/>
+              <String fx:value="SERIES"/>
+              <String fx:value="MOVIE"/>
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label text="Type:"/>
+      </HBox>
+
+      <!-- State Dropdown -->
+      <HBox alignment="CENTER" spacing="10">
+        <ComboBox onAction="#handleStateChange" fx:id="stateComboBox">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="DROPPED"/>
+              <String fx:value="FINISHED"/>
+              <String fx:value="TOWATCH"/>
+              <String fx:value="WATCHING"/>
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label text="State:"/>
+      </HBox>
+
+      <!-- Rating Spinner -->
+      <HBox alignment="CENTER" spacing="10">
+        <Label text="Rating:"/>
+        <Spinner editable="true" fx:id="ratingSpinner">
+          <valueFactory>
+            <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="5" max="10" min="1"/>
+          </valueFactory>
+        </Spinner>
+      </HBox>
+
+      <!-- Add Button -->
+      <HBox alignment="CENTER" spacing="10">
+        <Label text="Title:"/>
+        <TextField promptText="Enter title" fx:id="titleField"/>
+      </HBox>
+
+    </VBox>
+  </center>
+
+  <!-- Sidebar im linken Bereich des BorderPane -->
+  <left>
+    <fx:include source="../SidebarView.fxml"/>
+  </left>
+
+  <!-- Hauptinhalt im Zentrum des BorderPane, in einem VBox zur Anordnung -->
+  <top>
+    <Label style="-fx-font-size: 18px;" BorderPane.alignment="CENTER" text="Add New Cinematic"/>
+  </top>
+
+</BorderPane>
