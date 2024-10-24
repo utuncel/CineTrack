@@ -10,29 +10,35 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+<StackPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity"
+  minHeight="-Infinity"
   minWidth="-Infinity" prefHeight="1176.0" prefWidth="1900.0" xmlns="http://javafx.com/javafx/22"
   fx:controller="org.com.controller.dashboard.DashboardController"
   fx:id="contentPane">
   <AnchorPane prefHeight="827.0" prefWidth="1492.0">
-    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0"
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="139.0"
       layoutX="-2.0" layoutY="139.0" prefHeight="1039.0"
       prefWidth="1901.0" styleClass="semi-top-form" stylesheets="@DasboardStyle.css">
       <center>
         <AnchorPane BorderPane.alignment="CENTER" prefHeight="839.0" prefWidth="1632.0">
           <children>
-            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="3.0"
+            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="3.0"
               AnchorPane.topAnchor="0.0" prefHeight="854.0" prefWidth="1649.0">
               <children>
-                <AnchorPane AnchorPane.bottomAnchor="894.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0"
+                <AnchorPane AnchorPane.bottomAnchor="894.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0"
                   layoutX="14.0" layoutY="2.0"
                   prefHeight="99.0" prefWidth="1717.0">
                   <children>
-                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1438.0" AnchorPane.topAnchor="0.0"
+                    <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                      AnchorPane.rightAnchor="1438.0" AnchorPane.topAnchor="0.0"
                       layoutX="3.0" layoutY="-3.0"
                       prefHeight="110.0" prefWidth="283.0">
                       <children>
-                        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="0.0"
+                        <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="142.0"
+                          AnchorPane.rightAnchor="0.0"
                           AnchorPane.topAnchor="0.0" layoutX="142.0"
                           layoutY="-14.0" prefHeight="118.0"
                           prefWidth="141.0">
@@ -72,7 +78,8 @@
                         <FlowPane hgap="30.0" prefHeight="98.0" prefWidth="269.0" vgap="5.0">
                           <children>
                             <CheckBox mnemonicParsing="false" prefHeight="17.0"
-                              prefWidth="110.0" text="Average Ratings" fx:id="averageRatingCheckBox"/>
+                              prefWidth="110.0" text="Average Ratings"
+                              fx:id="averageRatingCheckBox"/>
                             <CheckBox mnemonicParsing="false" text="Actor Ratings"
                               fx:id="actorRatingCheckBox"/>
                             <CheckBox mnemonicParsing="false" prefHeight="17.0"
@@ -115,7 +122,8 @@
                     </AnchorPane>
                   </children>
                 </AnchorPane>
-                <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0"
                   AnchorPane.topAnchor="107.0" layoutY="107.0"
                   prefHeight="886.0" prefWidth="1717.0">
                   <content>
@@ -132,7 +140,8 @@
       </left>
       <top>
         <AnchorPane BorderPane.alignment="CENTER" prefHeight="37.0" prefWidth="928.0">
-          <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+          <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+            AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
             layoutX="-7.0" layoutY="-137.0" prefHeight="174.0"
             prefWidth="1900.0" styleClass="top-form" stylesheets="@DasboardStyle.css">
             <Label layoutX="73.0" layoutY="1.0" prefHeight="45.0" prefWidth="173.0"

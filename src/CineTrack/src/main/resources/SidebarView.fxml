@@ -16,9 +16,10 @@
   <left>
     <VBox spacing="10" styleClass="sidebar">
       <Button onAction="#loadDashboardView" text="Dashboard"/>
-      <Button onAction="#loadMovieView" text="Filme"/>
-      <Button onAction="#loadSeriesView" text="Serien"/>
+      <Button onAction="#loadMovieView" text="Movies"/>
+      <Button onAction="#loadSeriesView" text="Series"/>
       <Button onAction="#loadAnimeView" text="Anime"/>
+      <Button onAction="#loadDataImporterView" text="DataImporter"/>
     </VBox>
   </left>
 

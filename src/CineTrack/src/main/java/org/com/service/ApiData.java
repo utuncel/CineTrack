@@ -28,7 +28,6 @@ public class ApiData {
       }
 
       String responseBody = response.body();
-      System.out.println(responseBody);
 
       ObjectMapper objectMapper = new ObjectMapper();
       JsonNode rootNode = objectMapper.readTree(responseBody);

@@ -1,6 +1,6 @@
 package org.com.service;
 
-class LineValidator {
+public class LineValidator {
 
   private static final int HEADER_COLUMNS = 4;
   private static final int MIN_COLUMNS = 3;

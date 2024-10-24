@@ -8,7 +8,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20" xmlns="http://javafx.com/javafx/22"
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
+  xmlns="http://javafx.com/javafx/22"
   fx:controller="org.com.controller.dashboard.ActorRatingStatisticController"
   fx:id="actorRating">
   <VBox alignment="CENTER" spacing="10">

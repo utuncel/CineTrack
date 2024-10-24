@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.GenreRatingStatisticController"
+  xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.com.controller.dashboard.GenreRatingStatisticController"
   fx:id="genreRating">
 
   <VBox alignment="CENTER" spacing="10">

@@ -41,6 +41,16 @@ public class SidebarController {
   }
 
   @FXML
+  public void loadDataImporterView(ActionEvent event) throws IOException {
+    var loader = new FXMLLoader(getClass().getResource("/dataImport/DataImporterView.fxml"));
+    Parent view = loader.load();
+
+    Stage stage = (Stage) mainContentPane.getScene().getWindow();
+    Scene newScene = new Scene(view);
+    stage.setScene(newScene);
+  }
+
+  @FXML
   public void loadDashboardView(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));

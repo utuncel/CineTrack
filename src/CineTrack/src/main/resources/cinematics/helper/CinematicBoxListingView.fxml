@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
   fitToWidth="true"
   styleClass="cinematic-listing-scroll"
@@ -17,13 +16,13 @@
   <content>
     <VBox spacing="20" styleClass="cinematic-listing-container">
       <!-- Search and Sort Controls -->
-      <HBox spacing="10" alignment="CENTER_LEFT">
-        <TextField fx:id="searchField"
-          promptText="Search..."
-          HBox.hgrow="ALWAYS"/>
+      <HBox alignment="CENTER_LEFT" spacing="10">
+        <ComboBox prefWidth="150"
+          fx:id="sortComboBox"/>
 
-        <ComboBox fx:id="sortComboBox"
-          prefWidth="150"/>
+        <TextField HBox.hgrow="ALWAYS"
+          promptText="Search..."
+          fx:id="searchField"/>
       </HBox>
 
       <TilePane hgap="20"

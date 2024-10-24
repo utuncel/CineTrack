@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.StateCountStatisticController"
+  xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.com.controller.dashboard.StateCountStatisticController"
   fx:id="stateCount">
   <VBox alignment="CENTER" spacing="10" styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Finished"/>
