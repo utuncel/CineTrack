@@ -3,10 +3,7 @@ package org.com.controller.dashboard;
 import java.io.IOException;
 import java.util.EnumMap;
 import java.util.Map;
-import java.util.Objects;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.com.models.DashboardModel;
@@ -217,10 +214,5 @@ public class DashboardController {
     } catch (Exception e) {
       throw new RuntimeException("Failed to update dashboard", e);
     }
-  }
-
-  private void loadPage(String fxmlFile) throws IOException {
-    AnchorPane pane = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(fxmlFile)));
-    contentPane.getChildren().setAll(pane);
   }
 }

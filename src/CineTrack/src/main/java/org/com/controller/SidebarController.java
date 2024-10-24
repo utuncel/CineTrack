@@ -1,7 +1,6 @@
 package org.com.controller;
 
 import java.io.IOException;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,23 +25,23 @@ public class SidebarController {
   }
 
   @FXML
-  public void loadMovieView(ActionEvent event) {
+  public void loadMovieView() {
     loadCinematicView("/cinematics/MovieView.fxml");
   }
 
   @FXML
-  public void loadSeriesView(ActionEvent event) {
+  public void loadSeriesView() {
     loadCinematicView("/cinematics/SeriesView.fxml");
   }
 
   @FXML
-  public void loadAnimeView(ActionEvent event) {
+  public void loadAnimeView() {
     loadCinematicView("/cinematics/AnimeView.fxml");
   }
 
   @FXML
-  public void loadDataImporterView(ActionEvent event) throws IOException {
-    var loader = new FXMLLoader(getClass().getResource("/dataImport/DataImporterView.fxml"));
+  public void loadDataImporterView() throws IOException {
+    var loader = new FXMLLoader(getClass().getResource("/dataimport/DataImporterView.fxml"));
     Parent view = loader.load();
 
     Stage stage = (Stage) mainContentPane.getScene().getWindow();
@@ -51,7 +50,7 @@ public class SidebarController {
   }
 
   @FXML
-  public void loadDashboardView(ActionEvent event) {
+  public void loadDashboardView() {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));
       Parent view = loader.load();

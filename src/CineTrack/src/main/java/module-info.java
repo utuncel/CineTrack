@@ -32,6 +32,6 @@ module CineTrack {
   opens org.com.controller.cinematics to javafx.fxml;
   exports org.com.controller.cinematics.helper;
   opens org.com.controller.cinematics.helper to javafx.fxml;
-  exports org.com.controller.dataImport to javafx.fxml;
-  opens org.com.controller.dataImport to javafx.fxml;
+  exports org.com.controller.dataimport to javafx.fxml;
+  opens org.com.controller.dataimport to javafx.fxml;
 }

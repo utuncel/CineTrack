@@ -1,7 +1,8 @@
-package org.com.controller.dataImport;
+package org.com.controller.dataimport;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,7 +29,7 @@ public class DataImporterController {
       try {
         openFileChooser();
       } catch (IOException e) {
-        throw new RuntimeException(e);
+        throw new UncheckedIOException(e);
       }
     });
   }
