@@ -21,6 +21,7 @@
       <Button onAction="#loadAnimeView" text="Anime"/>
       <Button onAction="#loadDataImporterView" text="DataImporter"/>
       <Button onAction="#loadAddCinematicView" text="Add Cinematic"/>
+      <Button onAction="#loadLoggerView" text="Logs"/>
     </VBox>
   </left>
 

@@ -10,13 +10,15 @@ import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.controller.logger.LoggerController;
 import org.com.models.DashboardModel;
+import org.com.service.LoggerService;
 
 public class SidebarController {
 
+  private final LoggerService logger = LoggerService.getInstance();
   @FXML
   private BorderPane mainContentPane;
-
   private DashboardModel dashboardModel;
 
   @FXML
@@ -26,50 +28,82 @@ public class SidebarController {
 
   @FXML
   public void loadMovieView() {
+    logger.logInfo("Loading Movie View");
     loadCinematicView("/cinematics/MovieView.fxml");
   }
 
   @FXML
   public void loadSeriesView() {
+    logger.logInfo("Loading Series View");
     loadCinematicView("/cinematics/SeriesView.fxml");
   }
 
   @FXML
   public void loadAnimeView() {
+    logger.logInfo("Loading Anime View");
     loadCinematicView("/cinematics/AnimeView.fxml");
   }
 
   @FXML
   public void loadDataImporterView() throws IOException {
-    var loader = new FXMLLoader(getClass().getResource("/dataimport/DataImporterView.fxml"));
-    Parent view = loader.load();
-
-    Stage stage = (Stage) mainContentPane.getScene().getWindow();
-    Scene newScene = new Scene(view);
-    stage.setScene(newScene);
+    logger.logInfo("Loading Data Import View");
+    try {
+      var loader = new FXMLLoader(getClass().getResource("/dataimport/DataImporterView.fxml"));
+      Parent view = loader.load();
+      Stage stage = (Stage) mainContentPane.getScene().getWindow();
+      Scene newScene = new Scene(view);
+      stage.setScene(newScene);
+      logger.logInfo("Data Import View successfully loaded");
+    } catch (IOException e) {
+      logger.logError("Error loading Data Import View: " + e.getMessage());
+      throw e;
+    }
   }
 
   @FXML
   public void loadAddCinematicView() throws IOException {
-    var loader = new FXMLLoader(getClass().getResource("/addcinematic/AddCinematicView.fxml"));
-    Parent view = loader.load();
+    logger.logInfo("Loading Add Media View");
+    try {
+      var loader = new FXMLLoader(getClass().getResource("/addcinematic/AddCinematicView.fxml"));
+      Parent view = loader.load();
+      Stage stage = (Stage) mainContentPane.getScene().getWindow();
+      Scene newScene = new Scene(view);
+      stage.setScene(newScene);
+      logger.logInfo("Add Media View successfully loaded");
+    } catch (IOException e) {
+      logger.logError("Error loading Add Media View: " + e.getMessage());
+      throw e;
+    }
+  }
 
-    Stage stage = (Stage) mainContentPane.getScene().getWindow();
-    Scene newScene = new Scene(view);
-    stage.setScene(newScene);
+  @FXML
+  public void loadLoggerView() {
+    logger.logInfo("Loading Logger View");
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/logger/LoggerView.fxml"));
+      Parent view = loader.load();
+      LoggerController loggerController = loader.getController();
+      loggerController.setLoggerModel(LoggerService.getInstance().getLoggerModel());
+      updateMainContent(view);
+      logger.logInfo("Logger View successfully loaded");
+    } catch (IOException e) {
+      logger.logError("Error loading Logger View: " + e.getMessage());
+      handleLoadError(e);
+    }
   }
 
   @FXML
   public void loadDashboardView() {
+    logger.logInfo("Loading Dashboard View");
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));
       Parent view = loader.load();
-
       DashboardController controller = loader.getController();
       controller.setDashboardModel(dashboardModel);
-
       updateMainContent(view);
+      logger.logInfo("Dashboard View successfully loaded");
     } catch (IOException e) {
+      logger.logError("Error loading Dashboard View: " + e.getMessage());
       handleLoadError(e);
     }
   }
@@ -78,12 +112,12 @@ public class SidebarController {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
       Parent view = loader.load();
-
       CinematicController controller = loader.getController();
       controller.loadData(dashboardModel.getCinematics());
-
       updateMainContent(view);
+      logger.logInfo("Media View successfully loaded: " + viewPath);
     } catch (IOException e) {
+      logger.logError("Error loading Media View " + viewPath + ": " + e.getMessage());
       handleLoadError(e);
     }
   }
@@ -96,7 +130,6 @@ public class SidebarController {
 
 
   private void handleLoadError(Exception e) {
-    e.printStackTrace();
-    System.err.println("Error loading view: " + e.getMessage());
+    logger.logError("Critical error while loading view: " + e.getMessage());
   }
 }

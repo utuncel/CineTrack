@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
+  fx:controller="org.com.controller.logger.LoggerController">
+
+  <center>
+    <TableView fx:id="logTableView">
+      <columns>
+        <TableColumn text="Timestamp" fx:id="timestampColumn"/>
+        <TableColumn text="Level" fx:id="levelColumn"/>
+        <TableColumn text="Message" fx:id="messageColumn"/>
+      </columns>
+    </TableView>
+  </center>
+  <left>
+    <fx:include source="../SidebarView.fxml"/>
+  </left>
+</BorderPane>

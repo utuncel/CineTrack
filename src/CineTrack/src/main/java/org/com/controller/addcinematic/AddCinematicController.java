@@ -8,9 +8,12 @@ import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.DashboardModel;
 import org.com.models.helper.CsvCinematic;
 import org.com.service.CineFactory;
+import org.com.service.LoggerService;
 import org.com.service.ParserUtil;
 
 public class AddCinematicController {
+
+  private final LoggerService logger = LoggerService.getInstance();
 
   @FXML
   private TextField titleField;
@@ -32,11 +35,16 @@ public class AddCinematicController {
 
   @FXML
   public void initialize() {
-    // Set default state for rating field
-    ratingSpinner.setDisable(true);
-    dashboardModel = DashboardModelSingleton.getInstance();
-    parserUtil = new ParserUtil();
-    handleStateChange();
+    logger.logInfo("Initializing Add Cinematic Controller");
+    try {
+      ratingSpinner.setDisable(true);
+      dashboardModel = DashboardModelSingleton.getInstance();
+      parserUtil = new ParserUtil();
+      handleStateChange();
+      logger.logInfo("Add Cinematic Controller successfully initialized");
+    } catch (Exception e) {
+      logger.logError("Error during Add Cinematic Controller initialization: " + e.getMessage());
+    }
   }
 
   @FXML
@@ -48,27 +56,29 @@ public class AddCinematicController {
 
   @FXML
   private void handleAddCinematic() {
+    try {
+      CineFactory cineFactory = new CineFactory();
+      CsvCinematic csvCinematic;
 
-    CineFactory cineFactory = new CineFactory();
+      if (ignoreRating) {
+        csvCinematic = new CsvCinematic.Builder()
+            .withTitle(titleField.getText())
+            .withType(parserUtil.parseTypes(typeComboBox.getValue()))
+            .withState(parserUtil.parseStates(stateComboBox.getValue()))
+            .build();
+      } else {
+        csvCinematic = new CsvCinematic.Builder()
+            .withTitle(titleField.getText())
+            .withType(parserUtil.parseTypes(typeComboBox.getValue()))
+            .withState(parserUtil.parseStates(stateComboBox.getValue()))
+            .withRating(ratingSpinner.getValue())
+            .build();
+      }
 
-    CsvCinematic csvCinematic;
+      dashboardModel.addCinematic(cineFactory.createCinematic(csvCinematic));
 
-    if (ignoreRating) {
-      csvCinematic = new CsvCinematic.Builder()
-          .withTitle(titleField.getText())
-          .withType(parserUtil.parseTypes(typeComboBox.getValue()))
-          .withState(parserUtil.parseStates(stateComboBox.getValue()))
-          .build();
-    } else {
-      csvCinematic = new CsvCinematic.Builder()
-          .withTitle(titleField.getText())
-          .withType(parserUtil.parseTypes(typeComboBox.getValue()))
-          .withState(parserUtil.parseStates(stateComboBox.getValue()))
-          .withRating(ratingSpinner.getValue())
-          .build();
-
+    } catch (Exception e) {
+      logger.logError("Error adding new cinematic: " + e.getMessage());
     }
-
-    dashboardModel.addCinematic(cineFactory.createCinematic(csvCinematic));
   }
 }

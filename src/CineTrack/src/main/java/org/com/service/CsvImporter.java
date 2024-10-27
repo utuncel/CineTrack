@@ -12,8 +12,8 @@ public class CsvImporter {
   private static final String CSV_DELIMITER = ",";
   private final LineValidator validator = new LineValidator();
   private final String filePath;
-  private int lineNumber = 2; // 2 because we read the header and first time in the while loop
   private final ParserUtil parser;
+  private int lineNumber = 2; // 2 because we read the header and first time in the while loop
 
   public CsvImporter(String filePath) {
     this.filePath = filePath;
