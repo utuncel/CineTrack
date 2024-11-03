@@ -16,7 +16,7 @@ public class CineTrackApplication extends Application {
 
   @Override
   public void start(Stage stage) throws IOException {
-    var loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
+    var loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
     Parent root = loader.load();
 
     stage.setScene(new Scene(root));

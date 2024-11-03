@@ -13,6 +13,9 @@ open module CineTrack {
   requires com.fasterxml.jackson.databind;
   requires java.net.http;
   requires javafx.base;
+  requires java.desktop;
+  requires jakarta.persistence;
+  requires org.hibernate.orm.core;
 
   exports org.com to javafx.graphics;
   exports org.com.controller.dashboard;
@@ -28,4 +31,6 @@ open module CineTrack {
   exports org.com.controller.addcinematic to javafx.fxml;
   exports org.com.controller.logger to javafx.fxml;
   exports org.com.models.logger to javafx.fxml;
+  exports org.com.models.user;
+  exports org.com.controller.user;
 }

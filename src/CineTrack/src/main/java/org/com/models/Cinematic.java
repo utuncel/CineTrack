@@ -1,28 +1,73 @@
 package org.com.models;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import jakarta.persistence.*;
 import org.com.models.enums.State;
 import org.com.models.enums.Type;
 import org.com.models.helper.ApiCinematic;
 import org.com.models.helper.CsvCinematic;
+import org.com.models.user.User;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+@Entity
+@Table(name = "cinematics")
 public class Cinematic {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
+  @Column(nullable = false)
   private String title;
+
   private int myRating;
+
+  @Column(length = 2000)
   private String description;
+
+  @Column(length = 500)
   private String imageUrl;
+
   private String runtime;
+
   private double imdbRating;
+
   private int imdbVotes;
+
   private String directorName;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private State state;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private Type type;
-  private List<String> actors;
-  private List<String> genres;
+
+  @ElementCollection
+  @CollectionTable(
+      name = "cinematic_actors",
+      joinColumns = @JoinColumn(name = "cinematic_id")
+  )
+  @Column(name = "actor")
+  private List<String> actors = new ArrayList<>();
+
+  @ElementCollection
+  @CollectionTable(
+      name = "cinematic_genres",
+      joinColumns = @JoinColumn(name = "cinematic_id")
+  )
+  @Column(name = "genre")
+  private List<String> genres = new ArrayList<>();
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private User user;
+
+  // Standardkonstruktor für Hibernate
+  protected Cinematic() {}
 
   public Cinematic(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {
     this.title = csvCinematic.getTitle();
@@ -37,16 +82,36 @@ public class Cinematic {
     this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");
 
     String genres = apiCinematic.getGenre();
-    this.genres = (genres != null && !genres.isEmpty())
-        ? Arrays.asList(genres.split(", "))
-        : new ArrayList<>();
+    if (genres != null && !genres.isEmpty()) {
+      this.genres.addAll(Arrays.asList(genres.split(", ")));
+    }
 
     String actors = apiCinematic.getActors();
-    this.actors = (actors != null && !actors.isEmpty())
-        ? Arrays.asList(actors.split(", "))
-        : new ArrayList<>();
+    if (actors != null && !actors.isEmpty()) {
+      this.actors.addAll(Arrays.asList(actors.split(", ")));
+    }
   }
 
+  // Getter für id
+  public Long getId() {
+    return id;
+  }
+
+  // Setter für id
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  // User Getter und Setter
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  // Bestehende Getter und Setter
   public String getTitle() {
     return title;
   }
@@ -135,20 +200,20 @@ public class Cinematic {
     this.actors = actors;
   }
 
-  private double parseStringToDouble(String str) {
-    try {
-      return Double.parseDouble(str);
-    } catch (NumberFormatException e) {
-      return 0.0;
-    }
-  }
-
   public int getImdbVotes() {
     return imdbVotes;
   }
 
   public void setImdbVotes(int imdbVotes) {
     this.imdbVotes = imdbVotes;
+  }
+
+  private double parseStringToDouble(String str) {
+    try {
+      return Double.parseDouble(str);
+    } catch (NumberFormatException e) {
+      return 0.0;
+    }
   }
 
   private int parseImdbVotes(String imdbVotesStr) {
@@ -160,4 +225,3 @@ public class Cinematic {
     return Integer.parseInt(cleanedVotes);
   }
 }
-
