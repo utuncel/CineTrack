@@ -83,7 +83,7 @@ public class SidebarController {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/logger/LoggerView.fxml"));
       Parent view = loader.load();
       LoggerController loggerController = loader.getController();
-      loggerController.setLoggerModel(LoggerService.getInstance().getLoggerModel());
+      loggerController.setLogs();
       updateMainContent(view);
       logger.logInfo("Logger View successfully loaded");
     } catch (IOException e) {
@@ -96,7 +96,7 @@ public class SidebarController {
   public void loadDashboardView() {
     logger.logInfo("Loading Dashboard View");
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/dashboardView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
       Parent view = loader.load();
       DashboardController controller = loader.getController();
       controller.setDashboardModel(dashboardModel);

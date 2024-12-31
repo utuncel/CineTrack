@@ -10,20 +10,24 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.com.models.user.User;
 
 public class RegisterController {
 
   @FXML private TextField usernameField;
   @FXML private PasswordField passwordField;
   @FXML private Button registerButton;
+  private final UserController userController;
+
+  public RegisterController() {
+    this.userController = new UserController();
+  }
 
   @FXML
   private void handleRegistration(ActionEvent event) {
     String username = usernameField.getText();
     String password = passwordField.getText();
     try {
-      UserController.registerUser(username, password);
+      userController.registerUser(username, password);
       showInfo("Registration Successful", "Please login with your new account");
       switchToLogin(event);
     } catch (IllegalArgumentException e) {
@@ -35,6 +39,7 @@ public class RegisterController {
   private void switchToLogin(ActionEvent event) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
+      loader.setControllerFactory(param -> new LoginController());
       Parent loginView = loader.load();
 
       Scene currentScene = usernameField.getScene();

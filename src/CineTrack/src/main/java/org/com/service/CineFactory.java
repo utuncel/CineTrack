@@ -6,13 +6,23 @@ import java.util.List;
 import org.com.models.Cinematic;
 import org.com.models.helper.ApiCinematic;
 import org.com.models.helper.CsvCinematic;
+import org.com.models.user.User;
 
 public class CineFactory {
 
   private final ApiData apiData;
   private final LoggerService logger = LoggerService.getInstance();
   private CsvImporter csvImporter;
+  private User user;
 
+  public CineFactory(CsvImporter csvImporter, ApiData apiData, User user) {
+    this.csvImporter = csvImporter;
+    this.apiData = apiData;
+    this.user = user;
+    logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
+  }
+
+  //constructor for unit test
   public CineFactory(CsvImporter csvImporter, ApiData apiData) {
     this.csvImporter = csvImporter;
     this.apiData = apiData;
@@ -48,7 +58,7 @@ public class CineFactory {
       return null;
     }
 
-    Cinematic cinematic = new Cinematic(apiCinematic, csvCinematic);
+    Cinematic cinematic = new Cinematic(apiCinematic, csvCinematic, this.user);
     logger.logInfo("Successfully created cinematic for title: " + csvCinematic.getTitle());
     return cinematic;
   }
@@ -61,7 +71,7 @@ public class CineFactory {
       notFoundTitles.add(csvCinematic.getTitle());
       logger.logWarning("Title '" + csvCinematic.getTitle() + "' not found in API data.");
     } else {
-      createdCinematics.add(new Cinematic(apiCinematic, csvCinematic));
+      createdCinematics.add(new Cinematic(apiCinematic, csvCinematic, this.user));
       logger.logInfo("Added cinematic for title: " + csvCinematic.getTitle());
     }
   }

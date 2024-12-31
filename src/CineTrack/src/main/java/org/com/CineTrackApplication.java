@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
 public class CineTrackApplication extends Application {
 
   public static void main(String[] args) {
@@ -15,11 +14,17 @@ public class CineTrackApplication extends Application {
   }
 
   @Override
-  public void start(Stage stage) throws IOException {
-    var loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
-    Parent root = loader.load();
+  public void start(Stage stage) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
+      Parent root = loader.load();
+      stage.setScene(new Scene(root));
 
-    stage.setScene(new Scene(root));
-    stage.show();
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+
+    }
   }
+
 }

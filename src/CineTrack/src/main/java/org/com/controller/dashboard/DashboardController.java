@@ -38,6 +38,15 @@ public class DashboardController {
   public StackPane contentPane;
   private DashboardModel dashboardModel;
 
+  //For page switch
+  public DashboardController () {
+  }
+
+  //For initiating at logging
+  public DashboardController (DashboardModel dashboardModel) {
+    this.dashboardModel = dashboardModel;
+  }
+
   public void setDashboardModel(DashboardModel dashboardModel) {
     logger.logInfo("Initializing Dashboard Controller with model");
     try {

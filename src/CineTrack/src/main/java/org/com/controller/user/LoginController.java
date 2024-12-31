@@ -1,6 +1,7 @@
 package org.com.controller.user;
 
-
+import java.io.IOException;
+import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,10 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.com.controller.dashboard.DashboardController;
+import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.models.Cinematic;
+import org.com.models.DashboardModel;
 import org.com.models.user.User;
+import org.com.repository.CinematicDAO;
+import org.com.repository.HibernateUtil;
+import org.com.service.SessionManager;
 
 public class LoginController {
-
 
   @FXML
   private TextField usernameField;
@@ -22,14 +29,22 @@ public class LoginController {
   private PasswordField passwordField;
   @FXML
   private Button loginButton;
+  private final UserController userController;
+  private final CinematicDAO cinematicDAO;
+
+  public LoginController() {
+    this.userController = new UserController();
+    this.cinematicDAO = new CinematicDAO(HibernateUtil.getSessionFactory());
+  }
 
   @FXML
-  private void handleLogin(ActionEvent event) {
+  private void handleLogin(ActionEvent event) throws IOException {
     String username = usernameField.getText();
     String password = passwordField.getText();
-    User user = UserController.authenticateUser(username, password);
+    User user = userController.authenticateUser(username, password);
     if (user != null) {
-      // TODO: Implement navigation to main view
+
+      switchToDashboardView(cinematicDAO.getAllCinematicsByUser(SessionManager.getInstance().getCurrentUser().getId()));
     } else {
       showError("Login failed", "Invalid username or password");
     }
@@ -40,6 +55,7 @@ public class LoginController {
     try {
       FXMLLoader loader = new FXMLLoader(
           getClass().getResource("/user/RegisterView.fxml"));
+      loader.setControllerFactory(param -> new RegisterController());
       Parent registrationView = loader.load();
 
       Scene currentScene = usernameField.getScene();
@@ -61,4 +77,26 @@ public class LoginController {
     alert.setContentText(content);
     alert.showAndWait();
   }
+
+  private void switchToDashboardView(List<Cinematic> cinematics) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
+      Parent dashboardView = loader.load();
+
+      DashboardModelSingleton.getInstance().setCinematics(cinematics);
+
+      DashboardController controller = loader.getController();
+      controller.setDashboardModel(DashboardModelSingleton.getInstance());
+
+
+      Scene scene = new Scene(dashboardView);
+      Stage primaryStage = (Stage) usernameField.getScene().getWindow();
+      primaryStage.setScene(scene);
+      primaryStage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
+      showError("Navigation Error", "Could not load DashboardView.fxml.");
+    }
+  }
+
 }

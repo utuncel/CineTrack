@@ -11,9 +11,13 @@ import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.Cinematic;
 import org.com.models.DashboardModel;
+import org.com.repository.CinematicDAO;
+import org.com.repository.HibernateUtil;
+import org.com.repository.UserDAO;
 import org.com.service.ApiData;
 import org.com.service.CineFactory;
 import org.com.service.CsvImporter;
+import org.com.service.SessionManager;
 
 public class DataImporterController {
 
@@ -21,6 +25,11 @@ public class DataImporterController {
   private Button chooseFileButton;
 
   private DashboardModel dashboardModel;
+  private final CinematicDAO cinematicDAO;
+
+  public DataImporterController(){
+    cinematicDAO = new CinematicDAO(HibernateUtil.getSessionFactory());
+  }
 
   @FXML
   public void initialize() {
@@ -45,14 +54,16 @@ public class DataImporterController {
     File selectedFile = fileChooser.showOpenDialog(stage);
     if (selectedFile != null) {
 
-      dashboardModel.setCinematics(getImportedData(selectedFile.getAbsolutePath()));
+      List<Cinematic> cinematics = getImportedData(selectedFile.getAbsolutePath());
+      cinematicDAO.createCinematics(cinematics);
+      dashboardModel.setCinematics(cinematics);
     }
   }
 
   public List<Cinematic> getImportedData(String csvFilePath) throws IOException {
     CsvImporter csvImporter = new CsvImporter(csvFilePath);
     ApiData apiData = new ApiData();
-    CineFactory cineFactory = new CineFactory(csvImporter, apiData);
+    CineFactory cineFactory = new CineFactory(csvImporter, apiData, SessionManager.getInstance().getCurrentUser());
     return cineFactory.createCinematics();
   }
 }

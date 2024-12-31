@@ -14,8 +14,10 @@ open module CineTrack {
   requires java.net.http;
   requires javafx.base;
   requires java.desktop;
-  requires jakarta.persistence;
+  requires java.naming;
   requires org.hibernate.orm.core;
+  requires java.sql;
+  requires mysql.connector.j;
 
   exports org.com to javafx.graphics;
   exports org.com.controller.dashboard;

@@ -1,35 +1,40 @@
 package org.com.controller.user;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.com.models.user.User;
+import org.com.repository.HibernateUtil;
+import org.com.repository.UserDAO;
+import org.com.service.SessionManager;
 
 public class UserController {
-  private static final Map<String, User> userMap = new HashMap<>();
 
-  public static void registerUser(String username, String password) {
-    if (!userMap.containsKey(username)) {
-      User newUser = new User(username, password);
-      userMap.put(username, newUser);
-    } else {
-      throw new IllegalArgumentException("Username already exists.");
+  private final UserDAO userDAO;
+
+  public UserController() {
+    userDAO = new UserDAO(HibernateUtil.getSessionFactory());
+  }
+
+  public void registerUser(String username, String password) {
+    User user = new User(username, password);
+
+    try {
+      if (userDAO.getUserByName(username) == null) {
+        userDAO.createUser(user);
+      }
+    } catch (Exception e) {
+      throw new RuntimeException("Failed to register user: " + e.getMessage(), e);
     }
   }
 
-  public static User authenticateUser(String username, String password) {
-    User user = userMap.get(username);
-    if (user != null && user.validatePassword(password)) {
-      return user;
-    } else {
-      return null;
+  public User authenticateUser(String username, String password) {
+    try {
+      User user = userDAO.authenticate(username, password);
+      if (user != null) {
+        SessionManager.getInstance().setCurrentUser(user);
+        return user;
+      }
+    } catch (Exception e) {
+      throw new RuntimeException("Authentication failed: " + e.getMessage(), e);
     }
-  }
-
-  public static void updateUser(User user) {
-    userMap.put(user.getName(), user);
-  }
-
-  public static User getUser(String username) {
-    return userMap.get(username);
+    return null;
   }
 }

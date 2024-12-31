@@ -1,29 +1,20 @@
 package org.com.models.logger;
 
-import jakarta.persistence.*;
+
 import org.com.models.user.User;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "logs")
 public class Logger {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false)
   private LocalDateTime timestamp;
 
-  @Column(nullable = false)
   private String level;
 
-  @Column(nullable = false, length = 1000)
   private String message;
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
   private User user;
 
   // Standardkonstruktor für Hibernate

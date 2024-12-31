@@ -1,6 +1,7 @@
 package org.com.models;
 
-import jakarta.persistence.*;
+
+
 import org.com.models.enums.State;
 import org.com.models.enums.Type;
 import org.com.models.helper.ApiCinematic;
@@ -12,22 +13,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-@Entity
-@Table(name = "cinematics")
+
 public class Cinematic {
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+
   private Long id;
 
-  @Column(nullable = false)
+
   private String title;
 
   private int myRating;
 
-  @Column(length = 2000)
   private String description;
 
-  @Column(length = 500)
   private String imageUrl;
 
   private String runtime;
@@ -38,37 +35,44 @@ public class Cinematic {
 
   private String directorName;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
   private State state;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
   private Type type;
 
-  @ElementCollection
-  @CollectionTable(
-      name = "cinematic_actors",
-      joinColumns = @JoinColumn(name = "cinematic_id")
-  )
-  @Column(name = "actor")
+
   private List<String> actors = new ArrayList<>();
 
-  @ElementCollection
-  @CollectionTable(
-      name = "cinematic_genres",
-      joinColumns = @JoinColumn(name = "cinematic_id")
-  )
-  @Column(name = "genre")
   private List<String> genres = new ArrayList<>();
 
-  @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "user_id")
   private User user;
 
   // Standardkonstruktor für Hibernate
   protected Cinematic() {}
 
+  public Cinematic(ApiCinematic apiCinematic, CsvCinematic csvCinematic, User user) {
+    this.user = user;
+    this.title = csvCinematic.getTitle();
+    this.myRating = csvCinematic.getRating();
+    this.state = csvCinematic.getState();
+    this.type = csvCinematic.getType();
+    this.runtime = Optional.ofNullable(apiCinematic.getRuntime()).orElse("Unknown runtime");
+    this.imdbRating = parseStringToDouble(apiCinematic.getImdbRating());
+    this.imdbVotes = parseImdbVotes(apiCinematic.getImdbVotes());
+    this.directorName = Optional.ofNullable(apiCinematic.getDirector()).orElse("Unknown director");
+    this.description = Optional.ofNullable(apiCinematic.getPlot()).orElse("Unknown description");
+    this.imageUrl = Optional.ofNullable(apiCinematic.getPosterUrl()).orElse("Unknown imageUrl");
+
+    String genres = apiCinematic.getGenre();
+    if (genres != null && !genres.isEmpty()) {
+      this.genres.addAll(Arrays.asList(genres.split(", ")));
+    }
+
+    String actors = apiCinematic.getActors();
+    if (actors != null && !actors.isEmpty()) {
+      this.actors.addAll(Arrays.asList(actors.split(", ")));
+    }
+  }
+  //constructor for unit test
   public Cinematic(ApiCinematic apiCinematic, CsvCinematic csvCinematic) {
     this.title = csvCinematic.getTitle();
     this.myRating = csvCinematic.getRating();
@@ -90,6 +94,9 @@ public class Cinematic {
     if (actors != null && !actors.isEmpty()) {
       this.actors.addAll(Arrays.asList(actors.split(", ")));
     }
+  }
+
+  public Cinematic(String s, String anotherDescription, int i, double v, int i1, String anotherDirector, State state, Type type) {
   }
 
   // Getter für id

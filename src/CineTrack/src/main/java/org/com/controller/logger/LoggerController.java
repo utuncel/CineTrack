@@ -1,5 +1,6 @@
 package org.com.controller.logger;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -7,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.com.models.logger.Logger;
 import org.com.models.logger.LoggerModel;
 import org.com.service.LoggerService;
+import org.com.service.SessionManager;
 
 public class LoggerController {
 
@@ -30,14 +32,18 @@ public class LoggerController {
     messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
 
     if (loggerModel != null) {
-      logTableView.setItems(loggerModel.getLogs());
+      var logs = SessionManager.getInstance().getCurrentUser().getLogs();
+      logTableView.setItems(
+          FXCollections.observableArrayList(logs));
     }
   }
+  public void setController(LoggerModel loggerModel){
+    this.loggerModel = loggerModel;
+  }
 
-  public void setLoggerModel(LoggerModel model) {
-    this.loggerModel = model;
-    if (logTableView != null && model != null) {
-      logTableView.setItems(model.getLogs());
+  public void setLogs() {
+    if (logTableView != null && loggerModel != null) {
+      logTableView.setItems(FXCollections.observableArrayList(SessionManager.getInstance().getCurrentUser().getLogs()));
     }
   }
 
