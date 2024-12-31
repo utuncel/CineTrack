@@ -1,0 +1,47 @@
+-- Tabelle für Benutzer
+CREATE TABLE users (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+-- Tabelle für Cinematics
+CREATE TABLE cinematics (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    my_rating INT,
+    description VARCHAR(2000),
+    image_url VARCHAR(500),
+    runtime VARCHAR(255),
+    imdb_rating DOUBLE,
+    imdb_votes INT,
+    director_name VARCHAR(255),
+    state ENUM('FINISHED', 'WATCHING', 'DROPPED', 'TOWATCH') NOT NULL,
+    type ENUM('ANIME', 'MOVIE', 'SERIES') NOT NULL,
+    user_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Tabelle für Schauspieler
+CREATE TABLE actors (
+    cinematic_id BIGINT,
+    actor VARCHAR(255),
+    FOREIGN KEY (cinematic_id) REFERENCES cinematics(id) ON DELETE CASCADE
+);
+
+-- Tabelle für Genres
+CREATE TABLE genres (
+    cinematic_id BIGINT,
+    genre VARCHAR(255),
+    FOREIGN KEY (cinematic_id) REFERENCES cinematics(id) ON DELETE CASCADE
+);
+
+-- Tabelle für Logs
+CREATE TABLE logs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    timestamp DATETIME NOT NULL,
+    level VARCHAR(255) NOT NULL,
+    message VARCHAR(1000) NOT NULL,
+    user_id BIGINT,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
