@@ -18,6 +18,7 @@ import org.com.service.ApiData;
 import org.com.service.CineFactory;
 import org.com.service.CsvImporter;
 import org.com.service.SessionManager;
+import javafx.concurrent.Task;
 
 public class DataImporterController {
 
@@ -45,20 +46,37 @@ public class DataImporterController {
 
   private void openFileChooser() throws IOException {
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("chose file");
-
+    fileChooser.setTitle("Choose file");
     fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV File", "*.csv"));
 
     Stage stage = (Stage) chooseFileButton.getScene().getWindow();
-
     File selectedFile = fileChooser.showOpenDialog(stage);
-    if (selectedFile != null) {
 
-      List<Cinematic> cinematics = getImportedData(selectedFile.getAbsolutePath());
-      cinematicDAO.createCinematics(cinematics);
-      dashboardModel.setCinematics(cinematics);
+    if (selectedFile != null) {
+      Task<List<Cinematic>> task = new Task<>() {
+        @Override
+        protected List<Cinematic> call() throws Exception {
+          return getImportedData(selectedFile.getAbsolutePath());
+        }
+      };
+
+
+      task.setOnSucceeded(event -> {
+        List<Cinematic> cinematics = task.getValue();
+        cinematicDAO.createCinematics(cinematics);
+        dashboardModel.setCinematics(cinematics);
+      });
+
+      // Fehlerbehandlung
+      task.setOnFailed(event -> {
+        Throwable exception = task.getException();
+        exception.printStackTrace();
+      });
+
+      new Thread(task).start();
     }
   }
+
 
   public List<Cinematic> getImportedData(String csvFilePath) throws IOException {
     CsvImporter csvImporter = new CsvImporter(csvFilePath);

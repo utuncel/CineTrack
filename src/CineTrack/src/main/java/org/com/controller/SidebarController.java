@@ -1,6 +1,8 @@
 package org.com.controller;
 
 import java.io.IOException;
+import java.util.function.Consumer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -45,81 +47,80 @@ public class SidebarController {
   }
 
   @FXML
-  public void loadDataImporterView() throws IOException {
+  public void loadDataImporterView() {
     logger.logInfo("Loading Data Import View");
-    try {
-      var loader = new FXMLLoader(getClass().getResource("/dataimport/DataImporterView.fxml"));
-      Parent view = loader.load();
-      Stage stage = (Stage) mainContentPane.getScene().getWindow();
-      Scene newScene = new Scene(view);
-      stage.setScene(newScene);
-      logger.logInfo("Data Import View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Data Import View: " + e.getMessage());
-      throw e;
-    }
+    loadViewInBackground("/dataimport/DataImporterView.fxml", this::updateMainContent, this::handleLoadError);
   }
 
   @FXML
-  public void loadAddCinematicView() throws IOException {
+  public void loadAddCinematicView() {
     logger.logInfo("Loading Add Media View");
-    try {
-      var loader = new FXMLLoader(getClass().getResource("/addcinematic/AddCinematicView.fxml"));
-      Parent view = loader.load();
-      Stage stage = (Stage) mainContentPane.getScene().getWindow();
-      Scene newScene = new Scene(view);
-      stage.setScene(newScene);
-      logger.logInfo("Add Media View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Add Media View: " + e.getMessage());
-      throw e;
-    }
+    loadViewInBackground("/addcinematic/AddCinematicView.fxml", this::updateMainContent, this::handleLoadError);
   }
 
   @FXML
   public void loadLoggerView() {
     logger.logInfo("Loading Logger View");
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/logger/LoggerView.fxml"));
-      Parent view = loader.load();
-      LoggerController loggerController = loader.getController();
-      loggerController.setLogs();
-      updateMainContent(view);
-      logger.logInfo("Logger View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Logger View: " + e.getMessage());
-      handleLoadError(e);
-    }
+    loadViewInBackground("/logger/LoggerView.fxml", this::setLoggerView, this::handleLoadError);
   }
 
   @FXML
   public void loadDashboardView() {
     logger.logInfo("Loading Dashboard View");
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
-      Parent view = loader.load();
-      DashboardController controller = loader.getController();
-      controller.setDashboardModel(dashboardModel);
-      updateMainContent(view);
-      logger.logInfo("Dashboard View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Dashboard View: " + e.getMessage());
-      handleLoadError(e);
-    }
+    loadViewInBackground("/dashboard/DashboardView.fxml", this::setDashboardView, this::handleLoadError);
   }
 
   private void loadCinematicView(String viewPath) {
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
-      Parent view = loader.load();
-      CinematicController controller = loader.getController();
-      controller.loadData(dashboardModel.getCinematics());
-      updateMainContent(view);
-      logger.logInfo("Media View successfully loaded: " + viewPath);
-    } catch (IOException e) {
-      logger.logError("Error loading Media View " + viewPath + ": " + e.getMessage());
-      handleLoadError(e);
-    }
+    new Thread(() -> {
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+        Parent view = loader.load();
+
+        // Lade die Daten im Hintergrund
+        CinematicController controller = loader.getController();
+        controller.loadData(dashboardModel.getCinematics());
+
+        // UI im richtigen Thread aktualisieren
+        Platform.runLater(() -> {
+          updateMainContent(view);
+          logger.logInfo("Media View successfully loaded: " + viewPath);
+        });
+      } catch (IOException e) {
+        Platform.runLater(() -> {
+          logger.logError("Error loading Media View " + viewPath + ": " + e.getMessage());
+          handleLoadError(e);
+        });
+      }
+    }).start();
+  }
+
+  private void loadViewInBackground(String viewPath, Consumer<Parent> onSuccess, Consumer<Exception> onError) {
+    new Thread(() -> {
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+        Parent view = loader.load();
+
+        Platform.runLater(() -> {
+          onSuccess.accept(view);
+        });
+      } catch (IOException e) {
+        Platform.runLater(() -> {
+          onError.accept(e);
+        });
+      }
+    }).start();
+  }
+
+  private void setLoggerView(Parent view) {
+    LoggerController loggerController = new FXMLLoader(getClass().getResource("/logger/LoggerView.fxml")).getController();
+    loggerController.setLogs();
+    updateMainContent(view);
+  }
+
+  private void setDashboardView(Parent view) {
+    DashboardController controller = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml")).getController();
+    controller.setDashboardModel(dashboardModel);
+    updateMainContent(view);
   }
 
   private void updateMainContent(Parent content) {
@@ -127,7 +128,6 @@ public class SidebarController {
     Scene newScene = new Scene(content);
     stage.setScene(newScene);
   }
-
 
   private void handleLoadError(Exception e) {
     logger.logError("Critical error while loading view: " + e.getMessage());

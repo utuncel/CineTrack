@@ -30,7 +30,8 @@ public class DashboardModel {
   }
 
   public void setCinematics(List<Cinematic> cinematics) {
-    this.cinematics = cinematics;
+    this.cinematics.clear();
+    this.cinematics.addAll(cinematics);
     notifyObservers();
   }
 
