@@ -13,7 +13,6 @@ import org.com.models.Cinematic;
 import org.com.models.DashboardModel;
 import org.com.repository.CinematicDAO;
 import org.com.repository.HibernateUtil;
-import org.com.repository.UserDAO;
 import org.com.service.ApiData;
 import org.com.service.CineFactory;
 import org.com.service.CsvImporter;
@@ -63,8 +62,10 @@ public class DataImporterController {
 
       task.setOnSucceeded(event -> {
         List<Cinematic> cinematics = task.getValue();
+        cinematicDAO.deleteAllCinematicsByUser(SessionManager.getInstance().getCurrentUser().getId());
         cinematicDAO.createCinematics(cinematics);
         dashboardModel.setCinematics(cinematics);
+        SessionManager.getInstance().getCurrentUser().setCinematics(cinematics);
       });
 
       // Fehlerbehandlung
