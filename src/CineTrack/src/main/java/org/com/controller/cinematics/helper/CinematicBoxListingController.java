@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import org.com.models.Cinematic;
 import org.com.models.enums.Type;
@@ -64,7 +65,7 @@ public class CinematicBoxListingController {
         try {
           FXMLLoader loader = new FXMLLoader(
               getClass().getResource("/cinematics/helper/CinematicBoxView.fxml"));
-          AnchorPane cinematicPane = loader.load();
+          StackPane cinematicPane = loader.load();
           CinematicBoxController controller = loader.getController();
           controller.setCinematicView(cinematic);
 
@@ -117,7 +118,7 @@ public class CinematicBoxListingController {
     }
   }
 
-  private record CinematicViewHolder(AnchorPane view, CinematicBoxController controller) {
+  private record CinematicViewHolder(StackPane view, CinematicBoxController controller) {
 
   }
 

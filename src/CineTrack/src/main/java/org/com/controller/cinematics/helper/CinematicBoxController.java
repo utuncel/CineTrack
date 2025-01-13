@@ -7,57 +7,85 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import org.com.models.Cinematic;
+import javafx.scene.layout.StackPane;
 
 public class CinematicBoxController {
 
   @FXML
-  public TextArea descriptionArea;
+  private TextArea descriptionArea;
   @FXML
-  public FlowPane genresPane;
+  private Label directorLabel;
   @FXML
-  public FlowPane actorsPane;
+  private Label runtimeLabel;
   @FXML
-  public Label directorLabel;
+  private ImageView posterImage;
   @FXML
-  public Label runtimeLabel;
+  private Label imdbRatingLabel;
   @FXML
-  public ImageView posterImage;
+  private Label myRatingLabel;
   @FXML
-  public Label imdbRatingLabel;
+  private Label titleLabel;
   @FXML
-  public Label myRatingLabel;
+  private Label stateLabel;
   @FXML
-  public Label titleLabel;
+  private VBox hoverOverlay;
   @FXML
-  public Label stateLabel;
-  @FXML
-  public ImageView imageView;
+  private StackPane rootPane;
 
-  public void setCinematicView(Cinematic cinematic) {
-    posterImage.setImage(new Image(cinematic.getImageUrl()));
+  @FXML
+  public void initialize() {
+    // Setup hover effects
+    if (rootPane != null) {
+      rootPane.setOnMouseEntered(e -> {
+        if (descriptionArea != null) descriptionArea.setVisible(true);
+        if (hoverOverlay != null) hoverOverlay.setVisible(true);
+      });
 
-    titleLabel.setText(cinematic.getTitle());
-    runtimeLabel.setText("Laufzeit: " + cinematic.getRuntime());
-    imdbRatingLabel.setText(String.format("IMDb: %.1f/10 (%,d Stimmen)",
-        cinematic.getImdbRating(), cinematic.getImdbVotes()));
-    myRatingLabel.setText("Meine Bewertung: " + cinematic.getMyRating() + "/10");
-    directorLabel.setText("Regie: " + cinematic.getDirectorName());
-    stateLabel.setText("Status: " + cinematic.getState().toString());
-    descriptionArea.setText(cinematic.getDescription());
-
-    setChips(cinematic.getGenres(), genresPane);
-
-    setChips(cinematic.getActors(), actorsPane);
-  }
-
-  private void setChips(List<String> items, FlowPane pane) {
-    pane.getChildren().clear();
-    for (String item : items) {
-      Label chip = new Label(item);
-      chip.getStyleClass().add(pane == genresPane ? "genre-chip" : "actor-chip");
-      pane.getChildren().add(chip);
+      rootPane.setOnMouseExited(e -> {
+        if (descriptionArea != null) descriptionArea.setVisible(false);
+        if (hoverOverlay != null) hoverOverlay.setVisible(false);
+      });
     }
   }
 
+  public void setCinematicView(Cinematic cinematic) {
+    if (cinematic == null) return;
+
+    // Set image
+    if (posterImage != null && cinematic.getImageUrl() != null) {
+      posterImage.setImage(new Image(cinematic.getImageUrl()));
+    }
+
+    // Set text labels
+    if (titleLabel != null) {
+      titleLabel.setText(cinematic.getTitle());
+    }
+
+    if (runtimeLabel != null) {
+      runtimeLabel.setText("Runtime: " + cinematic.getRuntime());
+    }
+
+    if (imdbRatingLabel != null) {
+      imdbRatingLabel.setText(String.format("IMDb: %.1f/10 (%,d Stimmen)",
+          cinematic.getImdbRating(), cinematic.getImdbVotes()));
+    }
+
+    if (myRatingLabel != null) {
+      myRatingLabel.setText("MyRating: " + cinematic.getMyRating() + "/10");
+    }
+
+    if (directorLabel != null) {
+      directorLabel.setText("Director: " + cinematic.getDirectorName());
+    }
+
+    if (stateLabel != null) {
+      stateLabel.setText("State: " + cinematic.getState().toString());
+    }
+
+    if (descriptionArea != null) {
+      descriptionArea.setText(cinematic.getDescription());
+    }
+  }
 }

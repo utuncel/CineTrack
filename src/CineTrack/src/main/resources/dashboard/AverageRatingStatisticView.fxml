@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+
 <HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
   xmlns="http://javafx.com/javafx/22"
   fx:controller="org.com.controller.dashboard.AverageRatingStatisticController"
-  fx:id="averageRating">
-  <VBox alignment="CENTER" spacing="10" styleClass="rating-box">
+  fx:id="averageRating" prefWidth="500.0" prefHeight="150.0"
+  styleClass="strategy-container">
+
+  <!-- Label für die Statistikbezeichnung oben links -->
+  <Label styleClass="statistic-name" text="Average Ratings:" />
+
+  <!-- Boxen für den Inhalt (wieder zentriert) -->
+  <VBox alignment="CENTER" spacing="10" styleClass="rating-box" prefWidth="200.0" prefHeight="150.0">
     <Label styleClass="rating-name" text="MyRating"/>
     <Label styleClass="rating-value" fx:id="myRatingValue"/>
   </VBox>
-  <!-- Box für MyRating -->
-  <VBox alignment="CENTER" spacing="10" styleClass="rating-box">
+
+  <VBox alignment="CENTER" spacing="10" styleClass="rating-box" prefWidth="200.0" prefHeight="150.0">
     <Label styleClass="rating-name" text="IMDbRating"/>
     <Label styleClass="rating-value" fx:id="imdbRatingValue"/>
   </VBox>
 
-  <!-- Box für IMDbRating -->
   <stylesheets>
-    <URL value="@AverageRatingStatisticStyle.css"/>
+    <URL value="@StatisticStyle.css"/>
   </stylesheets>
 </HBox>
-

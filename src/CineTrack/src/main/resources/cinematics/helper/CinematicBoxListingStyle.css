@@ -1,24 +1,162 @@
+/* TilePane Grid Layout */
+.cinematics-tile-pane {
+    -fx-background-color: transparent;
+    -fx-hgap: 30;
+    -fx-vgap: 40;
+    -fx-padding: 10;
+    -fx-alignment: top-left;
+    -fx-pref-columns: 4;
+    -fx-tile-alignment: top-left;
+}
+
+/* Container adjustments */
+.cinematic-listing-container {
+    -fx-background-color: #141414;
+    -fx-spacing: 30;
+    -fx-padding: 20;
+    -fx-alignment: top-left;
+}
+
+/* Main Container Styles */
 .cinematic-listing-scroll {
-  -fx-background-color: #141414;
+    -fx-background: #141414;
+    -fx-background-color: transparent;
+    -fx-padding: 20;
+}
+
+.cinematic-listing-scroll > .viewport {
+    -fx-background-color: transparent;
 }
 
 .cinematic-listing-container {
-  -fx-background-color: #141414;
+    -fx-background-color: #141414;
+    -fx-spacing: 30;
+    -fx-padding: 20;
 }
 
+/* Search Controls Container */
+.cinematic-listing-container > .h-box {
+    -fx-spacing: 15;
+    -fx-padding: 0 0 20 0;
+}
+
+/* ComboBox Styling */
+.combo-box {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 4;
+    -fx-text-fill: white;
+    -fx-mark-color: white;
+    -fx-padding: 5 10;
+}
+
+.combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-padding: 8 12;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #2a2a2a;
+    -fx-background-radius: 4;
+    -fx-border-radius: 4;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 0);
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Search TextField Styling */
+.text-field {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 4;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.5);
+    -fx-padding: 8 12;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-background-color: rgba(255, 255, 255, 0.15);
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-radius: 4;
+}
+
+/* TilePane Grid Layout */
 .cinematics-tile-pane {
-  -fx-background-color: transparent;
+    -fx-background-color: transparent;
+    -fx-hgap: 30;
+    -fx-vgap: 40;
+    -fx-padding: 10;
 }
 
-.cinematic-preview {
-  -fx-background-color: #2f2f2f;
-  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
-  -fx-background-radius: 5;
-  -fx-transition: all 0.3s;
+/* Scrollbar Styling */
+.scroll-bar:vertical,
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+    -fx-padding: 2;
 }
 
-.cinematic-preview:hover {
-  -fx-scale-x: 1.05;
-  -fx-scale-y: 1.05;
-  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.9), 15, 0, 0, 0);
+.scroll-bar:vertical .thumb,
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 6;
+}
+
+.scroll-bar:vertical .thumb:hover,
+.scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
+
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Row Header Styling (if needed) */
+.section-header {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10 0 20 0;
+}
+
+/* Responsive Grid Adjustments */
+.cinematics-tile-pane {
+    -fx-pref-columns: 4;
+    -fx-max-width: infinity;
+}
+
+@media (max-width: 1200) {
+    .cinematics-tile-pane {
+        -fx-pref-columns: 3;
+    }
+}
+
+@media (max-width: 800) {
+    .cinematics-tile-pane {
+        -fx-pref-columns: 2;
+    }
 }

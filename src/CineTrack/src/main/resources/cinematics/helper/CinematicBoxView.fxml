@@ -1,40 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml"
-  prefHeight="400.0"
-  prefWidth="600.0"
-  styleClass="movie-preview" xmlns="http://javafx.com/javafx"
-  fx:controller="org.com.controller.cinematics.helper.CinematicBoxController">
 
-  <VBox AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10"
-    spacing="10">
-    <HBox spacing="20">
-      <ImageView fitHeight="300" fitWidth="200" preserveRatio="true" fx:id="posterImage"/>
-      <VBox spacing="10">
-        <Label styleClass="title" fx:id="titleLabel"/>
-        <Label styleClass="info" fx:id="runtimeLabel"/>
-        <Label styleClass="rating" fx:id="imdbRatingLabel"/>
-        <Label styleClass="my-rating" fx:id="myRatingLabel"/>
-        <Label styleClass="info" fx:id="directorLabel"/>
-        <Label styleClass="state" fx:id="stateLabel"/>
-      </VBox>
-    </HBox>
-    <HBox spacing="10">
-      <FlowPane hgap="10" vgap="5" fx:id="genresPane"/>
-      <Label styleClass="section-title" text="Genres:"/>
-    </HBox>
-    <HBox spacing="10">
-      <FlowPane hgap="10" vgap="5" fx:id="actorsPane"/>
-      <Label styleClass="section-title" text="Actors:"/>
-    </HBox>
-    <TextArea editable="false" prefHeight="100" wrapText="true" fx:id="descriptionArea"/>
+<StackPane styleClass="movie-preview" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.cinematics.helper.CinematicBoxController">
+
+  <VBox spacing="15" style="-fx-padding: 0;">
+    <StackPane>
+      <ImageView fx:id="posterImage" fitHeight="300" fitWidth="200" preserveRatio="true" styleClass="poster-image" />
+    </StackPane>
+
+    <VBox spacing="8" style="-fx-padding: 0 10 10 10;">
+      <Label fx:id="titleLabel" styleClass="title" />
+      <Label fx:id="runtimeLabel" styleClass="info" />
+      <Label fx:id="directorLabel" styleClass="info" />
+      <Label fx:id="imdbRatingLabel" styleClass="info" />
+      <Label fx:id="myRatingLabel" styleClass="info" />
+      <Label fx:id="stateLabel" styleClass="info" />
+
+      <TextArea fx:id="descriptionArea" editable="false" maxWidth="393.0" prefHeight="189.0" prefRowCount="6" prefWidth="393.0" styleClass="modern-description" wrapText="true"/>
+    </VBox>
   </VBox>
-</AnchorPane>
+  <stylesheets>
+    <URL value="@CinematicBoxStyle.css" />
+  </stylesheets>
+</StackPane>

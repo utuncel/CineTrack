@@ -1,0 +1,51 @@
+/* Grundlegende Container-Styles */
+#checkboxContainer {
+    -fx-alignment: top-center;
+    -fx-background-color: transparent;
+    -fx-padding: 20px;
+}
+
+/* Gruppenlabel */
+.group-label {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D3D3D3;
+    -fx-padding: 10px 0;
+}
+
+/* FlowPane für jede Gruppe */
+FlowPane {
+    -fx-alignment: center;
+    -fx-hgap: 20px;  /* Horizontaler Abstand zwischen den Checkboxen */
+    -fx-vgap: 15px;  /* Vertikaler Abstand zwischen den Checkboxen */
+    -fx-background-color: transparent;
+}
+
+/* Spezifische Checkbox-Stile */
+.check-box {
+    -fx-font-size: 14px;
+    -fx-text-fill: #D3D3D3;
+    -fx-background-color: transparent;
+    -fx-padding: 6px 10px;
+    -fx-border-radius: 5px;
+    -fx-border-color: transparent;
+}
+
+/* Hover-Effekt für Checkboxen */
+.check-box:hover {
+    -fx-background-color: #555555;
+    -fx-border-color: #888888;
+}
+
+/* Buttons im oberen Bereich */
+Button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-padding: 8px 16px;
+    -fx-font-size: 14px;
+    -fx-border-radius: 8px;
+}
+
+Button:hover {
+    -fx-background-color: #45a049;
+}
