@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-  fx:controller="org.com.controller.logger.LoggerController">
+  fx:controller="org.com.controller.logger.LoggerController"
+  stylesheets="@LoggerStyle.css">
 
   <center>
     <TableView fx:id="logTableView">

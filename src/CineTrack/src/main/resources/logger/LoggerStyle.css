@@ -1,0 +1,125 @@
+/* Base Theme Colors - matching CinematicBox theme */
+.root {
+    -fx-background-color: #141414;
+    -fx-text-fill: white;
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* TableView Styling */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 20;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #2f2f2f;
+    -fx-background-radius: 8 8 0 0;
+    -fx-padding: 5;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: transparent;
+    -fx-size: 45;
+    -fx-border-width: 0 0 0 0;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-padding: 10 5;
+}
+
+/* Table Cells */
+.table-row-cell {
+    -fx-background-color: #2f2f2f;
+    -fx-table-cell-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #262626;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #3f3f3f;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(255, 255, 255, 0.2);
+    -fx-text-fill: white;
+}
+
+/* Table Cells Content */
+.table-view .table-cell {
+    -fx-text-fill: white;
+    -fx-alignment: center-left;
+    -fx-padding: 8 15;
+}
+
+/* Specific Column Styles */
+#timestampColumn {
+    -fx-alignment: center-left;
+}
+
+#levelColumn {
+    -fx-alignment: center;
+}
+
+#messageColumn {
+    -fx-alignment: center-left;
+}
+
+/* Level-specific styling */
+.level-error {
+    -fx-text-fill: #e50914;
+}
+
+.level-warning {
+    -fx-text-fill: #ffd700;
+}
+
+.level-info {
+    -fx-text-fill: #1ed760;
+}
+
+/* Scrollbar Styling - matching CinematicListing */
+.table-view .scroll-bar:vertical,
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-pref-width: 12;
+    -fx-pref-height: 12;
+    -fx-padding: 2;
+}
+
+.table-view .scroll-bar:vertical .thumb,
+.table-view .scroll-bar:horizontal .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 6;
+}
+
+.table-view .scroll-bar:vertical .thumb:hover,
+.table-view .scroll-bar:horizontal .thumb:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.4);
+}
+
+.table-view .scroll-bar .increment-button,
+.table-view .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.table-view .scroll-bar .increment-arrow,
+.table-view .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* BorderPane Styling */
+.border-pane {
+    -fx-background-color: #141414;
+}

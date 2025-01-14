@@ -1,28 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import java.net.URL?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
   xmlns="http://javafx.com/javafx"
   fx:controller="org.com.controller.SidebarController"
   fx:id="mainContentPane">
 
-  <center>
-
-  </center>
-
   <left>
-    <VBox spacing="10" styleClass="sidebar">
-      <Button onAction="#loadDashboardView" text="Dashboard"/>
-      <Button onAction="#loadMovieView" text="Movies"/>
-      <Button onAction="#loadSeriesView" text="Series"/>
-      <Button onAction="#loadAnimeView" text="Anime"/>
-      <Button onAction="#loadDataImporterView" text="DataImporter"/>
-      <Button onAction="#loadAddCinematicView" text="Add Cinematic"/>
-      <Button onAction="#loadLoggerView" text="Logs"/>
+    <VBox styleClass="sidebar">
+      <!-- Logo or Title Area -->
+      <Label text="CINEMATIC TRACKER" styleClass="sidebar-title"/>
+
+      <!-- Navigation Section -->
+      <VBox styleClass="nav-section" spacing="8">
+        <Button onAction="#loadDashboardView"
+          text="Dashboard"
+          styleClass="nav-button"/>
+        <Button onAction="#loadMovieView"
+          text="Movies"
+          styleClass="nav-button"/>
+        <Button onAction="#loadSeriesView"
+          text="Series"
+          styleClass="nav-button"/>
+        <Button onAction="#loadAnimeView"
+          text="Anime"
+          styleClass="nav-button"/>
+      </VBox>
+
+      <!-- Spacer -->
+      <Region VBox.vgrow="ALWAYS"/>
+
+      <!-- Management Section -->
+      <VBox styleClass="nav-section" spacing="8">
+        <Label text="MANAGEMENT" styleClass="section-title"/>
+        <Button onAction="#loadDataImporterView"
+          text="Data Importer"
+          styleClass="nav-button"/>
+        <Button onAction="#loadAddCinematicView"
+          text="Add Cinematic"
+          styleClass="nav-button"/>
+        <Button onAction="#loadLoggerView"
+          text="Logs"
+          styleClass="nav-button"/>
+      </VBox>
     </VBox>
   </left>
-
+  <stylesheets>
+    <URL value="@SidebarStyle.css" />
+  </stylesheets>
 </BorderPane>

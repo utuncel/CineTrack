@@ -4,10 +4,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-  fx:controller="org.com.controller.dataimport.DataImporterController">
+  fx:controller="org.com.controller.dataimport.DataImporterController"
+  stylesheets="@DataImporterStyle.css">
   <center>
-    <VBox alignment="CENTER" spacing="10">
-      <Button text="Import CSV File" fx:id="chooseFileButton"/>
+    <VBox alignment="CENTER" spacing="20" styleClass="vbox">
+      <VBox styleClass="import-area" alignment="CENTER" spacing="15">
+        <Button text="Import CSV File" fx:id="chooseFileButton"/>
+      </VBox>
     </VBox>
   </center>
 
