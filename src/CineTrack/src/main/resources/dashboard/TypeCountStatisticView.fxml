@@ -8,7 +8,7 @@
 <HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
   xmlns="http://javafx.com/javafx/22"
   fx:controller="org.com.controller.dashboard.TypeCountStatisticController"
-  fx:id="typeCount" prefWidth="1000.0" prefHeight="450.0"
+  fx:id="typeCount" prefWidth="256.0" prefHeight="200.0"
   styleClass="strategy-container">
 
   <Label styleClass="statistic-name" text="Type Count:" />

@@ -1,0 +1,22 @@
+.root {
+    -fx-background-color: #141414;
+    -fx-text-fill: white;
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* BorderPane Container */
+.border-pane {
+    -fx-background-color: #141414;
+    -fx-padding: 0;
+}
+
+/* Center content area */
+.border-pane > .center {
+    -fx-background-color: transparent;
+    -fx-padding: 20;
+}
+
+/* Left sidebar area - ensuring proper spacing */
+.border-pane > .left {
+    -fx-background-color: transparent;
+}

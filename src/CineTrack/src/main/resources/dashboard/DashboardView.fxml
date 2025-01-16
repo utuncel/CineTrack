@@ -11,14 +11,14 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="contentPane" prefHeight="1176.0" prefWidth="1900.0" style="-fx-background-color: #2B2B2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.dashboard.DashboardController"> <!-- Hintergrundfarbe -->
+<StackPane fx:id="contentPane"   prefHeight="800.0" prefWidth="1550.0" style="-fx-background-color: #2B2B2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.dashboard.DashboardController"> <!-- Hintergrundfarbe -->
 
   <AnchorPane>
     <BorderPane styleClass="semi-top-form" stylesheets="@DashboardStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
       <!-- Hauptinhalt -->
       <center>
-        <AnchorPane prefHeight="968.0" prefWidth="1720.0">
+        <AnchorPane prefHeight="768.0" prefWidth="1120.0">
           <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="-4.0" prefHeight="958.0" prefWidth="1771.0" styleClass="scroll-pane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
             <content>
               <VBox fx:id="chartContainer" alignment="TOP_CENTER" spacing="15.0" maxHeight="Infinity">

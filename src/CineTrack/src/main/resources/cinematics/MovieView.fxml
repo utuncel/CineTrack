@@ -2,9 +2,11 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-  prefHeight="400.0"
-  prefWidth="600.0"
-  xmlns="http://javafx.com/javafx" fx:controller="org.com.controller.cinematics.MovieController">
+  prefHeight="800.0"
+  prefWidth="1200.0"
+  xmlns="http://javafx.com/javafx"
+  fx:controller="org.com.controller.cinematics.MovieController"
+  stylesheets="@CinematicStyle.css">
   <center>
     <fx:include source="helper/CinematicBoxListingView.fxml" fx:id="cinematicListing"/>
   </center>
