@@ -61,6 +61,22 @@ public class SidebarController {
   }
 
   @FXML
+  public void loadDataExportView() throws IOException {
+    logger.logInfo("Loading Data Export View");
+    try {
+      var loader = new FXMLLoader(getClass().getResource("/dataexport/DataExportView.fxml"));
+      Parent view = loader.load();
+      Stage stage = (Stage) mainContentPane.getScene().getWindow();
+      Scene newScene = new Scene(view);
+      stage.setScene(newScene);
+      logger.logInfo("Data Export View successfully loaded");
+    } catch (IOException e) {
+      logger.logError("Error loading Data Export View: " + e.getMessage());
+      throw e;
+    }
+  }
+
+  @FXML
   public void loadAddCinematicView() throws IOException {
     logger.logInfo("Loading Add Media View");
     try {
@@ -127,7 +143,6 @@ public class SidebarController {
     Scene newScene = new Scene(content);
     stage.setScene(newScene);
   }
-
 
   private void handleLoadError(Exception e) {
     logger.logError("Critical error while loading view: " + e.getMessage());

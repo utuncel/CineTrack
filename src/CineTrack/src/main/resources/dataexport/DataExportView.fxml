@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+  fx:controller="org.com.controller.dataexport.DataExportController"
+  stylesheets="@DataExportStyle.css" prefHeight="800.0" prefWidth="1200.0">
+  <center>
+    <VBox alignment="CENTER" spacing="20" styleClass="vbox">
+      <VBox styleClass="import-area" alignment="CENTER" spacing="15">
+        <Button text="Export Cinematics" fx:id="exportButton"/>
+      </VBox>
+    </VBox>
+  </center>
+
+  <left>
+    <fx:include source="../SidebarView.fxml"/>
+  </left>
+</BorderPane>

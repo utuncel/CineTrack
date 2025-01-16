@@ -42,6 +42,9 @@
         <Button onAction="#loadDataImporterView"
           text="Data Importer"
           styleClass="nav-button"/>
+        <Button onAction="#loadDataExportView"
+          text="Data Export"
+          styleClass="nav-button"/>
         <Button onAction="#loadAddCinematicView"
           text="Add Cinematic"
           styleClass="nav-button"/>
