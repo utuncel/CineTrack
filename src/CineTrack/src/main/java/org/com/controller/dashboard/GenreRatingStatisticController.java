@@ -77,7 +77,7 @@ public class GenreRatingStatisticController {
 
     double minRating = 0;
     try {
-      minRating = Double.parseDouble(minRatingInput.getText());
+      minRating = minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
     } catch (NumberFormatException e) {
     }
 

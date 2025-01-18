@@ -42,11 +42,6 @@ public class DashboardController {
   public DashboardController () {
   }
 
-  //For initiating at logging
-  public DashboardController (DashboardModel dashboardModel) {
-    this.dashboardModel = dashboardModel;
-  }
-
   public void setDashboardModel(DashboardModel dashboardModel) {
     logger.logInfo("Initializing Dashboard Controller with model");
     try {

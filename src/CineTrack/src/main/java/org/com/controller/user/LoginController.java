@@ -84,6 +84,7 @@ public class LoginController {
       Parent dashboardView = loader.load();
 
       DashboardModelSingleton.getInstance().setCinematics(cinematics);
+      SessionManager.getInstance().getCurrentUser().setCinematics(cinematics);
 
       DashboardController controller = loader.getController();
       controller.setDashboardModel(DashboardModelSingleton.getInstance());

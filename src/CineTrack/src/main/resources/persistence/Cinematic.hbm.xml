@@ -35,19 +35,18 @@
 
     <many-to-one name="user" class="org.com.models.user.User" column="user_id" not-null="true" fetch="join"/>
 
-    <!-- Actors List -->
-    <list name="actors" table="actors" cascade="all-delete-orphan" inverse="true" lazy="false">
+    <list name="actors" table="actors" cascade="all-delete-orphan" fetch="join">
       <key column="cinematic_id"/>
       <list-index column="actor_index"/>
       <element column="actor" type="string"/>
     </list>
 
-    <!-- Genres List -->
-    <list name="genres" table="genres" cascade="all-delete-orphan" inverse="true" lazy="false">
+    <list name="genres" table="genres" cascade="all-delete-orphan" fetch="join">
       <key column="cinematic_id"/>
       <list-index column="genre_index"/>
       <element column="genre" type="string"/>
     </list>
+
 
   </class>
 

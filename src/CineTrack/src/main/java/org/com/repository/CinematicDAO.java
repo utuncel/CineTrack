@@ -74,9 +74,14 @@ public class CinematicDAO {
 
   public List<Cinematic> getAllCinematicsByUser(Long userId) {
     try (Session session = sessionFactory.openSession()) {
-      return session.createQuery("from Cinematic c where c.user.id = :userId", Cinematic.class)
+      return session.createQuery(
+              "SELECT DISTINCT c FROM Cinematic c " +
+                  "LEFT JOIN FETCH c.actors " +
+                  "LEFT JOIN FETCH c.genres " +
+                  "WHERE c.user.id = :userId", Cinematic.class)
           .setParameter("userId", userId)
           .list();
+
     } catch (Exception e) {
       e.printStackTrace();
       return null;

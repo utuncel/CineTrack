@@ -76,7 +76,7 @@ public class GenreCountStatisticController {
 
     int minCount = 0;
     try {
-      minCount = Integer.parseInt(minGenreCountInput.getText());
+      minCount = minGenreCountInput.getText().isEmpty() ? 0 : Integer.parseInt(minGenreCountInput.getText());
     } catch (NumberFormatException e) {
     }
 

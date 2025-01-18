@@ -51,6 +51,7 @@ public class ActorRatingStatisticController {
     ActorRatingStatisticController controller = loader.getController();
     controller.setChartContainer(this.chartContainer);
 
+    // Direkt initialisieren
     controller.initializeChart(cinematics, types, states);
 
     if (chartContainer != null) {
@@ -59,6 +60,7 @@ public class ActorRatingStatisticController {
   }
 
   private void initializeChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
+
     updateChart(cinematics, types, states);
 
     minRatingInput.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -70,6 +72,7 @@ public class ActorRatingStatisticController {
     });
   }
 
+
   private void updateChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     ActorRatingsStrategy actorRatingStrategy = new ActorRatingsStrategy();
     Map<String, List<Double>> actorRatingData = actorRatingStrategy.calculate(cinematics, types,
@@ -77,7 +80,7 @@ public class ActorRatingStatisticController {
 
     double minRating = 0;
     try {
-      minRating = Double.parseDouble(minRatingInput.getText());
+      minRating = minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
     } catch (NumberFormatException e) {
     }
 
