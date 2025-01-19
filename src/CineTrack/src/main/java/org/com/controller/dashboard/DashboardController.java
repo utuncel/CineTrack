@@ -46,6 +46,7 @@ public class DashboardController {
     logger.logInfo("Initializing Dashboard Controller with model");
     try {
       this.dashboardModel = dashboardModel;
+      dashboardModel.removeAllStatisticStrategies();
       initializeCheckBoxMaps();
       setupTypeCheckBoxListeners();
       setupStateCheckBoxListeners();

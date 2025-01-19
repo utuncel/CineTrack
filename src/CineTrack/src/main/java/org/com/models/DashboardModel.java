@@ -67,6 +67,10 @@ public class DashboardModel {
     return states;
   }
 
+  public void removeAllStatisticStrategies(){
+    statisticStrategies.clear();
+  }
+
   public void addStatisticStrategy(StatisticStrategy statisticStrategy) {
     if (!statisticStrategies.contains(statisticStrategy)) {
       statisticStrategies.add(statisticStrategy);
