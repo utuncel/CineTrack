@@ -10,22 +10,22 @@ import java.util.List;
 import org.com.models.Cinematic;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
-import org.com.service.CsvImporter;
+import org.com.service.CsvImporterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CineFactoryServiceTest {
 
   private CineFactoryService cineFactoryService;
-  private CsvImporter csvImporter;
+  private CsvImporterService csvImporterService;
   private File tempFile;
 
   @BeforeEach
   void setUp() throws IOException {
     tempFile = File.createTempFile("Test", ".csv");
-    csvImporter = new CsvImporter(tempFile.getAbsolutePath());
+    csvImporterService = new CsvImporterService(tempFile.getAbsolutePath());
     ApiService apiService = new ApiService();
-    cineFactoryService = new CineFactoryService(csvImporter, apiService);
+    cineFactoryService = new CineFactoryService(csvImporterService, apiService);
   }
 
   @Test
@@ -47,10 +47,10 @@ public class CineFactoryServiceTest {
   @Test
   void testReadCSVValidFromFile() throws IOException {
 
-    csvImporter = new CsvImporter(
+    csvImporterService = new CsvImporterService(
         "C:\\Users\\umut2\\Desktop\\Programmieren\\Projekte\\CineTrack\\src\\CineTrack\\src\\test\\resources\\Test.csv");
     ApiService apiService = new ApiService();
-    cineFactoryService = new CineFactoryService(csvImporter, apiService);
+    cineFactoryService = new CineFactoryService(csvImporterService, apiService);
 
     List<Cinematic> cinematics = cineFactoryService.createCinematics();
 

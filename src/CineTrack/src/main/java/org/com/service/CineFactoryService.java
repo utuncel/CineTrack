@@ -12,19 +12,19 @@ public class CineFactoryService {
 
   private final ApiService apiService;
   private final LoggerService logger = LoggerService.getInstance();
-  private CsvImporter csvImporter;
+  private CsvImporterService csvImporterService;
   private User user;
 
-  public CineFactoryService(CsvImporter csvImporter, ApiService apiService, User user) {
-    this.csvImporter = csvImporter;
+  public CineFactoryService(CsvImporterService csvImporterService, ApiService apiService, User user) {
+    this.csvImporterService = csvImporterService;
     this.apiService = apiService;
     this.user = user;
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
   // Constructor for unit tests
-  public CineFactoryService(CsvImporter csvImporter, ApiService apiService) {
-    this(csvImporter, apiService, null);
+  public CineFactoryService(CsvImporterService csvImporterService, ApiService apiService) {
+    this(csvImporterService, apiService, null);
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
@@ -34,7 +34,7 @@ public class CineFactoryService {
 
   public List<Cinematic> createCinematics() throws IOException {
     logger.logInfo("Starting to create cinematics from CSV data.");
-    List<CsvCinematic> csvCinematics = csvImporter.importData();
+    List<CsvCinematic> csvCinematics = csvImporterService.importData();
     List<Cinematic> createdCinematics = new ArrayList<>();
     List<String> notFoundTitles = new ArrayList<>();
 

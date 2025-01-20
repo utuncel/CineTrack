@@ -15,9 +15,9 @@ import net.jqwik.api.Property;
 import net.jqwik.api.Provide;
 import net.jqwik.api.constraints.Size;
 import org.com.models.helper.CsvCinematic;
-import org.com.service.CsvImporter;
+import org.com.service.CsvImporterService;
 
-class CsvImporterTest {
+class CsvImporterServiceTest {
 
   @Property
   void testImportData(
@@ -25,9 +25,9 @@ class CsvImporterTest {
 
     String tempFilePath = createTempCSVFile(csvLines);
     Path path = Paths.get(tempFilePath);
-    CsvImporter csvImporter = new CsvImporter(path.toString());
+    CsvImporterService csvImporterService = new CsvImporterService(path.toString());
 
-    List<CsvCinematic> cinematics = csvImporter.importData();
+    List<CsvCinematic> cinematics = csvImporterService.importData();
 
     assertEquals(csvLines.size() - 1, cinematics.size(),
         "Number of records should match number of input lines");

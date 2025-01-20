@@ -9,19 +9,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.com.models.helper.CsvCinematic;
-import org.com.service.CsvImporter;
+import org.com.service.CsvImporterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class CsvImporterTest {
+class CsvImporterServiceTest {
 
-  private CsvImporter csvImporter;
+  private CsvImporterService csvImporterService;
   private File tempFile;
 
   @BeforeEach
   void setUp() throws IOException {
     tempFile = File.createTempFile("Test", ".csv");
-    csvImporter = new CsvImporter(tempFile.getAbsolutePath());
+    csvImporterService = new CsvImporterService(tempFile.getAbsolutePath());
   }
 
   @Test
@@ -35,7 +35,7 @@ class CsvImporterTest {
 
     writeToFile(validCSVContent);
 
-    List<CsvCinematic> cinematics = csvImporter.importData();
+    List<CsvCinematic> cinematics = csvImporterService.importData();
 
     assertEquals(3, cinematics.size());
     assertEquals(List.of("The Fighter", "MOVIE", "FINISHED", 1),
@@ -59,7 +59,7 @@ class CsvImporterTest {
 
     writeToFile(invalidCSVContent);
 
-    assertThrows(RuntimeException.class, () -> csvImporter.importData());
+    assertThrows(RuntimeException.class, () -> csvImporterService.importData());
   }
 
   // help-method that I can write some csv content into a file
