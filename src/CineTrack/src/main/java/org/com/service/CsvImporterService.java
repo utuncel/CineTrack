@@ -10,7 +10,7 @@ import org.com.models.helper.CsvCinematic;
 public class CsvImporterService {
 
   private static final String CSV_DELIMITER = ",";
-  private final LineValidator validator = new LineValidator();
+  private final LineValidatorService validator = new LineValidatorService();
   private final String filePath;
   private final ParserUtil parser;
   private final LoggerService logger = LoggerService.getInstance();
