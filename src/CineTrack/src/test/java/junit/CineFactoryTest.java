@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.com.models.Cinematic;
-import org.com.service.ApiData;
+import org.com.service.ApiService;
 import org.com.service.CineFactory;
 import org.com.service.CsvImporter;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,8 +24,8 @@ public class CineFactoryTest {
   void setUp() throws IOException {
     tempFile = File.createTempFile("Test", ".csv");
     csvImporter = new CsvImporter(tempFile.getAbsolutePath());
-    ApiData apiData = new ApiData();
-    cineFactory = new CineFactory(csvImporter, apiData);
+    ApiService apiService = new ApiService();
+    cineFactory = new CineFactory(csvImporter, apiService);
   }
 
   @Test
@@ -49,8 +49,8 @@ public class CineFactoryTest {
 
     csvImporter = new CsvImporter(
         "C:\\Users\\umut2\\Desktop\\Programmieren\\Projekte\\CineTrack\\src\\CineTrack\\src\\test\\resources\\Test.csv");
-    ApiData apiData = new ApiData();
-    cineFactory = new CineFactory(csvImporter, apiData);
+    ApiService apiService = new ApiService();
+    cineFactory = new CineFactory(csvImporter, apiService);
 
     List<Cinematic> cinematics = cineFactory.createCinematics();
 

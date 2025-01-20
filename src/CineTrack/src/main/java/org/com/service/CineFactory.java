@@ -10,27 +10,27 @@ import org.com.models.user.User;
 
 public class CineFactory {
 
-  private final ApiData apiData;
+  private final ApiService apiService;
   private final LoggerService logger = LoggerService.getInstance();
   private CsvImporter csvImporter;
   private User user;
 
-  public CineFactory(CsvImporter csvImporter, ApiData apiData, User user) {
+  public CineFactory(CsvImporter csvImporter, ApiService apiService, User user) {
     this.csvImporter = csvImporter;
-    this.apiData = apiData;
+    this.apiService = apiService;
     this.user = user;
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
   //constructor for unit test
-  public CineFactory(CsvImporter csvImporter, ApiData apiData) {
+  public CineFactory(CsvImporter csvImporter, ApiService apiService) {
     this.csvImporter = csvImporter;
-    this.apiData = apiData;
+    this.apiService = apiService;
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
   public CineFactory() {
-    this.apiData = new ApiData();
+    this.apiService = new ApiService();
   }
 
   public List<Cinematic> createCinematics() throws IOException {
@@ -50,7 +50,7 @@ public class CineFactory {
   }
 
   public Cinematic createCinematic(CsvCinematic csvCinematic) {
-    ApiCinematic apiCinematic = apiData.fetchMoviesOrSeries(csvCinematic.getTitle());
+    ApiCinematic apiCinematic = apiService.fetchMoviesOrSeries(csvCinematic.getTitle());
 
     if (apiCinematic == null) {
       logger.logWarning(
@@ -65,7 +65,7 @@ public class CineFactory {
 
   private void cinematicMerge(CsvCinematic csvCinematic, List<Cinematic> createdCinematics,
       List<String> notFoundTitles) {
-    ApiCinematic apiCinematic = apiData.fetchMoviesOrSeries(csvCinematic.getTitle());
+    ApiCinematic apiCinematic = apiService.fetchMoviesOrSeries(csvCinematic.getTitle());
 
     if (apiCinematic == null) {
       notFoundTitles.add(csvCinematic.getTitle());

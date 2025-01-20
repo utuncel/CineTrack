@@ -6,13 +6,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import org.com.models.helper.CsvCinematic;
-import org.com.service.ApiData;
+import org.com.service.ApiService;
 import org.com.service.CineFactory;
 import org.com.service.CsvImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ApiDataTest {
+public class ApiServiceTest {
 
   private CineFactory cineFactory;
   private CsvImporter csvImporter;
@@ -35,9 +35,9 @@ public class ApiDataTest {
     writeToFile(validCSVContent);
 
     List<CsvCinematic> cinematics = csvImporter.importData();
-    ApiData apiData = new ApiData();
+    ApiService apiService = new ApiService();
     for (CsvCinematic csvCinematic : cinematics) {
-      apiData.fetchMoviesOrSeries(csvCinematic.getTitle());
+      apiService.fetchMoviesOrSeries(csvCinematic.getTitle());
     }
   }
 
