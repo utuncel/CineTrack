@@ -14,26 +14,6 @@ public class CinematicDAO {
     this.sessionFactory = sessionFactory;
   }
 
-  public void createCinematic(Cinematic cinematic) {
-    if (cinematic.getUser() == null) {
-      throw new IllegalArgumentException("Cinematic must be associated with a user.");
-    }
-
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = sessionFactory.getCurrentSession();
-      transaction = session.beginTransaction();
-      session.persist(cinematic);
-      transaction.commit();
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      throw new RuntimeException("Cinematic creation failed", e);
-    }
-  }
-
   public void createCinematics(List<Cinematic> cinematics) {
     if (cinematics == null || cinematics.isEmpty()) {
       throw new IllegalArgumentException("Die Liste der Cinematics darf nicht leer sein.");
@@ -61,17 +41,6 @@ public class CinematicDAO {
     }
   }
 
-
-
-  public Cinematic getCinematicById(Long id) {
-    try (Session session = sessionFactory.openSession()) {
-      return session.get(Cinematic.class, id);
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
-  }
-
   public List<Cinematic> getAllCinematicsByUser(Long userId) {
     try (Session session = sessionFactory.openSession()) {
       return session.createQuery(
@@ -85,42 +54,6 @@ public class CinematicDAO {
     } catch (Exception e) {
       e.printStackTrace();
       return null;
-    }
-  }
-
-
-  public void updateCinematic(Cinematic cinematic) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = sessionFactory.getCurrentSession();
-      transaction = session.beginTransaction();
-      session.update(cinematic);
-      transaction.commit();
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
-    }
-  }
-
-  public void deleteCinematic(Long id) {
-    Session session = null;
-    Transaction transaction = null;
-    try {
-      session = sessionFactory.getCurrentSession();
-      transaction = session.beginTransaction();
-      Cinematic cinematic = session.get(Cinematic.class, id);
-      if (cinematic != null) {
-        session.delete(cinematic);
-      }
-      transaction.commit();
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      e.printStackTrace();
     }
   }
 

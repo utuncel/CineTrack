@@ -23,13 +23,10 @@ public class HibernateUtil {
       throw new ExceptionInInitializerError(ex);
     }
   }
+
   public static SessionFactory getSessionFactory()
   {
     return sessionFactory;
   }
-  public static void shutdown()
-  {
-    // Close caches and connection pools
-    getSessionFactory().close();
-  }
+
 }
