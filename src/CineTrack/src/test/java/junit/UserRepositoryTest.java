@@ -1,7 +1,7 @@
 package junit;
 
 import org.com.models.user.User;
-import org.com.repository.UserDAO;
+import org.com.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,11 +14,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class UserDAOTest {
+class UserRepositoryTest {
   private SessionFactory mockSessionFactory;
   private Session mockSession;
   private Transaction mockTransaction;
-  private UserDAO userDAO;
+  private UserRepository userRepository;
 
   @BeforeEach
   void setUp() {
@@ -29,7 +29,7 @@ class UserDAOTest {
     when(mockSessionFactory.openSession()).thenReturn(mockSession);
     when(mockSession.beginTransaction()).thenReturn(mockTransaction);
 
-    userDAO = new UserDAO(mockSessionFactory);
+    userRepository = new UserRepository(mockSessionFactory);
   }
 
   @Test
@@ -38,7 +38,7 @@ class UserDAOTest {
 
     doNothing().when(mockSession).persist(user);
 
-    userDAO.createUser(user);
+    userRepository.createUser(user);
 
     verify(mockSession).persist(user);
     verify(mockTransaction).commit();
@@ -50,7 +50,7 @@ class UserDAOTest {
 
     when(mockSession.get(User.class, user.getId())).thenReturn(user);
 
-    User retrievedUser = userDAO.getUserById(user.getId());
+    User retrievedUser = userRepository.getUserById(user.getId());
     assertNotNull(retrievedUser);
     assertEquals("TestUser2", retrievedUser.getName());
 
@@ -66,7 +66,7 @@ class UserDAOTest {
     when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
     when(mockQuery.uniqueResult()).thenReturn(mockUser);
 
-    User result = userDAO.getUserByName("testuser");
+    User result = userRepository.getUserByName("testuser");
 
     assertNotNull(result);
     assertEquals("testuser", result.getName());
@@ -78,7 +78,7 @@ class UserDAOTest {
     when(mockSession.createQuery("FROM User", User.class)).thenReturn(mockQuery);
     when(mockQuery.list()).thenReturn(List.of(new User("John", "password123")));
 
-    List<User> users = userDAO.getAllUsers();
+    List<User> users = userRepository.getAllUsers();
 
     assertNotNull(users);
     assertEquals(1, users.size());
@@ -96,7 +96,7 @@ class UserDAOTest {
 
     doNothing().when(mockSession).update(user);
 
-    userDAO.updateUser(user);
+    userRepository.updateUser(user);
 
     verify(mockSession).update(user);
     verify(mockTransaction).commit();
@@ -112,7 +112,7 @@ class UserDAOTest {
 
     doNothing().when(mockSession).delete(user);
 
-    userDAO.deleteUser(user.getId());
+    userRepository.deleteUser(user.getId());
 
     verify(mockSession).get(User.class, user.getId());
     verify(mockSession).delete(user);
@@ -130,7 +130,7 @@ class UserDAOTest {
     when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
     when(mockQuery.uniqueResult()).thenReturn(mockUser);
 
-    User result = userDAO.authenticate("testuser", "password123");
+    User result = userRepository.authenticate("testuser", "password123");
 
     assertNotNull(result);
     assertEquals("testuser", result.getName());
@@ -145,7 +145,7 @@ class UserDAOTest {
     when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
     when(mockQuery.uniqueResult()).thenReturn(mockUser);
 
-    User result = userDAO.authenticate("testuser", "wrongpassword");
+    User result = userRepository.authenticate("testuser", "wrongpassword");
 
     assertNull(result);
   }
@@ -157,7 +157,7 @@ class UserDAOTest {
     when(mockQuery.setParameter("username", "nonexistentuser")).thenReturn(mockQuery);
     when(mockQuery.uniqueResult()).thenReturn(null);
 
-    User result = userDAO.authenticate("nonexistentuser", "password123");
+    User result = userRepository.authenticate("nonexistentuser", "password123");
 
     assertNull(result);
   }
