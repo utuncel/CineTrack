@@ -3,7 +3,7 @@ package org.com.controller.user;
 import org.com.models.user.User;
 import org.com.repository.HibernateUtil;
 import org.com.repository.UserDAO;
-import org.com.service.SessionManager;
+import org.com.service.SessionManagerService;
 
 public class UserController {
 
@@ -29,7 +29,7 @@ public class UserController {
     try {
       User user = userDAO.authenticate(username, password);
       if (user != null) {
-        SessionManager.getInstance().setCurrentUser(user);
+        SessionManagerService.getInstance().setCurrentUser(user);
         return user;
       }
     } catch (Exception e) {

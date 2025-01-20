@@ -15,11 +15,10 @@ import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.Cinematic;
-import org.com.models.DashboardModel;
 import org.com.models.user.User;
 import org.com.repository.CinematicDAO;
 import org.com.repository.HibernateUtil;
-import org.com.service.SessionManager;
+import org.com.service.SessionManagerService;
 
 public class LoginController {
 
@@ -44,7 +43,8 @@ public class LoginController {
     User user = userController.authenticateUser(username, password);
     if (user != null) {
 
-      switchToDashboardView(cinematicDAO.getAllCinematicsByUser(SessionManager.getInstance().getCurrentUser().getId()));
+      switchToDashboardView(cinematicDAO.getAllCinematicsByUser(
+          SessionManagerService.getInstance().getCurrentUser().getId()));
     } else {
       showError("Login failed", "Invalid username or password");
     }
@@ -84,7 +84,7 @@ public class LoginController {
       Parent dashboardView = loader.load();
 
       DashboardModelSingleton.getInstance().setCinematics(cinematics);
-      SessionManager.getInstance().getCurrentUser().setCinematics(cinematics);
+      SessionManagerService.getInstance().getCurrentUser().setCinematics(cinematics);
 
       DashboardController controller = loader.getController();
       controller.setDashboardModel(DashboardModelSingleton.getInstance());

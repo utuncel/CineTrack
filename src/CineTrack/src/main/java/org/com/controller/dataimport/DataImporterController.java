@@ -16,7 +16,7 @@ import org.com.repository.HibernateUtil;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
 import org.com.service.CsvImporterService;
-import org.com.service.SessionManager;
+import org.com.service.SessionManagerService;
 import javafx.concurrent.Task;
 
 public class DataImporterController {
@@ -62,10 +62,10 @@ public class DataImporterController {
 
       task.setOnSucceeded(event -> {
         List<Cinematic> cinematics = task.getValue();
-        cinematicDAO.deleteAllCinematicsByUser(SessionManager.getInstance().getCurrentUser().getId());
+        cinematicDAO.deleteAllCinematicsByUser(SessionManagerService.getInstance().getCurrentUser().getId());
         cinematicDAO.createCinematics(cinematics);
         dashboardModel.setCinematics(cinematics);
-        SessionManager.getInstance().getCurrentUser().setCinematics(cinematics);
+        SessionManagerService.getInstance().getCurrentUser().setCinematics(cinematics);
       });
 
       // Fehlerbehandlung
@@ -82,7 +82,7 @@ public class DataImporterController {
   public List<Cinematic> getImportedData(String csvFilePath) throws IOException {
     CsvImporterService csvImporterService = new CsvImporterService(csvFilePath);
     ApiService apiService = new ApiService();
-    CineFactoryService cineFactoryService = new CineFactoryService(csvImporterService, apiService, SessionManager.getInstance().getCurrentUser());
+    CineFactoryService cineFactoryService = new CineFactoryService(csvImporterService, apiService, SessionManagerService.getInstance().getCurrentUser());
     return cineFactoryService.createCinematics();
   }
 }
