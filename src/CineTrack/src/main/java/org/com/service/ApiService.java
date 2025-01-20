@@ -16,7 +16,7 @@ public class ApiService {
   private static final String API_BASE_URL = "https://www.omdbapi.com/";
   private static final HttpClient client = HttpClient.newHttpClient();
   private final String apiKey;
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
 
   public ApiService() {
     this.apiKey = System.getenv("OMDb_API");

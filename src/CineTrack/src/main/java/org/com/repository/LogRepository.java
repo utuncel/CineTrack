@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class LoggerRepository {
+public class LogRepository {
 
   private final SessionFactory sessionFactory;
 
-  public LoggerRepository(SessionFactory sessionFactory) {
+  public LogRepository(SessionFactory sessionFactory) {
     this.sessionFactory = sessionFactory;
   }
 

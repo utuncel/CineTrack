@@ -12,11 +12,11 @@ import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.controller.logger.LoggerController;
 import org.com.models.DashboardModel;
-import org.com.service.LoggerService;
+import org.com.service.LogService;
 
 public class SidebarController {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   @FXML
   private BorderPane mainContentPane;
   private DashboardModel dashboardModel;

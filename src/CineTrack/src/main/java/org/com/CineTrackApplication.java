@@ -6,11 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.com.service.LoggerService;
+import org.com.service.LogService;
 
 public class CineTrackApplication extends Application {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
 
   public static void main(String[] args) {
     launch();

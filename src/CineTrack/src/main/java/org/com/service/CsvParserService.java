@@ -5,7 +5,7 @@ import org.com.models.enums.Type;
 
 public class CsvParserService {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   private int lineNumber;
 
   public CsvParserService(int lineNumber) {

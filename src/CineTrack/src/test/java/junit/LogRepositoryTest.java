@@ -3,7 +3,7 @@ package junit;
 import org.com.models.logger.Logger;
 import org.com.models.user.User;
 import org.com.repository.HibernateUtil;
-import org.com.repository.LoggerRepository;
+import org.com.repository.LogRepository;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 
@@ -12,15 +12,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class LoggerRepositoryTest {
+class LogRepositoryTest {
   private SessionFactory sessionFactory;
-  private LoggerRepository loggerRepository;
+  private LogRepository logRepository;
 
   @BeforeAll
   void setUp() {
     sessionFactory =  HibernateUtil.getSessionFactory();
 
-    loggerRepository = new LoggerRepository(sessionFactory);
+    logRepository = new LogRepository(sessionFactory);
   }
 
   @AfterAll
@@ -36,9 +36,9 @@ class LoggerRepositoryTest {
     Logger logger = new Logger("INFO", "Test log message");
     logger.setUser(user);
 
-    loggerRepository.createLogger(logger);
+    logRepository.createLogger(logger);
 
-    Logger retrievedLogger = loggerRepository.getLoggerById(logger.getId());
+    Logger retrievedLogger = logRepository.getLoggerById(logger.getId());
     assertNotNull(retrievedLogger);
     assertEquals("Test log message", retrievedLogger.getMessage());
     assertEquals("INFO", retrievedLogger.getLevel());
@@ -47,9 +47,9 @@ class LoggerRepositoryTest {
   @Test
   void testGetLoggerById() {
     Logger logger = new Logger("INFO", "Another log message");
-    loggerRepository.createLogger(logger);
+    logRepository.createLogger(logger);
 
-    Logger retrievedLogger = loggerRepository.getLoggerById(logger.getId());
+    Logger retrievedLogger = logRepository.getLoggerById(logger.getId());
     assertNotNull(retrievedLogger);
     assertEquals("Another log message", retrievedLogger.getMessage());
   }
@@ -59,10 +59,10 @@ class LoggerRepositoryTest {
     Logger logger1 = new Logger("ERROR", "Error occurred");
     Logger logger2 = new Logger("DEBUG", "Debugging the app");
 
-    loggerRepository.createLogger(logger1);
-    loggerRepository.createLogger(logger2);
+    logRepository.createLogger(logger1);
+    logRepository.createLogger(logger2);
 
-    List<Logger> loggers = loggerRepository.getAllLoggers();
+    List<Logger> loggers = logRepository.getAllLoggers();
     assertNotNull(loggers);
     assertEquals(2, loggers.size());
   }
@@ -70,12 +70,12 @@ class LoggerRepositoryTest {
   @Test
   void testDeleteLogger() {
     Logger logger = new Logger("WARNING", "Test delete log");
-    loggerRepository.createLogger(logger);
+    logRepository.createLogger(logger);
 
     Long loggerId = logger.getId();
-    loggerRepository.deleteLogger(loggerId);
+    logRepository.deleteLogger(loggerId);
 
-    Logger deletedLogger = loggerRepository.getLoggerById(loggerId);
+    Logger deletedLogger = logRepository.getLoggerById(loggerId);
     assertNull(deletedLogger);
   }
 }

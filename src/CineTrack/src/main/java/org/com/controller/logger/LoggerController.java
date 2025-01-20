@@ -7,7 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.com.models.logger.Logger;
 import org.com.models.logger.LoggerModel;
-import org.com.service.LoggerService;
+import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 
 public class LoggerController {
@@ -25,7 +25,7 @@ public class LoggerController {
 
   @FXML
   public void initialize() {
-    this.loggerModel = LoggerService.getInstance().getLoggerModel();
+    this.loggerModel = LogService.getInstance().getLoggerModel();
 
     timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     levelColumn.setCellValueFactory(new PropertyValueFactory<>("level"));

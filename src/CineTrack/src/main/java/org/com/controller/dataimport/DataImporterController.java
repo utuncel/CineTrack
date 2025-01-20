@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.Cinematic;
 import org.com.models.DashboardModel;
-import org.com.repository.CinematicDAO;
+import org.com.repository.CinematicRepository;
 import org.com.repository.HibernateUtil;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
@@ -25,10 +25,10 @@ public class DataImporterController {
   private Button chooseFileButton;
 
   private DashboardModel dashboardModel;
-  private final CinematicDAO cinematicDAO;
+  private final CinematicRepository cinematicRepository;
 
   public DataImporterController(){
-    cinematicDAO = new CinematicDAO(HibernateUtil.getSessionFactory());
+    cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
   }
 
   @FXML
@@ -62,8 +62,9 @@ public class DataImporterController {
 
       task.setOnSucceeded(event -> {
         List<Cinematic> cinematics = task.getValue();
-        cinematicDAO.deleteAllCinematicsByUser(SessionManagerService.getInstance().getCurrentUser().getId());
-        cinematicDAO.createCinematics(cinematics);
+        cinematicRepository.deleteAllCinematicsByUser(SessionManagerService.getInstance().getCurrentUser());
+        cinematicRepository.saveCinematics(cinematics,
+            SessionManagerService.getInstance().getCurrentUser());
         dashboardModel.setCinematics(cinematics);
         SessionManagerService.getInstance().getCurrentUser().setCinematics(cinematics);
       });

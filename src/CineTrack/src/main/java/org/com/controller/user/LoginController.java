@@ -16,7 +16,7 @@ import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.Cinematic;
 import org.com.models.user.User;
-import org.com.repository.CinematicDAO;
+import org.com.repository.CinematicRepository;
 import org.com.repository.HibernateUtil;
 import org.com.service.SessionManagerService;
 
@@ -29,11 +29,11 @@ public class LoginController {
   @FXML
   private Button loginButton;
   private final UserController userController;
-  private final CinematicDAO cinematicDAO;
+  private final CinematicRepository cinematicRepository;
 
   public LoginController() {
     this.userController = new UserController();
-    this.cinematicDAO = new CinematicDAO(HibernateUtil.getSessionFactory());
+    this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
   }
 
   @FXML
@@ -43,8 +43,8 @@ public class LoginController {
     User user = userController.authenticateUser(username, password);
     if (user != null) {
 
-      switchToDashboardView(cinematicDAO.getAllCinematicsByUser(
-          SessionManagerService.getInstance().getCurrentUser().getId()));
+      switchToDashboardView(cinematicRepository.getAllCinematicsByUser(
+          SessionManagerService.getInstance().getCurrentUser()));
     } else {
       showError("Login failed", "Invalid username or password");
     }

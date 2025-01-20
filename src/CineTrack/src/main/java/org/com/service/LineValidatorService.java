@@ -5,7 +5,7 @@ public class LineValidatorService {
   private static final int HEADER_COLUMNS = 4;
   private static final int MIN_COLUMNS = 3;
   private static final int MAX_COLUMNS = 4;
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
 
   public boolean isValidHeaderLength(String header) {
     String[] columns = header.split(",");

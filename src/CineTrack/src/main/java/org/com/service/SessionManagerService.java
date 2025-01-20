@@ -4,7 +4,7 @@ import org.com.models.user.User;
 
 public class SessionManagerService {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   private User currentUser;
 
   private SessionManagerService() {

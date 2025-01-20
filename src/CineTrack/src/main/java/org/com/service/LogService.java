@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import org.com.models.logger.LoggerModel;
 
-public class LoggerService {
+public class LogService {
 
   private final LoggerModel loggerModel;
 
-  private LoggerService() {
+  private LogService() {
     this.loggerModel = new LoggerModel();
   }
 
-  public static LoggerService getInstance() {
+  public static LogService getInstance() {
     return InstanceHolder.instance;
   }
 
@@ -46,6 +46,6 @@ public class LoggerService {
 
   private static final class InstanceHolder {
 
-    private static final LoggerService instance = new LoggerService();
+    private static final LogService instance = new LogService();
   }
 }

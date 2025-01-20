@@ -10,12 +10,12 @@ import org.com.models.DashboardModel;
 import org.com.models.enums.State;
 import org.com.models.enums.StatisticStrategy;
 import org.com.models.enums.Type;
-import org.com.service.LoggerService;
+import org.com.service.LogService;
 
 
 public class DashboardController {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   private final Map<Type, CheckBox> typeCheckBoxMap = new EnumMap<>(Type.class);
   private final Map<State, CheckBox> stateCheckBoxMap = new EnumMap<>(State.class);
   private final Map<StatisticStrategy, CheckBox> strategyCheckBoxMap = new EnumMap<>(

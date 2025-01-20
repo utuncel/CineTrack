@@ -8,12 +8,12 @@ import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.DashboardModel;
 import org.com.models.helper.CsvCinematic;
 import org.com.service.CineFactoryService;
-import org.com.service.LoggerService;
+import org.com.service.LogService;
 import org.com.service.CsvParserService;
 
 public class AddCinematicController {
 
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
 
   @FXML
   private TextField titleField;

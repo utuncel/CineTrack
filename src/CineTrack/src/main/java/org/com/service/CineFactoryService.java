@@ -11,7 +11,7 @@ import org.com.models.user.User;
 public class CineFactoryService {
 
   private final ApiService apiService;
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   private CsvImporterService csvImporterService;
   private User user;
 

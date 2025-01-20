@@ -13,7 +13,7 @@ public class CsvImporterService {
   private final LineValidatorService validator = new LineValidatorService();
   private final String filePath;
   private final CsvParserService parser;
-  private final LoggerService logger = LoggerService.getInstance();
+  private final LogService logger = LogService.getInstance();
   private int lineNumber = 2; // 2 because we read the header and first time in the while loop
 
   public CsvImporterService(String filePath) {
