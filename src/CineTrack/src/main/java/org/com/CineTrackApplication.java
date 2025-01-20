@@ -6,8 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.com.service.LoggerService;
 
 public class CineTrackApplication extends Application {
+
+  private final LoggerService logger = LoggerService.getInstance();
 
   public static void main(String[] args) {
     launch();
@@ -16,15 +19,17 @@ public class CineTrackApplication extends Application {
   @Override
   public void start(Stage stage) {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
-      Parent root = loader.load();
-      stage.setScene(new Scene(root));
-
+      stage.setScene(createScene());
       stage.show();
     } catch (IOException e) {
-      e.printStackTrace();
-
+      logger.logError(e.getMessage());
     }
+  }
+
+  private Scene createScene() throws IOException {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
+    Parent root = loader.load();
+    return new Scene(root);
   }
 
 }
