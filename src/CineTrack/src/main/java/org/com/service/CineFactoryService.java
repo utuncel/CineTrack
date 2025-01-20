@@ -8,36 +8,35 @@ import org.com.models.helper.ApiCinematic;
 import org.com.models.helper.CsvCinematic;
 import org.com.models.user.User;
 
-public class CineFactory {
+public class CineFactoryService {
 
   private final ApiService apiService;
   private final LoggerService logger = LoggerService.getInstance();
   private CsvImporter csvImporter;
   private User user;
 
-  public CineFactory(CsvImporter csvImporter, ApiService apiService, User user) {
+  public CineFactoryService(CsvImporter csvImporter, ApiService apiService, User user) {
     this.csvImporter = csvImporter;
     this.apiService = apiService;
     this.user = user;
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
-  //constructor for unit test
-  public CineFactory(CsvImporter csvImporter, ApiService apiService) {
-    this.csvImporter = csvImporter;
-    this.apiService = apiService;
+  // Constructor for unit tests
+  public CineFactoryService(CsvImporter csvImporter, ApiService apiService) {
+    this(csvImporter, apiService, null);
     logger.logInfo("CineFactory initialized with CsvImporter and ApiData.");
   }
 
-  public CineFactory() {
+  public CineFactoryService() {
     this.apiService = new ApiService();
   }
 
   public List<Cinematic> createCinematics() throws IOException {
     logger.logInfo("Starting to create cinematics from CSV data.");
     List<CsvCinematic> csvCinematics = csvImporter.importData();
-    final List<Cinematic> createdCinematics = new ArrayList<>();
-    final List<String> notFoundTitles = new ArrayList<>();
+    List<Cinematic> createdCinematics = new ArrayList<>();
+    List<String> notFoundTitles = new ArrayList<>();
 
     for (CsvCinematic csvCinematic : csvCinematics) {
       cinematicMerge(csvCinematic, createdCinematics, notFoundTitles);
@@ -53,14 +52,11 @@ public class CineFactory {
     ApiCinematic apiCinematic = apiService.fetchMoviesOrSeries(csvCinematic.getTitle());
 
     if (apiCinematic == null) {
-      logger.logWarning(
-          "Cinematic data for title '" + csvCinematic.getTitle() + "' not found in API.");
+      logWarningForTitleNotFound(csvCinematic.getTitle());
       return null;
     }
 
-    Cinematic cinematic = new Cinematic(apiCinematic, csvCinematic, this.user);
-    logger.logInfo("Successfully created cinematic for title: " + csvCinematic.getTitle());
-    return cinematic;
+    return createCinematicFromApiAndCsv(apiCinematic, csvCinematic);
   }
 
   private void cinematicMerge(CsvCinematic csvCinematic, List<Cinematic> createdCinematics,
@@ -69,9 +65,9 @@ public class CineFactory {
 
     if (apiCinematic == null) {
       notFoundTitles.add(csvCinematic.getTitle());
-      logger.logWarning("Title '" + csvCinematic.getTitle() + "' not found in API data.");
+      logWarningForTitleNotFound(csvCinematic.getTitle());
     } else {
-      createdCinematics.add(new Cinematic(apiCinematic, csvCinematic, this.user));
+      createdCinematics.add(createCinematicFromApiAndCsv(apiCinematic, csvCinematic));
       logger.logInfo("Added cinematic for title: " + csvCinematic.getTitle());
     }
   }
@@ -82,5 +78,16 @@ public class CineFactory {
         logger.logWarning("- " + title);
       }
     }
+  }
+
+  private Cinematic createCinematicFromApiAndCsv(ApiCinematic apiCinematic,
+      CsvCinematic csvCinematic) {
+    Cinematic cinematic = new Cinematic(apiCinematic, csvCinematic, this.user);
+    logger.logInfo("Successfully created cinematic for title: " + csvCinematic.getTitle());
+    return cinematic;
+  }
+
+  private void logWarningForTitleNotFound(String title) {
+    logger.logWarning("Cinematic data for title '" + title + "' not found in API.");
   }
 }

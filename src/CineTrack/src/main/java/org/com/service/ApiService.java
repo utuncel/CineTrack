@@ -11,7 +11,6 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import org.com.models.helper.ApiCinematic;
 
-
 public class ApiService {
 
   private static final String API_BASE_URL = "https://www.omdbapi.com/";
@@ -72,5 +71,4 @@ public class ApiService {
     }
     return objectMapper.readValue(responseBody, ApiCinematic.class);
   }
-
 }

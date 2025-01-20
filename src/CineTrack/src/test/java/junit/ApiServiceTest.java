@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.util.List;
 import org.com.models.helper.CsvCinematic;
 import org.com.service.ApiService;
-import org.com.service.CineFactory;
+import org.com.service.CineFactoryService;
 import org.com.service.CsvImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ApiServiceTest {
 
-  private CineFactory cineFactory;
+  private CineFactoryService cineFactoryService;
   private CsvImporter csvImporter;
   private File tempFile;
 

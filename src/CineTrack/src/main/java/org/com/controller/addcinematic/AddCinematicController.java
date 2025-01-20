@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.models.DashboardModel;
 import org.com.models.helper.CsvCinematic;
-import org.com.service.CineFactory;
+import org.com.service.CineFactoryService;
 import org.com.service.LoggerService;
 import org.com.service.ParserUtil;
 
@@ -57,7 +57,7 @@ public class AddCinematicController {
   @FXML
   private void handleAddCinematic() {
     try {
-      CineFactory cineFactory = new CineFactory();
+      CineFactoryService cineFactoryService = new CineFactoryService();
       CsvCinematic csvCinematic;
 
       if (ignoreRating) {
@@ -75,7 +75,7 @@ public class AddCinematicController {
             .build();
       }
 
-      dashboardModel.addCinematic(cineFactory.createCinematic(csvCinematic));
+      dashboardModel.addCinematic(cineFactoryService.createCinematic(csvCinematic));
 
     } catch (Exception e) {
       logger.logError("Error adding new cinematic: " + e.getMessage());

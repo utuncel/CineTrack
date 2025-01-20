@@ -14,7 +14,7 @@ import org.com.models.DashboardModel;
 import org.com.repository.CinematicDAO;
 import org.com.repository.HibernateUtil;
 import org.com.service.ApiService;
-import org.com.service.CineFactory;
+import org.com.service.CineFactoryService;
 import org.com.service.CsvImporter;
 import org.com.service.SessionManager;
 import javafx.concurrent.Task;
@@ -82,7 +82,7 @@ public class DataImporterController {
   public List<Cinematic> getImportedData(String csvFilePath) throws IOException {
     CsvImporter csvImporter = new CsvImporter(csvFilePath);
     ApiService apiService = new ApiService();
-    CineFactory cineFactory = new CineFactory(csvImporter, apiService, SessionManager.getInstance().getCurrentUser());
-    return cineFactory.createCinematics();
+    CineFactoryService cineFactoryService = new CineFactoryService(csvImporter, apiService, SessionManager.getInstance().getCurrentUser());
+    return cineFactoryService.createCinematics();
   }
 }

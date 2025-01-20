@@ -31,5 +31,4 @@ public class CineTrackApplication extends Application {
     Parent root = loader.load();
     return new Scene(root);
   }
-
 }

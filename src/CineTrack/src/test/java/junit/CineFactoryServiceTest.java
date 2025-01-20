@@ -9,14 +9,14 @@ import java.io.IOException;
 import java.util.List;
 import org.com.models.Cinematic;
 import org.com.service.ApiService;
-import org.com.service.CineFactory;
+import org.com.service.CineFactoryService;
 import org.com.service.CsvImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class CineFactoryTest {
+public class CineFactoryServiceTest {
 
-  private CineFactory cineFactory;
+  private CineFactoryService cineFactoryService;
   private CsvImporter csvImporter;
   private File tempFile;
 
@@ -25,7 +25,7 @@ public class CineFactoryTest {
     tempFile = File.createTempFile("Test", ".csv");
     csvImporter = new CsvImporter(tempFile.getAbsolutePath());
     ApiService apiService = new ApiService();
-    cineFactory = new CineFactory(csvImporter, apiService);
+    cineFactoryService = new CineFactoryService(csvImporter, apiService);
   }
 
   @Test
@@ -39,7 +39,7 @@ public class CineFactoryTest {
 
     writeToFile(validCSVContent);
 
-    List<Cinematic> cinematics = cineFactory.createCinematics();
+    List<Cinematic> cinematics = cineFactoryService.createCinematics();
 
     assertEquals(5, cinematics.size());
   }
@@ -50,9 +50,9 @@ public class CineFactoryTest {
     csvImporter = new CsvImporter(
         "C:\\Users\\umut2\\Desktop\\Programmieren\\Projekte\\CineTrack\\src\\CineTrack\\src\\test\\resources\\Test.csv");
     ApiService apiService = new ApiService();
-    cineFactory = new CineFactory(csvImporter, apiService);
+    cineFactoryService = new CineFactoryService(csvImporter, apiService);
 
-    List<Cinematic> cinematics = cineFactory.createCinematics();
+    List<Cinematic> cinematics = cineFactoryService.createCinematics();
 
     assertEquals(5, cinematics.size());
   }
@@ -65,7 +65,7 @@ public class CineFactoryTest {
 
     writeToFile(validCSVContent);
 
-    List<Cinematic> cinematics = cineFactory.createCinematics();
+    List<Cinematic> cinematics = cineFactoryService.createCinematics();
 
     assertEquals(1, cinematics.size());
   }
