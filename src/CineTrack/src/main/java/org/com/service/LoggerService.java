@@ -1,21 +1,19 @@
 package org.com.service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import org.com.models.logger.LoggerModel;
 
 public class LoggerService {
 
-  private static LoggerService instance;
   private final LoggerModel loggerModel;
 
   private LoggerService() {
     this.loggerModel = new LoggerModel();
   }
 
-  public static synchronized LoggerService getInstance() {
-    if (instance == null) {
-      instance = new LoggerService();
-    }
-    return instance;
+  public static LoggerService getInstance() {
+    return InstanceHolder.instance;
   }
 
   public LoggerModel getLoggerModel() {
@@ -35,8 +33,19 @@ public class LoggerService {
   }
 
   private void log(String level, String message) {
-    if (loggerModel != null) {
-      loggerModel.addLog(level, message);
-    }
+    String timestamp = getTimestamp();
+    String formattedMessage = String.format("[%s] %s: %s", timestamp, level, message);
+
+    loggerModel.addLog(level, formattedMessage);
+  }
+
+  private String getTimestamp() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    return LocalDateTime.now().format(formatter);
+  }
+
+  private static final class InstanceHolder {
+
+    private static final LoggerService instance = new LoggerService();
   }
 }
