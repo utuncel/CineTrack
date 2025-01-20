@@ -12,13 +12,13 @@ public class CsvImporterService {
   private static final String CSV_DELIMITER = ",";
   private final LineValidatorService validator = new LineValidatorService();
   private final String filePath;
-  private final ParserUtil parser;
+  private final CsvParserService parser;
   private final LoggerService logger = LoggerService.getInstance();
   private int lineNumber = 2; // 2 because we read the header and first time in the while loop
 
   public CsvImporterService(String filePath) {
     this.filePath = filePath;
-    this.parser = new ParserUtil(lineNumber);
+    this.parser = new CsvParserService(lineNumber);
   }
 
   public List<CsvCinematic> importData() throws IOException {

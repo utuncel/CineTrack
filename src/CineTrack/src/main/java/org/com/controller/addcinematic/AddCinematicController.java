@@ -9,7 +9,7 @@ import org.com.models.DashboardModel;
 import org.com.models.helper.CsvCinematic;
 import org.com.service.CineFactoryService;
 import org.com.service.LoggerService;
-import org.com.service.ParserUtil;
+import org.com.service.CsvParserService;
 
 public class AddCinematicController {
 
@@ -29,7 +29,7 @@ public class AddCinematicController {
 
   private DashboardModel dashboardModel;
 
-  private ParserUtil parserUtil;
+  private CsvParserService csvParserService;
 
   private boolean ignoreRating = false;
 
@@ -39,7 +39,7 @@ public class AddCinematicController {
     try {
       ratingSpinner.setDisable(true);
       dashboardModel = DashboardModelSingleton.getInstance();
-      parserUtil = new ParserUtil();
+      csvParserService = new CsvParserService();
       handleStateChange();
       logger.logInfo("Add Cinematic Controller successfully initialized");
     } catch (Exception e) {
@@ -63,14 +63,14 @@ public class AddCinematicController {
       if (ignoreRating) {
         csvCinematic = new CsvCinematic.Builder()
             .withTitle(titleField.getText())
-            .withType(parserUtil.parseTypes(typeComboBox.getValue()))
-            .withState(parserUtil.parseStates(stateComboBox.getValue()))
+            .withType(csvParserService.parseTypes(typeComboBox.getValue()))
+            .withState(csvParserService.parseStates(stateComboBox.getValue()))
             .build();
       } else {
         csvCinematic = new CsvCinematic.Builder()
             .withTitle(titleField.getText())
-            .withType(parserUtil.parseTypes(typeComboBox.getValue()))
-            .withState(parserUtil.parseStates(stateComboBox.getValue()))
+            .withType(csvParserService.parseTypes(typeComboBox.getValue()))
+            .withState(csvParserService.parseStates(stateComboBox.getValue()))
             .withRating(ratingSpinner.getValue())
             .build();
       }
