@@ -3,7 +3,7 @@ package junit;
 import org.com.models.logger.Logger;
 import org.com.models.user.User;
 import org.com.repository.HibernateUtil;
-import org.com.repository.LoggerDAO;
+import org.com.repository.LoggerRepository;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 
@@ -12,15 +12,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class LoggerDAOTest {
+class LoggerRepositoryTest {
   private SessionFactory sessionFactory;
-  private LoggerDAO loggerDAO;
+  private LoggerRepository loggerRepository;
 
   @BeforeAll
   void setUp() {
     sessionFactory =  HibernateUtil.getSessionFactory();
 
-    loggerDAO = new LoggerDAO(sessionFactory);
+    loggerRepository = new LoggerRepository(sessionFactory);
   }
 
   @AfterAll
@@ -36,9 +36,9 @@ class LoggerDAOTest {
     Logger logger = new Logger("INFO", "Test log message");
     logger.setUser(user);
 
-    loggerDAO.createLogger(logger);
+    loggerRepository.createLogger(logger);
 
-    Logger retrievedLogger = loggerDAO.getLoggerById(logger.getId());
+    Logger retrievedLogger = loggerRepository.getLoggerById(logger.getId());
     assertNotNull(retrievedLogger);
     assertEquals("Test log message", retrievedLogger.getMessage());
     assertEquals("INFO", retrievedLogger.getLevel());
@@ -47,9 +47,9 @@ class LoggerDAOTest {
   @Test
   void testGetLoggerById() {
     Logger logger = new Logger("INFO", "Another log message");
-    loggerDAO.createLogger(logger);
+    loggerRepository.createLogger(logger);
 
-    Logger retrievedLogger = loggerDAO.getLoggerById(logger.getId());
+    Logger retrievedLogger = loggerRepository.getLoggerById(logger.getId());
     assertNotNull(retrievedLogger);
     assertEquals("Another log message", retrievedLogger.getMessage());
   }
@@ -59,10 +59,10 @@ class LoggerDAOTest {
     Logger logger1 = new Logger("ERROR", "Error occurred");
     Logger logger2 = new Logger("DEBUG", "Debugging the app");
 
-    loggerDAO.createLogger(logger1);
-    loggerDAO.createLogger(logger2);
+    loggerRepository.createLogger(logger1);
+    loggerRepository.createLogger(logger2);
 
-    List<Logger> loggers = loggerDAO.getAllLoggers();
+    List<Logger> loggers = loggerRepository.getAllLoggers();
     assertNotNull(loggers);
     assertEquals(2, loggers.size());
   }
@@ -70,12 +70,12 @@ class LoggerDAOTest {
   @Test
   void testDeleteLogger() {
     Logger logger = new Logger("WARNING", "Test delete log");
-    loggerDAO.createLogger(logger);
+    loggerRepository.createLogger(logger);
 
     Long loggerId = logger.getId();
-    loggerDAO.deleteLogger(loggerId);
+    loggerRepository.deleteLogger(loggerId);
 
-    Logger deletedLogger = loggerDAO.getLoggerById(loggerId);
+    Logger deletedLogger = loggerRepository.getLoggerById(loggerId);
     assertNull(deletedLogger);
   }
 }

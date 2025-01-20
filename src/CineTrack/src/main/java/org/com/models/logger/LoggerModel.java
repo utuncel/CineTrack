@@ -4,16 +4,16 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.com.repository.HibernateUtil;
-import org.com.repository.LoggerDAO;
+import org.com.repository.LoggerRepository;
 import org.com.service.SessionManagerService;
 
 public class LoggerModel {
 
   private ObservableList<Logger> logs = FXCollections.observableArrayList();
-  private final LoggerDAO loggerDAO;
+  private final LoggerRepository loggerRepository;
 
   public LoggerModel() {
-    this.loggerDAO = new LoggerDAO(HibernateUtil.getSessionFactory());
+    this.loggerRepository = new LoggerRepository(HibernateUtil.getSessionFactory());
     logs.add(new Logger("INFO", "LoggerModel initialized"));
   }
 
@@ -27,7 +27,7 @@ public class LoggerModel {
     Platform.runLater(() -> logs.add(newLog));
 
     try {
-      loggerDAO.createLogger(newLog, SessionManagerService.getInstance().getCurrentUser());
+      loggerRepository.saveLogger(newLog, SessionManagerService.getInstance().getCurrentUser());
     } catch (RuntimeException e) {
       e.printStackTrace();
       Platform.runLater(() -> logs.add(new Logger("ERROR", "Failed to persist log: " + e.getMessage())));
