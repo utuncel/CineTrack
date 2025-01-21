@@ -3,8 +3,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.BorderPane?>
 <BorderPane xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx"
-  fx:controller="org.com.controller.logger.LoggerController"
-  stylesheets="@LoggerStyle.css" prefHeight="800.0" prefWidth="1200.0">
+  fx:controller="org.com.controller.log.LogController"
+  stylesheets="@LogStyle.css" prefHeight="800.0" prefWidth="1200.0">
 
   <center>
     <TableView fx:id="logTableView">

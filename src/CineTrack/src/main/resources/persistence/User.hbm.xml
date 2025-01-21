@@ -20,7 +20,7 @@
 
     <bag  name="logs" table="logs" cascade="all" lazy="false" fetch="select">
       <key column="user_id" />
-      <one-to-many class="org.com.model.domain.Logger" />
+      <one-to-many class="org.com.model.domain.Log" />
     </bag >
   </class>
 </hibernate-mapping>

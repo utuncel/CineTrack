@@ -30,7 +30,7 @@ open module CineTrack {
   exports org.com.controller.cinematics.helper;
   exports org.com.controller.dataimport to javafx.fxml;
   exports org.com.controller.addcinematic to javafx.fxml;
-  exports org.com.controller.logger to javafx.fxml;
+  exports org.com.controller.log to javafx.fxml;
   exports org.com.controller.user;
   exports org.com.model.models;
 }

@@ -1,6 +1,6 @@
 package junit;
 
-import org.com.model.domain.Logger;
+import org.com.model.domain.Log;
 import org.com.model.domain.User;
 import org.com.repository.HibernateUtil;
 import org.com.repository.LogRepository;
@@ -33,49 +33,49 @@ class LogRepositoryTest {
   @Test
   void testCreateLogger() {
     User user = new User("TestUser", "password");  // Beispieluser für das Log
-    Logger logger = new Logger("INFO", "Test log message");
-    logger.setUser(user);
+    Log log = new Log("INFO", "Test log message");
+    log.setUser(user);
 
-    logRepository.createLogger(logger);
+    logRepository.createLogger(log);
 
-    Logger retrievedLogger = logRepository.getLoggerById(logger.getId());
-    assertNotNull(retrievedLogger);
-    assertEquals("Test log message", retrievedLogger.getMessage());
-    assertEquals("INFO", retrievedLogger.getLevel());
+    Log retrievedLog = logRepository.getLoggerById(log.getId());
+    assertNotNull(retrievedLog);
+    assertEquals("Test log message", retrievedLog.getMessage());
+    assertEquals("INFO", retrievedLog.getLevel());
   }
 
   @Test
   void testGetLoggerById() {
-    Logger logger = new Logger("INFO", "Another log message");
-    logRepository.createLogger(logger);
+    Log log = new Log("INFO", "Another log message");
+    logRepository.createLogger(log);
 
-    Logger retrievedLogger = logRepository.getLoggerById(logger.getId());
-    assertNotNull(retrievedLogger);
-    assertEquals("Another log message", retrievedLogger.getMessage());
+    Log retrievedLog = logRepository.getLoggerById(log.getId());
+    assertNotNull(retrievedLog);
+    assertEquals("Another log message", retrievedLog.getMessage());
   }
 
   @Test
   void testGetAllLoggers() {
-    Logger logger1 = new Logger("ERROR", "Error occurred");
-    Logger logger2 = new Logger("DEBUG", "Debugging the app");
+    Log log1 = new Log("ERROR", "Error occurred");
+    Log log2 = new Log("DEBUG", "Debugging the app");
 
-    logRepository.createLogger(logger1);
-    logRepository.createLogger(logger2);
+    logRepository.createLogger(log1);
+    logRepository.createLogger(log2);
 
-    List<Logger> loggers = logRepository.getAllLoggers();
-    assertNotNull(loggers);
-    assertEquals(2, loggers.size());
+    List<Log> logs = logRepository.getAllLoggers();
+    assertNotNull(logs);
+    assertEquals(2, logs.size());
   }
 
   @Test
   void testDeleteLogger() {
-    Logger logger = new Logger("WARNING", "Test delete log");
-    logRepository.createLogger(logger);
+    Log log = new Log("WARNING", "Test delete log");
+    logRepository.createLogger(log);
 
-    Long loggerId = logger.getId();
+    Long loggerId = log.getId();
     logRepository.deleteLogger(loggerId);
 
-    Logger deletedLogger = logRepository.getLoggerById(loggerId);
-    assertNull(deletedLogger);
+    Log deletedLog = logRepository.getLoggerById(loggerId);
+    assertNull(deletedLog);
   }
 }

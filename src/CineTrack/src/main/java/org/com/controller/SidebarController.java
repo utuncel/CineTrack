@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
-import org.com.controller.logger.LoggerController;
+import org.com.controller.log.LogController;
 import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
 
@@ -94,16 +94,16 @@ public class SidebarController {
 
   @FXML
   public void loadLoggerView() {
-    logger.logInfo("Loading Logger View");
+    logger.logInfo("Loading Log View");
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/logger/LoggerView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/log/LogView.fxml"));
       Parent view = loader.load();
-      LoggerController loggerController = loader.getController();
-      loggerController.setLogs();
+      LogController logController = loader.getController();
+      logController.setLogs();
       updateMainContent(view);
-      logger.logInfo("Logger View successfully loaded");
+      logger.logInfo("Log View successfully loaded");
     } catch (IOException e) {
-      logger.logError("Error loading Logger View: " + e.getMessage());
+      logger.logError("Error loading Log View: " + e.getMessage());
       handleLoadError(e);
     }
   }

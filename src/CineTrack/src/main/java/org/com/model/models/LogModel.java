@@ -3,27 +3,27 @@ package org.com.model.models;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.com.model.domain.Logger;
+import org.com.model.domain.Log;
 import org.com.repository.HibernateUtil;
 import org.com.repository.LogRepository;
 import org.com.service.SessionManagerService;
 
-public class LoggerModel {
+public class LogModel {
 
-  private ObservableList<Logger> logs = FXCollections.observableArrayList();
+  private ObservableList<Log> logs = FXCollections.observableArrayList();
   private final LogRepository logRepository;
 
-  public LoggerModel() {
+  public LogModel() {
     this.logRepository = new LogRepository(HibernateUtil.getSessionFactory());
-    logs.add(new Logger("INFO", "LoggerModel initialized"));
+    logs.add(new Log("INFO", "LogModel initialized"));
   }
 
-  public ObservableList<Logger> getLogs() {
+  public ObservableList<Log> getLogs() {
     return logs;
   }
 
   public void addLog(String level, String message) {
-    Logger newLog = new Logger(level, message);
+    Log newLog = new Log(level, message);
 
     Platform.runLater(() -> logs.add(newLog));
 
@@ -31,7 +31,7 @@ public class LoggerModel {
       logRepository.saveLogger(newLog, SessionManagerService.getInstance().getCurrentUser());
     } catch (RuntimeException e) {
       e.printStackTrace();
-      Platform.runLater(() -> logs.add(new Logger("ERROR", "Failed to persist log: " + e.getMessage())));
+      Platform.runLater(() -> logs.add(new Log("ERROR", "Failed to persist log: " + e.getMessage())));
     }
   }
 }

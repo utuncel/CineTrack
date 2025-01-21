@@ -1,7 +1,7 @@
 package org.com.repository;
 
 import java.util.List;
-import org.com.model.domain.Logger;
+import org.com.model.domain.Log;
 import org.com.model.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,17 +15,17 @@ public class LogRepository {
     this.sessionFactory = sessionFactory;
   }
 
-  public void saveLogger(Logger logger, User user) {
+  public void saveLogger(Log log, User user) {
     executeWithinTransaction(session -> {
-      logger.setUser(user);
-      session.persist(logger);
+      log.setUser(user);
+      session.persist(log);
       return null;
-    }, "Failed to create logger");
+    }, "Failed to create log");
   }
 
-  public List<Logger> getLogsByUser(User user) {
+  public List<Log> getLogsByUser(User user) {
     return executeWithinTransaction(session ->
-            session.createQuery("FROM Logger l WHERE l.user = :user", Logger.class)
+            session.createQuery("FROM Log l WHERE l.user = :user", Log.class)
                 .setParameter("user", user)
                 .list(),
         "Failed to retrieve logs for user");

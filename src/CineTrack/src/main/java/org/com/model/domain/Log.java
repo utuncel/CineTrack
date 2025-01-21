@@ -3,7 +3,7 @@ package org.com.model.domain;
 
 import java.time.LocalDateTime;
 
-public class Logger {
+public class Log {
 
   private Long id;
 
@@ -15,30 +15,31 @@ public class Logger {
 
   private User user;
 
-  // Standardkonstruktor für Hibernate
-  protected Logger() {
+  protected Log() {
     this.timestamp = LocalDateTime.now();
   }
 
-  public Logger(String level, String message) {
+  public Log(String level, String message) {
     this.timestamp = LocalDateTime.now();
     this.level = level;
     this.message = message;
   }
 
-  // Getter und Setter
   public Long getId() {
     return id;
   }
 
+  //not used but needed
   protected void setId(Long id) {
     this.id = id;
   }
 
+  //not used but needed
   public LocalDateTime getTimestamp() {
     return timestamp;
   }
 
+  //not used but needed
   protected void setTimestamp(LocalDateTime timestamp) {
     this.timestamp = timestamp;
   }
@@ -47,6 +48,7 @@ public class Logger {
     return level;
   }
 
+  //not used but needed
   public void setLevel(String level) {
     this.level = level;
   }
@@ -67,7 +69,6 @@ public class Logger {
     this.user = user;
   }
 
-  // Builder-Pattern für einfachere Erstellung
   public static class LoggerBuilder {
     private String level;
     private String message;
@@ -88,10 +89,10 @@ public class Logger {
       return this;
     }
 
-    public Logger build() {
-      Logger logger = new Logger(level, message);
-      logger.setUser(user);
-      return logger;
+    public Log build() {
+      Log log = new Log(level, message);
+      log.setUser(user);
+      return log;
     }
   }
 

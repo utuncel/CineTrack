@@ -12,18 +12,15 @@ public class User {
 
   private List<Cinematic> cinematics;
 
-  private List<Logger> logs;
+  private List<Log> logs;
 
-  // Standardkonstruktor
   protected User() {}
 
-  // Konstruktor
   public User(String name, String password) {
     this.name = name;
     this.password = password;
   }
 
-  // Getter und Setter
   public Long getId() {
     return id;
   }
@@ -56,11 +53,12 @@ public class User {
     this.cinematics = cinematics;
   }
 
-  public List<Logger> getLogs() {
+  public List<Log> getLogs() {
     return logs;
   }
 
-  public void setLogs(List<Logger> logs) {
+  //not used but needed
+  public void setLogs(List<Log> logs) {
     this.logs = logs;
   }
 }

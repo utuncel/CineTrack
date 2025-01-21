@@ -1,56 +1,56 @@
-package org.com.controller.logger;
+package org.com.controller.log;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.com.model.domain.Logger;
-import org.com.model.models.LoggerModel;
+import org.com.model.domain.Log;
+import org.com.model.models.LogModel;
 import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 
-public class LoggerController {
+public class LogController {
 
   @FXML
-  private TableView<Logger> logTableView;
+  private TableView<Log> logTableView;
   @FXML
-  private TableColumn<Logger, String> timestampColumn;
+  private TableColumn<Log, String> timestampColumn;
   @FXML
-  private TableColumn<Logger, String> levelColumn;
+  private TableColumn<Log, String> levelColumn;
   @FXML
-  private TableColumn<Logger, String> messageColumn;
+  private TableColumn<Log, String> messageColumn;
 
-  private LoggerModel loggerModel;
+  private LogModel logModel;
 
   @FXML
   public void initialize() {
-    this.loggerModel = LogService.getInstance().getLoggerModel();
+    this.logModel = LogService.getInstance().getLoggerModel();
 
     timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     levelColumn.setCellValueFactory(new PropertyValueFactory<>("level"));
     messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
 
-    if (loggerModel != null) {
+    if (logModel != null) {
       var logs = SessionManagerService.getInstance().getCurrentUser().getLogs();
       logTableView.setItems(
           FXCollections.observableArrayList(logs));
     }
   }
-  public void setController(LoggerModel loggerModel){
-    this.loggerModel = loggerModel;
+  public void setController(LogModel logModel){
+    this.logModel = logModel;
   }
 
   public void setLogs() {
-    if (logTableView != null && loggerModel != null) {
+    if (logTableView != null && logModel != null) {
       logTableView.setItems(FXCollections.observableArrayList(
           SessionManagerService.getInstance().getCurrentUser().getLogs()));
     }
   }
 
   public void addLog(String level, String message) {
-    if (loggerModel != null) {
-      loggerModel.addLog(level, message);
+    if (logModel != null) {
+      logModel.addLog(level, message);
     }
   }
 }

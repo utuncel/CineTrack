@@ -2,22 +2,22 @@ package org.com.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import org.com.model.models.LoggerModel;
+import org.com.model.models.LogModel;
 
 public class LogService {
 
-  private final LoggerModel loggerModel;
+  private final LogModel logModel;
 
   private LogService() {
-    this.loggerModel = new LoggerModel();
+    this.logModel = new LogModel();
   }
 
   public static LogService getInstance() {
     return InstanceHolder.instance;
   }
 
-  public LoggerModel getLoggerModel() {
-    return loggerModel;
+  public LogModel getLoggerModel() {
+    return logModel;
   }
 
   public void logInfo(String message) {
@@ -36,7 +36,7 @@ public class LogService {
     String timestamp = getTimestamp();
     String formattedMessage = String.format("[%s] %s: %s", timestamp, level, message);
 
-    loggerModel.addLog(level, formattedMessage);
+    logModel.addLog(level, formattedMessage);
   }
 
   private String getTimestamp() {
