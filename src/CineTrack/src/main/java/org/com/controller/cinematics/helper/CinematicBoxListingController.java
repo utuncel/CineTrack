@@ -10,11 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import org.com.models.Cinematic;
-import org.com.models.enums.Type;
+import org.com.model.Cinematic;
+import org.com.model.enums.Type;
 
 public class CinematicBoxListingController {
 

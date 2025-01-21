@@ -2,7 +2,7 @@ package org.com.service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import org.com.models.logger.LoggerModel;
+import org.com.model.logger.LoggerModel;
 
 public class LogService {
 

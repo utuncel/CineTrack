@@ -22,17 +22,17 @@ open module CineTrack {
   exports org.com to javafx.graphics;
   exports org.com.controller.dashboard;
   exports org.com.controller.cinematics;
-  exports org.com.models.helper;
-  exports org.com.models;
-  exports org.com.models.statistics;
-  exports org.com.models.records;
-  exports org.com.models.enums;
+  exports org.com.model.helper;
+  exports org.com.model;
+  exports org.com.model.statistics;
+  exports org.com.model.records;
+  exports org.com.model.enums;
   exports org.com.controller;
   exports org.com.controller.cinematics.helper;
   exports org.com.controller.dataimport to javafx.fxml;
   exports org.com.controller.addcinematic to javafx.fxml;
   exports org.com.controller.logger to javafx.fxml;
-  exports org.com.models.logger to javafx.fxml;
-  exports org.com.models.user;
+  exports org.com.model.logger to javafx.fxml;
+  exports org.com.model.user;
   exports org.com.controller.user;
 }

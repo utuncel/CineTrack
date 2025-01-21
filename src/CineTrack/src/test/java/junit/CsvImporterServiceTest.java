@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import org.com.models.helper.CsvCinematic;
+import org.com.model.helper.CsvCinematic;
 import org.com.service.CsvImporterService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

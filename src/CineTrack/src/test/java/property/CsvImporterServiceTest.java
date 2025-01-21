@@ -14,7 +14,7 @@ import net.jqwik.api.From;
 import net.jqwik.api.Property;
 import net.jqwik.api.Provide;
 import net.jqwik.api.constraints.Size;
-import org.com.models.helper.CsvCinematic;
+import org.com.model.helper.CsvCinematic;
 import org.com.service.CsvImporterService;
 
 class CsvImporterServiceTest {

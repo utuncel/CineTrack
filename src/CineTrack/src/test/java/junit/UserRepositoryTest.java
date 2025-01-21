@@ -1,6 +1,6 @@
 package junit;
 
-import org.com.models.user.User;
+import org.com.model.user.User;
 import org.com.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

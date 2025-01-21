@@ -1,7 +1,7 @@
 package junit;
 
-import org.com.models.logger.Logger;
-import org.com.models.user.User;
+import org.com.model.logger.Logger;
+import org.com.model.user.User;
 import org.com.repository.HibernateUtil;
 import org.com.repository.LogRepository;
 import org.hibernate.SessionFactory;

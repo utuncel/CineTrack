@@ -1,9 +1,9 @@
-package org.com.models.statistics;
+package org.com.model.statistics;
 
 import java.util.List;
-import org.com.models.Cinematic;
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
+import org.com.model.Cinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 
 public interface StatisticStrategy<T> {
 

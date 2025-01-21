@@ -1,7 +1,7 @@
 package org.com.repository;
 
-import org.com.models.Cinematic;
-import org.com.models.user.User;
+import org.com.model.Cinematic;
+import org.com.model.user.User;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

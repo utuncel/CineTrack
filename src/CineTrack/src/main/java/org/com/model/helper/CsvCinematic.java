@@ -1,7 +1,7 @@
-package org.com.models.helper;
+package org.com.model.helper;
 
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 
 public class CsvCinematic {
 

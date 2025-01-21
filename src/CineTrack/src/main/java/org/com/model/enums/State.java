@@ -1,4 +1,4 @@
-package org.com.models.enums;
+package org.com.model.enums;
 
 public enum State {
   FINISHED, WATCHING, DROPPED, TOWATCH

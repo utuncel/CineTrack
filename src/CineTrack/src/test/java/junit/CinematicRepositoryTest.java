@@ -1,8 +1,8 @@
 package junit;
 
-import org.com.models.Cinematic;
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
+import org.com.model.Cinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 import org.com.repository.CinematicRepository;
 import org.com.repository.HibernateUtil;
 import org.hibernate.SessionFactory;

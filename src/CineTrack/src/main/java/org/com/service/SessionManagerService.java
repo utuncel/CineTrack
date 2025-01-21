@@ -1,6 +1,6 @@
 package org.com.service;
 
-import org.com.models.user.User;
+import org.com.model.user.User;
 
 public class SessionManagerService {
 

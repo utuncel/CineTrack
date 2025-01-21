@@ -1,6 +1,6 @@
 package org.com.controller.dashboard;
 
-import org.com.models.DashboardModel;
+import org.com.model.DashboardModel;
 
 public class DashboardModelSingleton {
 

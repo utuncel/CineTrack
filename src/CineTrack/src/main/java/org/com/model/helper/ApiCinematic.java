@@ -1,4 +1,4 @@
-package org.com.models.helper;
+package org.com.model.helper;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

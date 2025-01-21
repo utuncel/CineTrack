@@ -1,4 +1,4 @@
-package org.com.models.logger;
+package org.com.model.logger;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

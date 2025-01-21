@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import org.com.models.Cinematic;
+import org.com.model.Cinematic;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
 import org.com.service.CsvImporterService;

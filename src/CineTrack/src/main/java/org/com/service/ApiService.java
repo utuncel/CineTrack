@@ -9,7 +9,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-import org.com.models.helper.ApiCinematic;
+import org.com.model.helper.ApiCinematic;
 
 public class ApiService {
 

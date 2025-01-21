@@ -3,9 +3,9 @@
   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="org.com.models">
+<hibernate-mapping package="org.com.model">
 
-  <class name="org.com.models.Cinematic" table="cinematics">
+  <class name="org.com.model.Cinematic" table="cinematics">
     <id name="id" column="id">
       <generator class="identity"/>
     </id>
@@ -21,19 +21,19 @@
 
     <property name="state" column="state" not-null="true">
       <type name="org.hibernate.type.EnumType">
-        <param name="enumClass">org.com.models.enums.State</param>
+        <param name="enumClass">org.com.model.enums.State</param>
         <param name="useNamed">true</param>
       </type>
     </property>
 
     <property name="type" column="type" not-null="true">
       <type name="org.hibernate.type.EnumType">
-        <param name="enumClass">org.com.models.enums.Type</param>
+        <param name="enumClass">org.com.model.enums.Type</param>
         <param name="useNamed">true</param>
       </type>
     </property>
 
-    <many-to-one name="user" class="org.com.models.user.User" column="user_id" not-null="true" fetch="join"/>
+    <many-to-one name="user" class="org.com.model.user.User" column="user_id" not-null="true" fetch="join"/>
 
     <list name="actors" table="actors" cascade="all-delete-orphan" fetch="join">
       <key column="cinematic_id"/>

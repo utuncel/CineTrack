@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.com.models.helper.CsvCinematic;
+import org.com.model.helper.CsvCinematic;
 
 public class CsvImporterService {
 

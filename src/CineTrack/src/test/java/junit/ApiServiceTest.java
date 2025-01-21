@@ -5,7 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import org.com.models.helper.CsvCinematic;
+import org.com.model.helper.CsvCinematic;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
 import org.com.service.CsvImporterService;

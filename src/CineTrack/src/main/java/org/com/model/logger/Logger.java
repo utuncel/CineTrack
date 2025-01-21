@@ -1,7 +1,7 @@
-package org.com.models.logger;
+package org.com.model.logger;
 
 
-import org.com.models.user.User;
+import org.com.model.user.User;
 
 import java.time.LocalDateTime;
 

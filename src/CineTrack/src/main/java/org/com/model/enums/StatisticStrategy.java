@@ -1,4 +1,4 @@
-package org.com.models.enums;
+package org.com.model.enums;
 
 public enum StatisticStrategy {
   GENRE_COUNT_STRATEGY,

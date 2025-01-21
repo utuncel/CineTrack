@@ -7,11 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.com.models.Cinematic;
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
-import org.com.models.records.TypeCount;
-import org.com.models.statistics.TypeCountStrategy;
+import org.com.model.Cinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
+import org.com.model.records.TypeCount;
+import org.com.model.statistics.TypeCountStrategy;
 
 public class TypeCountStatisticController {
 

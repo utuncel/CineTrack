@@ -1,8 +1,8 @@
 package org.com.repository;
 
 import java.util.List;
-import org.com.models.logger.Logger;
-import org.com.models.user.User;
+import org.com.model.logger.Logger;
+import org.com.model.user.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

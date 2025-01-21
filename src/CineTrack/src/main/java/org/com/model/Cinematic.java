@@ -1,12 +1,12 @@
-package org.com.models;
+package org.com.model;
 
 
 
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
-import org.com.models.helper.ApiCinematic;
-import org.com.models.helper.CsvCinematic;
-import org.com.models.user.User;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
+import org.com.model.helper.ApiCinematic;
+import org.com.model.helper.CsvCinematic;
+import org.com.model.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;

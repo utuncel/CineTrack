@@ -1,11 +1,11 @@
-package org.com.models.statistics;
+package org.com.model.statistics;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.com.models.Cinematic;
-import org.com.models.enums.State;
-import org.com.models.enums.Type;
+import org.com.model.Cinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 
 public class GenreCountStrategy implements StatisticStrategy<Map<String, Integer>> {
 
