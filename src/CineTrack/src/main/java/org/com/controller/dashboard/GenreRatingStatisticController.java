@@ -13,10 +13,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.statistics.GenreRatingsStrategy;
+import org.com.model.domain.statistics.GenreRatingsStrategy;
 
 public class GenreRatingStatisticController {
 

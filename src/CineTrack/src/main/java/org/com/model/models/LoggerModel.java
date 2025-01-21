@@ -1,8 +1,9 @@
-package org.com.model.logger;
+package org.com.model.models;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.com.model.domain.Logger;
 import org.com.repository.HibernateUtil;
 import org.com.repository.LogRepository;
 import org.com.service.SessionManagerService;

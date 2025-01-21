@@ -1,6 +1,6 @@
 package org.com.repository;
 
-import org.com.model.user.User;
+import org.com.model.domain.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

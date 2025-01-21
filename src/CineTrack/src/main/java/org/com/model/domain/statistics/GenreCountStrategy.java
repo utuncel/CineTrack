@@ -1,9 +1,9 @@
-package org.com.model.statistics;
+package org.com.model.domain.statistics;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
 

@@ -5,7 +5,7 @@
 
 <hibernate-mapping package="org.com.model">
 
-  <class name="org.com.model.Cinematic" table="cinematics">
+  <class name="org.com.model.domain.Cinematic" table="cinematics">
     <id name="id" column="id">
       <generator class="identity"/>
     </id>
@@ -33,7 +33,7 @@
       </type>
     </property>
 
-    <many-to-one name="user" class="org.com.model.user.User" column="user_id" not-null="true" fetch="join"/>
+    <many-to-one name="user" class="org.com.model.domain.User" column="user_id" not-null="true" fetch="join"/>
 
     <list name="actors" table="actors" cascade="all-delete-orphan" fetch="join">
       <key column="cinematic_id"/>

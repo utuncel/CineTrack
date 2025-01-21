@@ -1,4 +1,4 @@
-package org.com.model.helper;
+package org.com.model.domain;
 
 import org.com.model.enums.State;
 import org.com.model.enums.Type;

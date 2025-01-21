@@ -12,7 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.Type;
 
 public class CinematicBoxListingController {

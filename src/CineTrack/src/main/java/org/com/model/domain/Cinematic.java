@@ -1,12 +1,9 @@
-package org.com.model;
+package org.com.model.domain;
 
 
 
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.helper.ApiCinematic;
-import org.com.model.helper.CsvCinematic;
-import org.com.model.user.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;

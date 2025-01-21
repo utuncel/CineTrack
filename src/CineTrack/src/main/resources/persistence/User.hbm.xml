@@ -4,7 +4,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="org.com.model.user">
-  <class name="org.com.model.user.User" table="users">
+  <class name="org.com.model.domain.User" table="users">
 
     <id name="id" column="id" type="long">
       <generator class="identity" />
@@ -15,12 +15,12 @@
 
     <bag  name="cinematics" table="cinematics" cascade="all" lazy="true" fetch="select">
       <key column="user_id" />
-      <one-to-many class="org.com.model.Cinematic" />
+      <one-to-many class="org.com.model.domain.Cinematic" />
     </bag >
 
     <bag  name="logs" table="logs" cascade="all" lazy="false" fetch="select">
       <key column="user_id" />
-      <one-to-many class="org.com.model.logger.Logger" />
+      <one-to-many class="org.com.model.domain.Logger" />
     </bag >
   </class>
 </hibernate-mapping>

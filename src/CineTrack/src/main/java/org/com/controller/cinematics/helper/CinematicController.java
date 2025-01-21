@@ -1,7 +1,7 @@
 package org.com.controller.cinematics.helper;
 
 import java.util.List;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 
 public interface CinematicController {
 

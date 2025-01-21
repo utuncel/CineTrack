@@ -1,7 +1,5 @@
-package org.com.model.logger;
+package org.com.model.domain;
 
-
-import org.com.model.user.User;
 
 import java.time.LocalDateTime;
 

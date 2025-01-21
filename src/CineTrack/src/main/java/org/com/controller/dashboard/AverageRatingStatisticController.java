@@ -7,11 +7,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.statistics.ImdbRatingAverageStrategy;
-import org.com.model.statistics.MyRatingAverageStrategy;
+import org.com.model.domain.statistics.ImdbRatingAverageStrategy;
+import org.com.model.domain.statistics.MyRatingAverageStrategy;
 
 public class AverageRatingStatisticController {
 

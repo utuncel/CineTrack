@@ -9,8 +9,8 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardModelSingleton;
-import org.com.model.Cinematic;
-import org.com.model.DashboardModel;
+import org.com.model.domain.Cinematic;
+import org.com.model.models.DashboardModel;
 import javafx.concurrent.Task;
 
 public class DataExportController {

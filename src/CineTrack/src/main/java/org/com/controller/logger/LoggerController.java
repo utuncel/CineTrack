@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.com.model.logger.Logger;
-import org.com.model.logger.LoggerModel;
+import org.com.model.domain.Logger;
+import org.com.model.models.LoggerModel;
 import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 

@@ -3,10 +3,10 @@ package org.com.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.com.model.Cinematic;
-import org.com.model.helper.ApiCinematic;
-import org.com.model.helper.CsvCinematic;
-import org.com.model.user.User;
+import org.com.model.domain.Cinematic;
+import org.com.model.domain.ApiCinematic;
+import org.com.model.domain.CsvCinematic;
+import org.com.model.domain.User;
 
 public class CineFactoryService {
 

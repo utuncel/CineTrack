@@ -1,8 +1,6 @@
-package org.com.model.user;
+package org.com.model.domain;
 
 import java.util.List;
-import org.com.model.Cinematic;
-import org.com.model.logger.Logger;
 
 public class User {
 

@@ -1,11 +1,11 @@
-package org.com.model.statistics;
+package org.com.model.domain.statistics;
 
 import java.util.List;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
 
-public class ImdbRatingAverageStrategy implements StatisticStrategy<Double> {
+public class MyRatingAverageStrategy implements StatisticStrategy<Double> {
 
   @Override
   public Double calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
@@ -14,8 +14,8 @@ public class ImdbRatingAverageStrategy implements StatisticStrategy<Double> {
 
     for (Cinematic cinematic : cinematics) {
       if (types.contains(cinematic.getType()) && states.contains(cinematic.getState())
-          && cinematic.getImdbRating() != 0) {
-        averageRating = averageRating + (cinematic.getImdbRating());
+          && cinematic.getMyRating() != 0) {
+        averageRating = averageRating + (cinematic.getMyRating());
         count++;
       }
     }
@@ -25,4 +25,3 @@ public class ImdbRatingAverageStrategy implements StatisticStrategy<Double> {
     return Math.round((averageRating / count) * 100.0) / 100.0;
   }
 }
-

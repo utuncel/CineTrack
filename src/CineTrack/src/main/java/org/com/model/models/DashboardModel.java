@@ -1,7 +1,8 @@
-package org.com.model;
+package org.com.model.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.com.model.domain.Cinematic;
 import org.com.model.enums.State;
 import org.com.model.enums.StatisticStrategy;
 import org.com.model.enums.Type;

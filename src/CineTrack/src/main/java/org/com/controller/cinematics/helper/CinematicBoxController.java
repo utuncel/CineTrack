@@ -6,7 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import org.com.model.Cinematic;
+import org.com.model.domain.Cinematic;
 import javafx.scene.layout.StackPane;
 
 public class CinematicBoxController {

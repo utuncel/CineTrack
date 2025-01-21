@@ -11,7 +11,7 @@ import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.controller.logger.LoggerController;
-import org.com.model.DashboardModel;
+import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
 
 public class SidebarController {

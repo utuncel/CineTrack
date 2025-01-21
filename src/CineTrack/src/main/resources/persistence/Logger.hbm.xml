@@ -3,9 +3,9 @@
   "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="org.com.model.logger">
+<hibernate-mapping package="org.com.model.models">
 
-  <class name="org.com.model.logger.Logger" table="logs">
+  <class name="org.com.model.domain.Logger" table="logs">
     <id name="id" column="id">
       <generator class="identity"/>
     </id>
@@ -14,7 +14,7 @@
     <property name="level" column="level" not-null="true"/>
     <property name="message" column="message" not-null="true"/>
 
-    <many-to-one name="user" class="org.com.model.user.User" column="user_id" fetch="join" not-null="false"/>
+    <many-to-one name="user" class="org.com.model.domain.User" column="user_id" fetch="join" not-null="false"/>
 
   </class>
 

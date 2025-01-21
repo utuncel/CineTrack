@@ -6,7 +6,7 @@ import java.util.Map;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.com.model.DashboardModel;
+import org.com.model.models.DashboardModel;
 import org.com.model.enums.State;
 import org.com.model.enums.StatisticStrategy;
 import org.com.model.enums.Type;
