@@ -298,7 +298,7 @@ public class DashboardController {
     logger.logInfo("Updating dashboard with current filters and strategies");
     try {
       chartContainer.getChildren().clear();
-      dashboardModel.getStatisticStrategy().forEach(this::addStrategyChart);
+      dashboardModel.getStatisticStrategies().forEach(this::addStrategyChart);
       logger.logInfo("Dashboard successfully updated");
     } catch (Exception e) {
       logger.logError("Failed to update dashboard: " + e.getMessage());

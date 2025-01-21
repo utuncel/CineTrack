@@ -1,12 +1,11 @@
 package org.com.model.domain;
 
-import org.com.model.enums.State;
-import org.com.model.enums.Type;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 
 public class Cinematic {
 
@@ -78,6 +77,7 @@ public class Cinematic {
       return 0;
     }
   }
+
   public Long getId() {
     return id;
   }

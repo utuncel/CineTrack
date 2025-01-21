@@ -25,6 +25,10 @@ public class Log {
     this.message = message;
   }
 
+  public static LoggerBuilder builder() {
+    return new LoggerBuilder();
+  }
+
   public Long getId() {
     return id;
   }
@@ -70,6 +74,7 @@ public class Log {
   }
 
   public static class LoggerBuilder {
+
     private String level;
     private String message;
     private User user;
@@ -94,9 +99,5 @@ public class Log {
       log.setUser(user);
       return log;
     }
-  }
-
-  public static LoggerBuilder builder() {
-    return new LoggerBuilder();
   }
 }

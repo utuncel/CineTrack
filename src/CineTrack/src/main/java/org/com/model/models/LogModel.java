@@ -10,28 +10,44 @@ import org.com.service.SessionManagerService;
 
 public class LogModel {
 
-  private ObservableList<Log> logs = FXCollections.observableArrayList();
+  private final ObservableList<Log> logs = FXCollections.observableArrayList();
   private final LogRepository logRepository;
 
   public LogModel() {
     this.logRepository = new LogRepository(HibernateUtil.getSessionFactory());
-    logs.add(new Log("INFO", "LogModel initialized"));
+    initializeLogs();
   }
 
   public ObservableList<Log> getLogs() {
-    return logs;
+    return FXCollections.unmodifiableObservableList(logs);
   }
 
   public void addLog(String level, String message) {
     Log newLog = new Log(level, message);
 
+    // Add the log to the UI thread
     Platform.runLater(() -> logs.add(newLog));
 
-    try {
-      logRepository.saveLogger(newLog, SessionManagerService.getInstance().getCurrentUser());
-    } catch (RuntimeException e) {
-      e.printStackTrace();
-      Platform.runLater(() -> logs.add(new Log("ERROR", "Failed to persist log: " + e.getMessage())));
-    }
+    // Save the log to the database asynchronously
+    saveLogAsync(newLog);
+  }
+
+  private void initializeLogs() {
+    logs.add(new Log("INFO", "LogModel initialized"));
+  }
+
+  private void saveLogAsync(Log log) {
+    new Thread(() -> {
+      try {
+        logRepository.saveLogger(log, SessionManagerService.getInstance().getCurrentUser());
+      } catch (RuntimeException e) {
+        handlePersistenceError(e);
+      }
+    }).start();
+  }
+
+  private void handlePersistenceError(RuntimeException e) {
+    String errorMessage = "Failed to persist log: " + e.getMessage();
+    Platform.runLater(() -> logs.add(new Log("ERROR", errorMessage)));
   }
 }

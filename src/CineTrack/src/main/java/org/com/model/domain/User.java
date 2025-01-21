@@ -14,7 +14,8 @@ public class User {
 
   private List<Log> logs;
 
-  protected User() {}
+  protected User() {
+  }
 
   public User(String name, String password) {
     this.name = name;
