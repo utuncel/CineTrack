@@ -27,4 +27,16 @@ public class ViewLoaderService {
       logger.logError("Error loading view " + viewPath + ": " + e.getMessage());
     }
   }
+
+  public void loadView(String viewPath, Stage stage) {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
+      Parent view = loader.load();
+      Scene scene = new Scene(view);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      logger.logError("Error loading view " + viewPath + ": " + e.getMessage());
+    }
+  }
 }
