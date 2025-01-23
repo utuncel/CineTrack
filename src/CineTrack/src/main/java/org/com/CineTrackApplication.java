@@ -27,7 +27,7 @@ public class CineTrackApplication extends Application {
   }
 
   private Scene createScene() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/user/LoginView.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/authentication/LoginView.fxml"));
     Parent root = loader.load();
     return new Scene(root);
   }

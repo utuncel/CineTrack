@@ -26,7 +26,7 @@ public class LogRepository {
   public List<Log> getLogsByUser(User user) {
     return executeWithinTransaction(session ->
             session.createQuery("FROM Log l WHERE l.user = :user", Log.class)
-                .setParameter("user", user)
+                .setParameter("authentication", user)
                 .list(),
         "Failed to retrieve logs for user");
   }
