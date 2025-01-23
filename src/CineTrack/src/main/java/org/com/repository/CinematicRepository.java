@@ -17,6 +17,21 @@ public class CinematicRepository {
     this.sessionFactory = sessionFactory;
   }
 
+  public void saveCinematic(Cinematic cinematic, User user) {
+    if (cinematic == null) {
+      throw new IllegalArgumentException("Cinematic cannot be null.");
+    }
+
+    executeWithinTransaction(session -> {
+      if (cinematic.getUser() == null) {
+        cinematic.setUser(user);  // Associate cinematic with the user if not already set
+      }
+      session.persist(cinematic);
+      return null;
+    }, "Failed to save the cinematic");
+  }
+
+
   public void saveCinematics(List<Cinematic> cinematics, User user) {
     if (cinematics == null || cinematics.isEmpty()) {
       throw new IllegalArgumentException("The list of cinematics cannot be empty.");

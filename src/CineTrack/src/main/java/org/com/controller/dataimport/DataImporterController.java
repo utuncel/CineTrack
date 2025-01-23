@@ -3,7 +3,6 @@ package org.com.controller.dataimport;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,18 +13,22 @@ import org.com.model.domain.Cinematic;
 import org.com.model.models.DashboardModel;
 import org.com.repository.CinematicRepository;
 import org.com.repository.HibernateUtil;
-import org.com.service.*;
+import org.com.service.ApiService;
+import org.com.service.CineFactoryService;
+import org.com.service.CsvImporterService;
+import org.com.service.DialogService;
+import org.com.service.LogService;
+import org.com.service.SessionManagerService;
 
 public class DataImporterController {
-
-  @FXML
-  private Button chooseFileButton;
 
   private final DashboardModel dashboardModel;
   private final CinematicRepository cinematicRepository;
   private final SessionManagerService sessionManager;
   private final DialogService dialogService;
   private final LogService logger = LogService.getInstance();
+  @FXML
+  private Button chooseFileButton;
 
   public DataImporterController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
