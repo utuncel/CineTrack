@@ -22,7 +22,7 @@ public class AddCinematicController {
   private final CineFactoryService cineFactoryService = new CineFactoryService();
   private final CinematicRepository cinematicRepository;
   private final SessionManagerService sessionManager;
-  private final DashboardModel dashboardModel = DashboardModelSingleton.getInstance();
+  private final DashboardModel dashboardModel;
 
   @FXML
   private TextField titleField;
@@ -38,17 +38,17 @@ public class AddCinematicController {
   public AddCinematicController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
     this.sessionManager = SessionManagerService.getInstance();
+    this.dashboardModel = DashboardModelSingleton.getInstance();
   }
 
   @FXML
   public void initialize() {
-    logger.logInfo("Initializing Add Cinematic Controller");
     try {
       ratingSpinner.setDisable(true);
       handleStateChange();
-      logger.logInfo("Add Cinematic Controller successfully initialized");
+      logger.logInfo("Add Cinematic Controller initialized successfully");
     } catch (Exception e) {
-      logger.logError("Error during Add Cinematic Controller initialization: " + e.getMessage());
+      logger.logError("Initialization error: " + e.getMessage());
     }
   }
 
@@ -61,17 +61,23 @@ public class AddCinematicController {
   @FXML
   private void handleAddCinematic() {
     try {
-      CsvCinematic csvCinematic = createCsvCinematic();
-      Cinematic cinematic = cineFactoryService.createCinematic(csvCinematic);
-      cinematicRepository.saveCinematic(cinematic, sessionManager.getCurrentUser());
+      Cinematic cinematic = processCinematic();
       dashboardModel.addCinematic(cinematic);
     } catch (Exception e) {
-      logger.logError("Error adding new cinematic: " + e.getMessage());
+      logger.logError("Error adding cinematic: " + e.getMessage());
     }
   }
 
+  private Cinematic processCinematic() {
+    CsvCinematic csvCinematic = createCsvCinematic();
+    Cinematic cinematic = cineFactoryService.createCinematic(csvCinematic);
+    cinematicRepository.saveCinematic(cinematic, sessionManager.getCurrentUser());
+    return cinematic;
+  }
+
   private CsvCinematic createCsvCinematic() {
-    CsvCinematic.Builder builder = new CsvCinematic.Builder().withTitle(titleField.getText())
+    CsvCinematic.Builder builder = new CsvCinematic.Builder()
+        .withTitle(titleField.getText())
         .withType(csvParserService.parseTypes(typeComboBox.getValue()))
         .withState(csvParserService.parseStates(stateComboBox.getValue()));
 
