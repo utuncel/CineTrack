@@ -6,8 +6,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import org.com.model.domain.Cinematic;
 import javafx.scene.layout.StackPane;
+import org.com.model.domain.Cinematic;
 
 public class CinematicBoxController {
 
@@ -34,54 +34,55 @@ public class CinematicBoxController {
 
   @FXML
   public void initialize() {
-    // Setup hover effects
-    if (rootPane != null) {
-      rootPane.setOnMouseEntered(e -> {
-        if (descriptionArea != null) descriptionArea.setVisible(true);
-        if (hoverOverlay != null) hoverOverlay.setVisible(true);
-      });
+    setupHoverEffects();
+  }
 
-      rootPane.setOnMouseExited(e -> {
-        if (descriptionArea != null) descriptionArea.setVisible(false);
-        if (hoverOverlay != null) hoverOverlay.setVisible(false);
-      });
+  private void setupHoverEffects() {
+    if (rootPane != null) {
+      rootPane.setOnMouseEntered(e -> toggleOverlayVisibility(true));
+      rootPane.setOnMouseExited(e -> toggleOverlayVisibility(false));
     }
   }
 
-  public void setCinematicView(Cinematic cinematic) {
-    if (cinematic == null) return;
+  private void toggleOverlayVisibility(boolean isVisible) {
+    if (descriptionArea != null)
+      descriptionArea.setVisible(isVisible);
+    if (hoverOverlay != null)
+      hoverOverlay.setVisible(isVisible);
+  }
 
-    // Set image
+  public void setCinematicView(Cinematic cinematic) {
+    if (cinematic == null)
+      return;
+
+    updatePoster(cinematic);
+    updateLabels(cinematic);
+    updateDescription(cinematic);
+  }
+
+  private void updatePoster(Cinematic cinematic) {
     if (posterImage != null && cinematic.getImageUrl() != null) {
       posterImage.setImage(new Image(cinematic.getImageUrl()));
     }
+  }
 
-    // Set text labels
-    if (titleLabel != null) {
-      titleLabel.setText(cinematic.getTitle());
+  private void updateLabels(Cinematic cinematic) {
+    updateLabel(titleLabel, cinematic.getTitle());
+    updateLabel(runtimeLabel, "Runtime: " + cinematic.getRuntime());
+    updateLabel(imdbRatingLabel, String.format("IMDb: %.1f/10 (%,d Stimmen)",
+        cinematic.getImdbRating(), cinematic.getImdbVotes()));
+    updateLabel(myRatingLabel, "MyRating: " + cinematic.getMyRating() + "/10");
+    updateLabel(directorLabel, "Director: " + cinematic.getDirectorName());
+    updateLabel(stateLabel, "State: " + cinematic.getState().toString());
+  }
+
+  private void updateLabel(Label label, String text) {
+    if (label != null) {
+      label.setText(text);
     }
+  }
 
-    if (runtimeLabel != null) {
-      runtimeLabel.setText("Runtime: " + cinematic.getRuntime());
-    }
-
-    if (imdbRatingLabel != null) {
-      imdbRatingLabel.setText(String.format("IMDb: %.1f/10 (%,d Stimmen)",
-          cinematic.getImdbRating(), cinematic.getImdbVotes()));
-    }
-
-    if (myRatingLabel != null) {
-      myRatingLabel.setText("MyRating: " + cinematic.getMyRating() + "/10");
-    }
-
-    if (directorLabel != null) {
-      directorLabel.setText("Director: " + cinematic.getDirectorName());
-    }
-
-    if (stateLabel != null) {
-      stateLabel.setText("State: " + cinematic.getState().toString());
-    }
-
+  private void updateDescription(Cinematic cinematic) {
     if (descriptionArea != null) {
       descriptionArea.setText(cinematic.getDescription());
     }
