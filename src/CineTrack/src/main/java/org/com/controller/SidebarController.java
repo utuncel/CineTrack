@@ -10,13 +10,15 @@ import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
-import org.com.controller.log.LogController;
 import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
+import org.com.service.ViewLoaderService;
 
 public class SidebarController {
 
   private final LogService logger = LogService.getInstance();
+  private final ViewLoaderService viewLoaderService = new ViewLoaderService(logger);
+
   @FXML
   private BorderPane mainContentPane;
   private DashboardModel dashboardModel;
@@ -28,89 +30,48 @@ public class SidebarController {
 
   @FXML
   public void loadMovieView() {
-    logger.logInfo("Loading Movie View");
     loadCinematicView("/cinematics/MovieView.fxml");
   }
 
   @FXML
   public void loadSeriesView() {
-    logger.logInfo("Loading Series View");
     loadCinematicView("/cinematics/SeriesView.fxml");
   }
 
   @FXML
   public void loadAnimeView() {
-    logger.logInfo("Loading Anime View");
     loadCinematicView("/cinematics/AnimeView.fxml");
   }
 
   @FXML
-  public void loadDataImporterView() throws IOException {
-    logger.logInfo("Loading Data Import View");
-    try {
-      var loader = new FXMLLoader(getClass().getResource("/dataimport/DataImporterView.fxml"));
-      Parent view = loader.load();
-      Stage stage = (Stage) mainContentPane.getScene().getWindow();
-      Scene newScene = new Scene(view);
-      stage.setScene(newScene);
-      logger.logInfo("Data Import View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Data Import View: " + e.getMessage());
-      throw e;
-    }
+  public void loadDataImporterView() {
+    viewLoaderService.loadView("/dataimport/DataImporterView.fxml", mainContentPane);
   }
 
   @FXML
-  public void loadDataExportView() throws IOException {
-    logger.logInfo("Loading Data Export View");
-    try {
-      var loader = new FXMLLoader(getClass().getResource("/dataexport/DataExportView.fxml"));
-      Parent view = loader.load();
-      Stage stage = (Stage) mainContentPane.getScene().getWindow();
-      Scene newScene = new Scene(view);
-      stage.setScene(newScene);
-      logger.logInfo("Data Export View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Data Export View: " + e.getMessage());
-      throw e;
-    }
+  public void loadDataExportView() {
+    viewLoaderService.loadView("/dataexport/DataExportView.fxml", mainContentPane);
   }
 
   @FXML
-  public void loadAddCinematicView() throws IOException {
-    logger.logInfo("Loading Add Media View");
-    try {
-      var loader = new FXMLLoader(getClass().getResource("/addcinematic/AddCinematicView.fxml"));
-      Parent view = loader.load();
-      Stage stage = (Stage) mainContentPane.getScene().getWindow();
-      Scene newScene = new Scene(view);
-      stage.setScene(newScene);
-      logger.logInfo("Add Media View successfully loaded");
-    } catch (IOException e) {
-      logger.logError("Error loading Add Media View: " + e.getMessage());
-      throw e;
-    }
+  public void loadAddCinematicView() {
+    viewLoaderService.loadView("/addcinematic/AddCinematicView.fxml", mainContentPane);
   }
 
   @FXML
   public void loadLoggerView() {
-    logger.logInfo("Loading Log View");
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/log/LogView.fxml"));
       Parent view = loader.load();
-      LogController logController = loader.getController();
-      logController.setLogs();
       updateMainContent(view);
       logger.logInfo("Log View successfully loaded");
     } catch (IOException e) {
-      logger.logError("Error loading Log View: " + e.getMessage());
-      handleLoadError(e);
+      handleLoadError("Log View", e);
     }
   }
 
   @FXML
   public void loadDashboardView() {
-    logger.logInfo("Loading Dashboard View");
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
       Parent view = loader.load();
@@ -119,8 +80,7 @@ public class SidebarController {
       updateMainContent(view);
       logger.logInfo("Dashboard View successfully loaded");
     } catch (IOException e) {
-      logger.logError("Error loading Dashboard View: " + e.getMessage());
-      handleLoadError(e);
+      handleLoadError("Dashboard View", e);
     }
   }
 
@@ -133,8 +93,7 @@ public class SidebarController {
       updateMainContent(view);
       logger.logInfo("Media View successfully loaded: " + viewPath);
     } catch (IOException e) {
-      logger.logError("Error loading Media View " + viewPath + ": " + e.getMessage());
-      handleLoadError(e);
+      handleLoadError("Media View " + viewPath, e);
     }
   }
 
@@ -144,7 +103,7 @@ public class SidebarController {
     stage.setScene(newScene);
   }
 
-  private void handleLoadError(Exception e) {
-    logger.logError("Critical error while loading view: " + e.getMessage());
+  private void handleLoadError(String viewName, Exception e) {
+    logger.logError("Error loading " + viewName + ": " + e.getMessage());
   }
 }
