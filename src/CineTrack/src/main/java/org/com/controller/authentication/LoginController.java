@@ -68,6 +68,8 @@ public class LoginController {
       currentUser.setCinematics(cinematics);
       DashboardModelSingleton.getInstance().setCinematics(cinematics);
 
+      // setDashbordmodell is missing
+
       viewLoaderService.loadView("/dashboard/DashboardView.fxml",
           (Stage) usernameField.getScene().getWindow());
     } catch (Exception e) {
