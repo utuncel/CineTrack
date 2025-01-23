@@ -21,36 +21,24 @@ public class LogController {
   @FXML
   private TableColumn<Log, String> messageColumn;
 
-  private LogModel logModel;
-
   @FXML
   public void initialize() {
-    this.logModel = LogService.getInstance().getLoggerModel();
+    initializeColumns();
+    loadUserLogs();
+  }
 
+  private void initializeColumns() {
     timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     levelColumn.setCellValueFactory(new PropertyValueFactory<>("level"));
     messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+  }
 
+  private void loadUserLogs() {
+    LogModel logModel = LogService.getInstance().getLoggerModel();
     if (logModel != null) {
       var logs = SessionManagerService.getInstance().getCurrentUser().getLogs();
-      logTableView.setItems(
-          FXCollections.observableArrayList(logs));
-    }
-  }
-  public void setController(LogModel logModel){
-    this.logModel = logModel;
-  }
-
-  public void setLogs() {
-    if (logTableView != null && logModel != null) {
-      logTableView.setItems(FXCollections.observableArrayList(
-          SessionManagerService.getInstance().getCurrentUser().getLogs()));
+      logTableView.setItems(FXCollections.observableArrayList(logs));
     }
   }
 
-  public void addLog(String level, String message) {
-    if (logModel != null) {
-      logModel.addLog(level, message);
-    }
-  }
 }
