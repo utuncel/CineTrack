@@ -6,7 +6,7 @@
 
 <StackPane xmlns="http://javafx.com/javafx"
   xmlns:fx="http://javafx.com/fxml"
-  fx:controller="org.com.controller.user.LoginController"
+  fx:controller="org.com.controller.authentication.LoginController"
   stylesheets="@RegisterStyle.css">
 
   <VBox spacing="15" alignment="CENTER">
