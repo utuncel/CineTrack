@@ -1,4 +1,4 @@
-package org.com.repository;
+package org.com.model.repository;
 
 import org.com.model.domain.User;
 import org.hibernate.Session;

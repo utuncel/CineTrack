@@ -1,7 +1,7 @@
 package junit;
 
 import org.com.model.domain.User;
-import org.com.repository.UserRepository;
+import org.com.model.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

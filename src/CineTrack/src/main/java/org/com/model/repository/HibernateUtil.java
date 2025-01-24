@@ -1,4 +1,4 @@
-package org.com.repository;
+package org.com.model.repository;
 
 import org.com.service.LogService;
 import org.hibernate.SessionFactory;

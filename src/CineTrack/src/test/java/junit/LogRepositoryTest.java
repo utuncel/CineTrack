@@ -2,8 +2,8 @@ package junit;
 
 import org.com.model.domain.Log;
 import org.com.model.domain.User;
-import org.com.repository.HibernateUtil;
-import org.com.repository.LogRepository;
+import org.com.model.repository.HibernateUtil;
+import org.com.model.repository.LogRepository;
 import org.hibernate.SessionFactory;
 import org.junit.jupiter.api.*;
 

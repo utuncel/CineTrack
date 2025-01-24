@@ -1,4 +1,4 @@
-package org.com.repository;
+package org.com.model.repository;
 
 import java.util.List;
 import org.com.model.domain.Log;

@@ -1,8 +1,8 @@
 package org.com.controller.authentication;
 
 import org.com.model.domain.User;
-import org.com.repository.HibernateUtil;
-import org.com.repository.UserRepository;
+import org.com.model.repository.HibernateUtil;
+import org.com.model.repository.UserRepository;
 import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 
