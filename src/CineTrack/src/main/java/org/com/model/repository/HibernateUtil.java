@@ -23,7 +23,7 @@ public class HibernateUtil {
 
       return new Configuration()
           .configure(
-              HibernateUtil.class.getClassLoader().getResource("persistence/hibernate.cfg.xml"))
+              HibernateUtil.class.getClassLoader().getResource("repository/hibernate.cfg.xml"))
           .setProperty("hibernate.connection.password", dbPassword)
           .buildSessionFactory();
     } catch (Exception e) {
