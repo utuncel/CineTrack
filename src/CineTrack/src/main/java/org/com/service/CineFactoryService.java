@@ -3,8 +3,8 @@ package org.com.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import org.com.model.domain.Cinematic;
 import org.com.model.domain.ApiCinematic;
+import org.com.model.domain.Cinematic;
 import org.com.model.domain.CsvCinematic;
 import org.com.model.domain.User;
 
@@ -15,7 +15,8 @@ public class CineFactoryService {
   private CsvImporterService csvImporterService;
   private User user;
 
-  public CineFactoryService(CsvImporterService csvImporterService, ApiService apiService, User user) {
+  public CineFactoryService(CsvImporterService csvImporterService, ApiService apiService,
+      User user) {
     this.csvImporterService = csvImporterService;
     this.apiService = apiService;
     this.user = user;

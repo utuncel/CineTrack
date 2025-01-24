@@ -1,13 +1,12 @@
 package org.com.repository;
 
+import java.util.List;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.User;
 import org.hibernate.HibernateError;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-
-import java.util.List;
 
 public class CinematicRepository {
 

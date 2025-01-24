@@ -5,8 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.com.model.domain.Cinematic;
 
 public class CinematicBoxController {
@@ -45,15 +45,18 @@ public class CinematicBoxController {
   }
 
   private void toggleOverlayVisibility(boolean isVisible) {
-    if (descriptionArea != null)
+    if (descriptionArea != null) {
       descriptionArea.setVisible(isVisible);
-    if (hoverOverlay != null)
+    }
+    if (hoverOverlay != null) {
       hoverOverlay.setVisible(isVisible);
+    }
   }
 
   public void setCinematicView(Cinematic cinematic) {
-    if (cinematic == null)
+    if (cinematic == null) {
       return;
+    }
 
     updatePoster(cinematic);
     updateLabels(cinematic);

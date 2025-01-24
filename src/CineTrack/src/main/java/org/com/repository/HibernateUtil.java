@@ -6,12 +6,11 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-  private HibernateUtil(){
-  }
-
   private static final LogService logger = LogService.getInstance();
-
   private static final SessionFactory sessionFactory = buildSessionFactory();
+
+  private HibernateUtil() {
+  }
 
   private static SessionFactory buildSessionFactory() {
     try {

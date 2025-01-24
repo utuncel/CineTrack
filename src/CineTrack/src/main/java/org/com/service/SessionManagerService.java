@@ -14,6 +14,14 @@ public class SessionManagerService {
     return SessionHolder.INSTANCE;
   }
 
+  public User getCurrentUser() {
+    if (currentUser == null) {
+      logger.logWarning("Attempt to get user from empty session");
+      throw new IllegalStateException("No user currently logged in");
+    }
+    return currentUser;
+  }
+
   public void setCurrentUser(User user) {
     if (user == null) {
       logger.logWarning("Attempt to set null user in session");
@@ -21,14 +29,6 @@ public class SessionManagerService {
     }
     this.currentUser = user;
     logger.logInfo("User session started: " + user.getName());
-  }
-
-  public User getCurrentUser() {
-    if (currentUser == null) {
-      logger.logWarning("Attempt to get user from empty session");
-      throw new IllegalStateException("No user currently logged in");
-    }
-    return currentUser;
   }
 
   private static final class SessionHolder {
