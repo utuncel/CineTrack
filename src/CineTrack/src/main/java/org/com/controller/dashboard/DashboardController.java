@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
+import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -30,22 +31,36 @@ public class DashboardController {
   private final Map<State, CheckBox> stateCheckBoxMap = new EnumMap<>(State.class);
   private final Map<StatisticStrategy, CheckBox> strategyCheckBoxMap = new EnumMap<>(
       StatisticStrategy.class);
-
-  public CheckBox movieCheckBox;
-  public CheckBox animeCheckBox;
-  public CheckBox seriesCheckBox;
-  public CheckBox averageRatingCheckBox;
-  public CheckBox actorRatingCheckBox;
-  public CheckBox genreRatingCheckBox;
-  public CheckBox genreCountCheckBox;
-  public CheckBox typeCountCheckBox;
-  public CheckBox stateCountCheckBox;
-  public CheckBox toWatchCheckBox;
-  public CheckBox droppedCheckBox;
-  public CheckBox finishedCheckBox;
-  public CheckBox watchingCheckBox;
-  public VBox chartContainer;
-  public StackPane contentPane;
+  @FXML
+  private CheckBox movieCheckBox;
+  @FXML
+  private CheckBox animeCheckBox;
+  @FXML
+  private CheckBox seriesCheckBox;
+  @FXML
+  private CheckBox averageRatingCheckBox;
+  @FXML
+  private CheckBox actorRatingCheckBox;
+  @FXML
+  private CheckBox genreRatingCheckBox;
+  @FXML
+  private CheckBox genreCountCheckBox;
+  @FXML
+  private CheckBox typeCountCheckBox;
+  @FXML
+  private CheckBox stateCountCheckBox;
+  @FXML
+  private CheckBox toWatchCheckBox;
+  @FXML
+  private CheckBox droppedCheckBox;
+  @FXML
+  private CheckBox finishedCheckBox;
+  @FXML
+  private CheckBox watchingCheckBox;
+  @FXML
+  private VBox chartContainer;
+  @FXML
+  private StackPane contentPane;
 
   private DashboardModel dashboardModel;
 
