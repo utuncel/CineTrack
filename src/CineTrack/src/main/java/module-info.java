@@ -26,7 +26,6 @@ open module CineTrack {
   exports org.com.model.domain.statistics;
   exports org.com.model.records;
   exports org.com.model.enums;
-  exports org.com.controller;
   exports org.com.controller.cinematics.helper;
   exports org.com.controller.dataimport to javafx.fxml;
   exports org.com.controller.addcinematic to javafx.fxml;
@@ -34,4 +33,5 @@ open module CineTrack {
   exports org.com.controller.authentication;
   exports org.com.model.models;
   exports org.com.service;
+  exports org.com.controller.sidebar;
 }

@@ -1,4 +1,4 @@
-package org.com.controller;
+package org.com.controller.sidebar;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
