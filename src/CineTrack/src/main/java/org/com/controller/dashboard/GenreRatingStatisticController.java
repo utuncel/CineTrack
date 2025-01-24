@@ -14,18 +14,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.model.domain.Cinematic;
+import org.com.model.domain.statistics.GenreRatingsStrategy;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.domain.statistics.GenreRatingsStrategy;
+import org.com.service.LogService;
 
 public class GenreRatingStatisticController {
 
+  private final LogService logger = LogService.getInstance();
   @FXML
   private BarChart<String, Number> genreRatingBarChart;
-
   @FXML
   private TextField minRatingInput;
-
   @FXML
   private CategoryAxis xAxis;
 
@@ -77,15 +77,17 @@ public class GenreRatingStatisticController {
 
     double minRating = 0;
     try {
-      minRating = minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
+      minRating =
+          minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
     } catch (NumberFormatException e) {
+      logger.logError("Error parsing minRating: " + e.getMessage());
     }
 
     XYChart.Series<String, Number> myRatingSeries = new XYChart.Series<>();
     myRatingSeries.setName("My Rating");
 
     XYChart.Series<String, Number> otherRatingSeries = new XYChart.Series<>();
-    otherRatingSeries.setName("Imdb Rating");
+    otherRatingSeries.setName("IMDb Rating");
 
     List<String> categories = new ArrayList<>();
 
@@ -107,9 +109,15 @@ public class GenreRatingStatisticController {
     xAxis.setCategories(FXCollections.observableArrayList(categories));
 
     genreRatingBarChart.getData().clear();
-    genreRatingBarChart.getData().addAll(myRatingSeries, otherRatingSeries);
+
+    List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
+    seriesList.add(myRatingSeries);
+    seriesList.add(otherRatingSeries);
+
+    genreRatingBarChart.getData().addAll(seriesList);
 
     genreRatingBarChart.setCategoryGap(10);
     genreRatingBarChart.setBarGap(1);
   }
+
 }

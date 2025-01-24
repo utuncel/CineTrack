@@ -14,22 +14,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.model.domain.Cinematic;
+import org.com.model.domain.statistics.ActorRatingsStrategy;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.domain.statistics.ActorRatingsStrategy;
+import org.com.service.LogService;
 
 public class ActorRatingStatisticController {
 
+  private final LogService logger = LogService.getInstance();
   @FXML
   private BarChart<String, Number> actorRatingBarChart;
-
   @FXML
   private TextField minRatingInput;
-
   @FXML
   private CategoryAxis xAxis;
-
   private VBox chartContainer;
+
 
   public ActorRatingStatisticController() {
   }
@@ -51,7 +51,6 @@ public class ActorRatingStatisticController {
     ActorRatingStatisticController controller = loader.getController();
     controller.setChartContainer(this.chartContainer);
 
-    // Direkt initialisieren
     controller.initializeChart(cinematics, types, states);
 
     if (chartContainer != null) {
@@ -72,7 +71,6 @@ public class ActorRatingStatisticController {
     });
   }
 
-
   private void updateChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     ActorRatingsStrategy actorRatingStrategy = new ActorRatingsStrategy();
     Map<String, List<Double>> actorRatingData = actorRatingStrategy.calculate(cinematics, types,
@@ -80,15 +78,17 @@ public class ActorRatingStatisticController {
 
     double minRating = 0;
     try {
-      minRating = minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
+      minRating =
+          minRatingInput.getText().isEmpty() ? 0.0 : Double.parseDouble(minRatingInput.getText());
     } catch (NumberFormatException e) {
+      logger.logError("minRating got an error");
     }
 
     XYChart.Series<String, Number> myRatingSeries = new XYChart.Series<>();
     myRatingSeries.setName("My Rating");
 
     XYChart.Series<String, Number> imdbRatingSeries = new XYChart.Series<>();
-    imdbRatingSeries.setName("Imdb Rating");
+    imdbRatingSeries.setName("IMDb Rating");
 
     List<String> categories = new ArrayList<>();
 
@@ -97,22 +97,28 @@ public class ActorRatingStatisticController {
         .filter(entry -> entry.getValue().getFirst() >= finalMinRating
             || entry.getValue().get(1) >= finalMinRating)
         .forEach(entry -> {
-          String genre = entry.getKey();
+          String actor = entry.getKey();
           Double myRating = entry.getValue().get(0);
           Double otherRating = entry.getValue().get(1);
 
-          myRatingSeries.getData().add(new XYChart.Data<>(genre, myRating));
-          imdbRatingSeries.getData().add(new XYChart.Data<>(genre, otherRating));
-          categories.add(genre);
+          myRatingSeries.getData().add(new XYChart.Data<>(actor, myRating));
+          imdbRatingSeries.getData().add(new XYChart.Data<>(actor, otherRating));
+          categories.add(actor);
         });
 
     xAxis.getCategories().clear();
     xAxis.setCategories(FXCollections.observableArrayList(categories));
 
     actorRatingBarChart.getData().clear();
-    actorRatingBarChart.getData().addAll(myRatingSeries, imdbRatingSeries);
+
+    List<XYChart.Series<String, Number>> seriesList = new ArrayList<>();
+    seriesList.add(myRatingSeries);
+    seriesList.add(imdbRatingSeries);
+
+    actorRatingBarChart.getData().addAll(seriesList);
 
     actorRatingBarChart.setCategoryGap(10);
     actorRatingBarChart.setBarGap(1);
   }
+
 }

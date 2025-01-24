@@ -14,22 +14,22 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.model.domain.Cinematic;
+import org.com.model.domain.statistics.GenreCountStrategy;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
-import org.com.model.domain.statistics.GenreCountStrategy;
+import org.com.service.LogService;
 
 public class GenreCountStatisticController {
 
+  private final LogService logger = LogService.getInstance();
   @FXML
   private BarChart<String, Number> genreBarChart;
-
   @FXML
   private TextField minGenreCountInput;
-
   @FXML
   private CategoryAxis xAxis;
-
   private VBox chartContainer;
+
 
   public GenreCountStatisticController() {
   }
@@ -76,8 +76,10 @@ public class GenreCountStatisticController {
 
     int minCount = 0;
     try {
-      minCount = minGenreCountInput.getText().isEmpty() ? 0 : Integer.parseInt(minGenreCountInput.getText());
+      minCount = minGenreCountInput.getText().isEmpty() ? 0
+          : Integer.parseInt(minGenreCountInput.getText());
     } catch (NumberFormatException e) {
+      logger.logError("minRating got an error");
     }
 
     XYChart.Series<String, Number> series = new XYChart.Series<>();

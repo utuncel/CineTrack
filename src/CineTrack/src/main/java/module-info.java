@@ -33,4 +33,5 @@ open module CineTrack {
   exports org.com.controller.log to javafx.fxml;
   exports org.com.controller.authentication;
   exports org.com.model.models;
+  exports org.com.service;
 }

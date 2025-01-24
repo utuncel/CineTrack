@@ -8,10 +8,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import org.com.model.domain.Cinematic;
+import org.com.model.domain.statistics.StateCountStrategy;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
 import org.com.model.records.StateCount;
-import org.com.model.domain.statistics.StateCountStrategy;
 
 public class StateCountStatisticController {
 
