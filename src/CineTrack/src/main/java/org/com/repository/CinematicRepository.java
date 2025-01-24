@@ -61,12 +61,13 @@ public class CinematicRepository {
 
   public void deleteAllCinematicsByUser(User user) {
     executeWithinTransaction(session -> {
-      session.createQuery("DELETE FROM Cinematic c WHERE c.user = :user")
+      session.createMutationQuery("DELETE FROM Cinematic c WHERE c.user = :user")
           .setParameter("user", user)
           .executeUpdate();
       return null;
     }, "Failed to delete cinematics for the user");
   }
+
 
   private <T> T executeWithinTransaction(DatabaseOperation<T> operation, String errorMessage) {
     Transaction transaction = null;
