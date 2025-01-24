@@ -6,7 +6,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.User;
 import org.com.model.repository.CinematicRepository;
@@ -64,14 +63,7 @@ public class LoginController {
 
   private void prepareDashboardView(List<Cinematic> cinematics) {
     try {
-      User currentUser = sessionManager.getCurrentUser();
-      currentUser.setCinematics(cinematics);
-      DashboardModelSingleton.getInstance().setCinematics(cinematics);
-
-      // setDashbordmodell is missing
-
-      viewLoaderService.loadView("/dashboard/DashboardView.fxml",
-          (Stage) usernameField.getScene().getWindow());
+      viewLoaderService.loadDashboardView(cinematics, usernameField);
     } catch (Exception e) {
       dialogService.showErrorAlert("Navigation Error", "Could not load DashboardView");
     }
