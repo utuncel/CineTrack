@@ -7,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.com.model.domain.CsvCinematic;
 
+/**
+ * Service for importing and parsing CSV files containing cinematic data. Handles reading,
+ * validation, and conversion of CSV lines to CsvCinematic objects.
+ *
+ * @author Umut
+ * @version 1.0
+ */
 public class CsvImporterService {
 
   private static final String CSV_DELIMITER = ",";
@@ -16,11 +23,22 @@ public class CsvImporterService {
   private final LogService logger = LogService.getInstance();
   private int lineNumber = 2; // 2 because we read the header and first time in the while loop
 
+  /**
+   * Constructs a CsvImporterService with specified file path.
+   *
+   * @param filePath Path to the CSV file to be imported
+   */
   public CsvImporterService(String filePath) {
     this.filePath = filePath;
     this.parser = new CsvParserService(lineNumber);
   }
 
+  /**
+   * Imports cinematic data from CSV file, parsing and validating each line.
+   *
+   * @return List of CsvCinematic objects parsed from the file
+   * @throws IOException If error occurs during file reading or parsing
+   */
   public List<CsvCinematic> importData() throws IOException {
     List<CsvCinematic> cinematics = new ArrayList<>();
 
@@ -43,6 +61,11 @@ public class CsvImporterService {
     return cinematics;
   }
 
+  /**
+   * Validates the CSV file header for correct structure and column names.
+   *
+   * @param header Header line from the CSV file
+   */
   private void validateHeader(String header) {
     if (header == null || !validator.isValidHeaderLength(header)) {
       logger.logError("Invalid CSV Header: Must contain exactly 4 columns.");
@@ -53,6 +76,12 @@ public class CsvImporterService {
     }
   }
 
+  /**
+   * Creates a CsvCinematic object from a single CSV line.
+   *
+   * @param columns Array of column values from a CSV line
+   * @return CsvCinematic object created from the line
+   */
   private CsvCinematic createCinematicFromCsvLine(String[] columns) {
     if (!validator.isValidRecord(columns)) {
       logger.logError("CSV line is invalid at line: " + lineNumber);
