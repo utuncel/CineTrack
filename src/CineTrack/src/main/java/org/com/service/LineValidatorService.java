@@ -1,5 +1,12 @@
 package org.com.service;
 
+/**
+ * Service for validating CSV file headers and records. Ensures CSV data meets specific structural
+ * and content requirements.
+ *
+ * @author Umut
+ * @version 1.0
+ */
 public class LineValidatorService {
 
   private static final int HEADER_COLUMNS = 4;
@@ -7,6 +14,12 @@ public class LineValidatorService {
   private static final int MAX_COLUMNS = 4;
   private final LogService logger = LogService.getInstance();
 
+  /**
+   * Validates the length of the CSV header.
+   *
+   * @param header Header line from CSV file
+   * @return true if header has correct number of columns, false otherwise
+   */
   public boolean isValidHeaderLength(String header) {
     String[] columns = header.split(",");
     if (columns.length != HEADER_COLUMNS) {
@@ -16,6 +29,12 @@ public class LineValidatorService {
     return true;
   }
 
+  /**
+   * Checks if CSV header contains correct column names.
+   *
+   * @param header Header line from CSV file
+   * @return true if header column names are correct, false otherwise
+   */
   public boolean isValidHeader(String header) {
     String[] columns = header.split(",");
     boolean isValid = "Title".equalsIgnoreCase(columns[0]) && "Type".equalsIgnoreCase(columns[1])
@@ -27,6 +46,12 @@ public class LineValidatorService {
     return isValid;
   }
 
+  /**
+   * Validates a CSV record for correct structure and non-blank required fields.
+   *
+   * @param columns Array of column values from a CSV line
+   * @return true if record is valid, false otherwise
+   */
   public boolean isValidRecord(String[] columns) {
     int size = columns.length;
 
