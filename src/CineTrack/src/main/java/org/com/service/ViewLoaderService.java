@@ -13,14 +13,32 @@ import org.com.controller.dashboard.DashboardController;
 import org.com.controller.dashboard.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 
+/**
+ * Service for loading and managing JavaFX views and scenes. Handles view transitions and scene
+ * setup for different application stages.
+ *
+ * @author Umut
+ * @version 1.0
+ */
 public class ViewLoaderService {
 
   private final LogService logger;
 
+  /**
+   * Constructs ViewLoaderService with a logging service.
+   *
+   * @param logger LogService for tracking view loading events
+   */
   public ViewLoaderService(LogService logger) {
     this.logger = logger;
   }
 
+  /**
+   * Loads a view into a BorderPane and updates the current stage's scene.
+   *
+   * @param viewPath        Path to the FXML view resource
+   * @param mainContentPane BorderPane to be replaced
+   */
   public void loadView(String viewPath, BorderPane mainContentPane) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
@@ -34,6 +52,12 @@ public class ViewLoaderService {
     }
   }
 
+  /**
+   * Loads the dashboard view with cinematics and updates the current stage.
+   *
+   * @param cinematics    List of cinematics to be displayed
+   * @param usernameField TextField used to access the current stage
+   */
   public void loadDashboardView(List<Cinematic> cinematics, TextField usernameField) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
@@ -56,6 +80,12 @@ public class ViewLoaderService {
     }
   }
 
+  /**
+   * Loads a view into a specified stage.
+   *
+   * @param viewPath Path to the FXML view resource
+   * @param stage    Stage to load the view into
+   */
   public void loadView(String viewPath, Stage stage) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
