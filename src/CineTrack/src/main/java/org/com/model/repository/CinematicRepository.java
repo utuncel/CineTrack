@@ -3,19 +3,33 @@ package org.com.model.repository;
 import java.util.List;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.User;
-import org.hibernate.HibernateError;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
-public class CinematicRepository {
+/**
+ * Repository for cinematic-related database operations using Hibernate. Handles persistence,
+ * retrieval, and deletion of cinematics for users.
+ *
+ * @author Umut
+ * @version 1.0
+ */
+public class CinematicRepository extends AbstractRepository {
 
-  private final SessionFactory sessionFactory;
-
+  /**
+   * Constructs CinematicRepository with a Hibernate SessionFactory.
+   *
+   * @param sessionFactory Hibernate SessionFactory for database connections
+   */
   public CinematicRepository(SessionFactory sessionFactory) {
-    this.sessionFactory = sessionFactory;
+    super(sessionFactory);
   }
 
+  /**
+   * Saves a single cinematic, associating it with a user.
+   *
+   * @param cinematic Cinematic to be saved
+   * @param user      User to associate with the cinematic
+   * @throws IllegalArgumentException If cinematic is null
+   */
   public void saveCinematic(Cinematic cinematic, User user) {
     if (cinematic == null) {
       throw new IllegalArgumentException("Cinematic cannot be null.");
@@ -23,14 +37,20 @@ public class CinematicRepository {
 
     executeWithinTransaction(session -> {
       if (cinematic.getUser() == null) {
-        cinematic.setUser(user);  // Associate cinematic with the user if not already set
+        cinematic.setUser(user);
       }
       session.persist(cinematic);
       return null;
     }, "Failed to save the cinematic");
   }
 
-
+  /**
+   * Saves multiple cinematics, associating them with a user.
+   *
+   * @param cinematics List of cinematics to be saved
+   * @param user       User to associate with the cinematics
+   * @throws IllegalArgumentException If cinematics list is null or empty
+   */
   public void saveCinematics(List<Cinematic> cinematics, User user) {
     if (cinematics == null || cinematics.isEmpty()) {
       throw new IllegalArgumentException("The list of cinematics cannot be empty.");
@@ -39,7 +59,7 @@ public class CinematicRepository {
     executeWithinTransaction(session -> {
       for (Cinematic cinematic : cinematics) {
         if (cinematic.getUser() == null) {
-          cinematic.setUser(user);  // Associate cinematic with the user if not already set
+          cinematic.setUser(user);
         }
         session.persist(cinematic);
       }
@@ -47,6 +67,12 @@ public class CinematicRepository {
     }, "Failed to save the cinematics list");
   }
 
+  /**
+   * Retrieves all cinematics for a specific user with related actors and genres.
+   *
+   * @param user User whose cinematics are to be retrieved
+   * @return List of cinematics for the user
+   */
   public List<Cinematic> getAllCinematicsByUser(User user) {
     return executeWithinTransaction(session ->
             session.createQuery(
@@ -59,6 +85,11 @@ public class CinematicRepository {
         "Failed to fetch cinematics for the user");
   }
 
+  /**
+   * Deletes all cinematics associated with a specific user.
+   *
+   * @param user User whose cinematics are to be deleted
+   */
   public void deleteAllCinematicsByUser(User user) {
     executeWithinTransaction(session -> {
       session.createMutationQuery("DELETE FROM Cinematic c WHERE c.user = :user")
@@ -66,27 +97,5 @@ public class CinematicRepository {
           .executeUpdate();
       return null;
     }, "Failed to delete cinematics for the user");
-  }
-
-
-  private <T> T executeWithinTransaction(DatabaseOperation<T> operation, String errorMessage) {
-    Transaction transaction = null;
-    try (Session session = sessionFactory.getCurrentSession()) {
-      transaction = session.beginTransaction();
-      T result = operation.execute(session);
-      transaction.commit();
-      return result;
-    } catch (Exception e) {
-      if (transaction != null) {
-        transaction.rollback();
-      }
-      throw new HibernateError(errorMessage, e);
-    }
-  }
-
-  @FunctionalInterface
-  private interface DatabaseOperation<T> {
-
-    T execute(Session session);
   }
 }

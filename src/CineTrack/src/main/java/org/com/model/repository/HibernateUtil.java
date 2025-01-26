@@ -4,14 +4,33 @@ import org.com.service.LogService;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+/**
+ * Utility class for creating and managing Hibernate SessionFactory.
+ * <p>
+ * Provides a singleton SessionFactory configured from a hibernate configuration file and uses an
+ * environment variable for database password.
+ *
+ * @author Umut
+ * @version 1.0
+ */
 public class HibernateUtil {
 
   private static final LogService logger = LogService.getInstance();
   private static final SessionFactory sessionFactory = buildSessionFactory();
 
+  /**
+   * Private constructor to prevent instantiation.
+   */
   private HibernateUtil() {
   }
 
+  /**
+   * Builds a SessionFactory using Hibernate configuration.
+   *
+   * @return Configured SessionFactory
+   * @throws IllegalArgumentException    if database password is not set
+   * @throws ExceptionInInitializerError if SessionFactory creation fails
+   */
   private static SessionFactory buildSessionFactory() {
     try {
       String dbPassword = System.getenv("CT_DB_PASSWORD");
@@ -32,6 +51,11 @@ public class HibernateUtil {
     }
   }
 
+  /**
+   * Retrieves the singleton SessionFactory.
+   *
+   * @return the configured SessionFactory
+   */
   public static SessionFactory getSessionFactory() {
     return sessionFactory;
   }
