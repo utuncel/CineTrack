@@ -6,8 +6,21 @@ import org.com.model.enums.State;
 import org.com.model.enums.Type;
 import org.com.model.records.TypeCount;
 
+/**
+ * A strategy for calculating the count of cinematics by their type (Movie, Series, Anime).
+ * Implements the {@link StatisticStrategy} interface for the {@link TypeCount} result type.
+ */
 public class TypeCountStrategy implements StatisticStrategy<TypeCount> {
 
+  /**
+   * Calculates the count of cinematics by their type (Movie, Series, Anime) based on the provided
+   * filters for types and states.
+   *
+   * @param cinematics The list of all cinematics to evaluate.
+   * @param types      The types to include in the calculation (e.g., Movie, Series, Anime).
+   * @param states     The states to include in the calculation (e.g., Watched, ToWatch, Dropped).
+   * @return A {@link TypeCount} object containing the counts of movies, series, and anime.
+   */
   @Override
   public TypeCount calculate(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     int movie = 0;
