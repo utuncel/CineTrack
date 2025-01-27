@@ -18,6 +18,15 @@ import org.com.model.domain.Cinematic;
 import org.com.model.enums.Type;
 import org.com.service.LogService;
 
+/**
+ * Controller for managing the listing of Cinematic objects in a grid format. This controller
+ * handles the sorting, filtering, and search functionality for displaying Cinematic items based on
+ * their type and user preferences. It also manages the caching of views for each Cinematic to
+ * optimize performance. A single instance you can see here {@link CinematicBoxController}.
+ *
+ * @author umut
+ * @version 1.0
+ */
 public class CinematicBoxListingController {
 
   private static final int PREFERRED_COLUMNS = 3;
@@ -36,6 +45,10 @@ public class CinematicBoxListingController {
   private List<Cinematic> currentCinematics;
   private Type currentType;
 
+  /**
+   * Initializes the controller, configuring the UI components such as the Cinematic container, the
+   * sort combo box, and the search field listener.
+   */
   @FXML
   public void initialize() {
     configureCinematicsContainer();
@@ -43,12 +56,18 @@ public class CinematicBoxListingController {
     configureSearchListener();
   }
 
+  /**
+   * Configures the cinematics container to have a fixed number of columns and defined gaps.
+   */
   private void configureCinematicsContainer() {
     cinematicsContainer.setPrefColumns(PREFERRED_COLUMNS);
     cinematicsContainer.setHgap(GAP);
     cinematicsContainer.setVgap(GAP);
   }
 
+  /**
+   * Configures the sort combo box with available sorting options and sets the default value.
+   */
   private void configureSortComboBox() {
     sortComboBox.setItems(FXCollections.observableArrayList(SortOption.values()));
     sortComboBox.setValue(SortOption.STANDARD);
@@ -56,11 +75,22 @@ public class CinematicBoxListingController {
         .addListener((observable, oldValue, newValue) -> filterAndSortCinematics());
   }
 
+  /**
+   * Sets up a listener for changes in the search field to filter and sort the Cinematic list
+   * dynamically.
+   */
   private void configureSearchListener() {
     searchField.textProperty()
         .addListener((observable, oldValue, newValue) -> filterAndSortCinematics());
   }
 
+  /**
+   * Sets the list of Cinematics and their type to be displayed, caches their views, and triggers
+   * filtering and sorting.
+   *
+   * @param cinematics The list of Cinematics to display.
+   * @param type       The type of Cinematics (e.g., MOVIE, SERIES, etc.).
+   */
   public void setCinematics(List<Cinematic> cinematics, Type type) {
     clearCacheIfTypeChanged(type);
 
@@ -71,18 +101,33 @@ public class CinematicBoxListingController {
     filterAndSortCinematics();
   }
 
+  /**
+   * Clears the view cache if the Cinematic type has changed.
+   *
+   * @param type The new Cinematic type.
+   */
   private void clearCacheIfTypeChanged(Type type) {
     if (this.currentType != type) {
       viewCache.clear();
     }
   }
 
+  /**
+   * Caches the views for each Cinematic object by loading and storing them in a map.
+   *
+   * @param cinematics The list of Cinematics to cache views for.
+   */
   private void cacheMovieViews(List<Cinematic> cinematics) {
     cinematics.stream()
         .filter(cinematic -> !viewCache.containsKey(cinematic))
         .forEach(this::createAndCacheView);
   }
 
+  /**
+   * Creates and caches a view for a Cinematic object.
+   *
+   * @param cinematic The Cinematic object for which to create a view.
+   */
   private void createAndCacheView(Cinematic cinematic) {
     try {
       FXMLLoader loader = new FXMLLoader(
@@ -97,6 +142,10 @@ public class CinematicBoxListingController {
     }
   }
 
+  /**
+   * Filters and sorts the list of Cinematics based on the selected search term and sorting option,
+   * and updates the display.
+   */
   private void filterAndSortCinematics() {
     List<Cinematic> filteredCinematics = currentCinematics.stream()
         .filter(createTypeFilter())
@@ -107,15 +156,30 @@ public class CinematicBoxListingController {
     updateCinematicBoxes(filteredCinematics);
   }
 
+  /**
+   * Creates a filter to match Cinematics of the current type.
+   *
+   * @return A predicate for filtering Cinematics by type.
+   */
   private Predicate<Cinematic> createTypeFilter() {
     return c -> c.getType() == currentType;
   }
 
+  /**
+   * Creates a filter to match Cinematics based on the search text.
+   *
+   * @return A predicate for filtering Cinematics by search text.
+   */
   private Predicate<Cinematic> createSearchFilter() {
     return c -> searchField.getText().isEmpty() ||
         c.getTitle().toLowerCase().contains(searchField.getText().toLowerCase());
   }
 
+  /**
+   * Creates a comparator based on the selected sorting option.
+   *
+   * @return A comparator for sorting Cinematics.
+   */
   private Comparator<Cinematic> createComparator() {
     return switch (sortComboBox.getValue()) {
       case MY_RATING_HIGHEST -> Comparator.comparing(Cinematic::getMyRating).reversed();
@@ -128,6 +192,11 @@ public class CinematicBoxListingController {
     };
   }
 
+  /**
+   * Updates the display of Cinematic views in the container.
+   *
+   * @param cinematics The list of Cinematics to display.
+   */
   private void updateCinematicBoxes(List<Cinematic> cinematics) {
     cinematicsContainer.getChildren().clear();
     cinematics.stream()
@@ -136,7 +205,10 @@ public class CinematicBoxListingController {
         .forEach(viewHolder -> cinematicsContainer.getChildren().add(viewHolder.view()));
   }
 
-  // Enum for sorting options to improve type safety and readability
+  /**
+   * Enum representing the sorting options for Cinematics. Provides a user-friendly string
+   * representation for each sorting option.
+   */
   private enum SortOption {
     STANDARD("Standard"),
     MY_RATING_HIGHEST("MyRating (Highest first)"),
@@ -158,6 +230,10 @@ public class CinematicBoxListingController {
     }
   }
 
+  /**
+   * A simple container to hold a Cinematic view and its associated controller. This is used to
+   * cache the views for Cinematics to optimize performance.
+   */
   private record CinematicViewHolder(StackPane view, CinematicBoxController controller) {
 
   }
