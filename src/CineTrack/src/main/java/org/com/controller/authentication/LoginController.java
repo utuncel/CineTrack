@@ -15,6 +15,21 @@ import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 import org.com.service.ViewLoaderService;
 
+/**
+ * Controller for handling the login functionality in the application. Provides methods for user
+ * authentication and navigation between login and registration views. Handles loading the user's
+ * cinematics data upon successful login and navigating to the dashboard view.
+ * <p>
+ * This class interacts with the {@link AuthenticationController}, {@link CinematicRepository}, and
+ * several services such as {@link DialogService}, {@link LogService},
+ * {@link SessionManagerService}, and {@link ViewLoaderService}.
+ *
+ * @author umut
+ * @version 1.0
+ * @see AuthenticationController
+ * @see CinematicRepository
+ * @see ViewLoaderService
+ */
 public class LoginController {
 
   private final AuthenticationController authenticationController;
@@ -29,6 +44,10 @@ public class LoginController {
   @FXML
   private Button loginButton;
 
+  /**
+   * Constructs a {@code LoginController} and initializes required dependencies for authentication,
+   * cinematic data access, view loading, and dialog handling.
+   */
   public LoginController() {
     this.authenticationController = new AuthenticationController();
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
@@ -37,6 +56,10 @@ public class LoginController {
     this.sessionManager = SessionManagerService.getInstance();
   }
 
+  /**
+   * Handles the login action. Authenticates the user and loads the dashboard view with the user's
+   * cinematics if the login is successful. Displays an error dialog otherwise.
+   */
   @FXML
   private void handleLogin() {
     String username = usernameField.getText();
@@ -51,6 +74,9 @@ public class LoginController {
     }
   }
 
+  /**
+   * Navigates the user to the registration view. Displays an error dialog if navigation fails.
+   */
   @FXML
   private void switchToRegister() {
     try {
@@ -61,6 +87,12 @@ public class LoginController {
     }
   }
 
+  /**
+   * Prepares and navigates the user to the dashboard view with the provided cinematics. Displays an
+   * error dialog if navigation fails.
+   *
+   * @param cinematics A list of {@link Cinematic} objects associated with the logged-in user.
+   */
   private void prepareDashboardView(List<Cinematic> cinematics) {
     try {
       viewLoaderService.loadDashboardView(cinematics, usernameField);

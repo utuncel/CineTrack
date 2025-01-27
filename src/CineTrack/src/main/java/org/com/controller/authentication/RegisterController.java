@@ -10,6 +10,22 @@ import org.com.service.DialogService;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
 
+/**
+ * Controller class responsible for handling user registration in the application. This class
+ * manages the registration process and navigation between the registration and login views.
+ *
+ * <p>Dependencies include:
+ * <ul>
+ *   <li>{@link AuthenticationController} for handling authentication logic.</li>
+ *   <li>{@link ViewLoaderService} for managing view transitions.</li>
+ *   <li>{@link DialogService} for displaying alerts and error messages.</li>
+ *   <li>{@link LogService} for logging application events.</li>
+ * </ul>
+ * </p>
+ *
+ * @author umut
+ * @version 1.0
+ */
 public class RegisterController {
 
   private final AuthenticationController authenticationController;
@@ -23,6 +39,10 @@ public class RegisterController {
   @FXML
   private Button registerButton;
 
+  /**
+   * Constructs a {@code RegisterController} and initializes required services for registration,
+   * navigation, and logging.
+   */
   public RegisterController() {
     this.authenticationController = new AuthenticationController();
     this.viewLoader = new ViewLoaderService(LogService.getInstance());
@@ -30,6 +50,13 @@ public class RegisterController {
     this.logger = LogService.getInstance();
   }
 
+  /**
+   * Handles the user registration process when the register button is clicked. Validates the input,
+   * attempts to register the user, and displays appropriate success or error messages. If
+   * registration is successful, navigates to the login view.
+   *
+   * @param event the {@link ActionEvent} triggered by the register button.
+   */
   @FXML
   private void handleRegistration(ActionEvent event) {
     String username = usernameField.getText();
@@ -49,6 +76,12 @@ public class RegisterController {
     }
   }
 
+  /**
+   * Navigates the user to the login view when the login switch button is clicked. Displays an error
+   * dialog if the navigation fails.
+   *
+   * @param event the {@link ActionEvent} triggered by the navigation request.
+   */
   @FXML
   private void switchToLogin(ActionEvent event) {
     try {
