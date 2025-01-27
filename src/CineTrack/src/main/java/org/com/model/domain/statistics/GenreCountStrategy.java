@@ -12,6 +12,9 @@ import org.com.model.enums.Type;
  * <p>
  * This strategy counts how many times each genre appears across the cinematics that match the
  * specified types and states.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class GenreCountStrategy implements StatisticStrategy<Map<String, Integer>> {
 

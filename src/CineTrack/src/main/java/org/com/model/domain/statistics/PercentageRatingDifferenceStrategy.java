@@ -11,6 +11,9 @@ import org.com.model.enums.Type;
  * <p>
  * The percentage is calculated using the formula: ((user's average rating - IMDb's average rating)
  * / IMDb's average rating) * 100. If IMDb's rating is 0, the result will be 0%.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class PercentageRatingDifferenceStrategy implements StatisticStrategy<Double> {
 

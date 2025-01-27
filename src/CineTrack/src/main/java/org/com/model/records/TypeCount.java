@@ -9,6 +9,9 @@ package org.com.model.records;
  * @param movie  The count of movies.
  * @param series The count of series.
  * @param anime  The count of anime.
+ *
+ * @author umut
+ * @version 1.0
  */
 public record TypeCount(int movie, int series, int anime) {
 

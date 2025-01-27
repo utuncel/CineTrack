@@ -10,6 +10,9 @@ package org.com.model.records;
  * @param dropped  The count of cinematics that have been dropped.
  * @param watching The count of cinematics currently being watched.
  * @param towatch  The count of cinematics planned to be watched.
+ *
+ * @author umut
+ * @version 1.0
  */
 public record StateCount(int finished, int dropped, int watching, int towatch) {
 

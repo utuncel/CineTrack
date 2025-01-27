@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Represents cinematic data retrieved from an external API. This class is mapped to JSON fields
  * using Jackson annotations.
+ *
+ * @author umut
+ * @version 1.0
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiCinematic {

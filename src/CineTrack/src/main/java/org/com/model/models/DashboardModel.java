@@ -23,6 +23,9 @@ import org.com.model.enums.Type;
  *   <li>Supports observer pattern for real-time updates to the UI or other components.</li>
  *   <li>Handles a list of cinematics that are displayed or analyzed in the dashboard.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class DashboardModel {
 

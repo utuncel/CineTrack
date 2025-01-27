@@ -9,6 +9,9 @@ import org.com.model.records.StateCount;
 /**
  * A strategy for calculating the count of cinematics in different states (e.g., Finished, Dropped,
  * Watching, ToWatch) based on filtering criteria.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class StateCountStrategy implements StatisticStrategy<StateCount> {
 

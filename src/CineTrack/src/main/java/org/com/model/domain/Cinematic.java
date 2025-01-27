@@ -21,6 +21,9 @@ import org.com.model.enums.Type;
  *   <li>Automatic handling of missing or malformed data using defaults and safe parsing.</li>
  *   <li>Support for lists of genres and actors parsed from delimited strings.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class Cinematic {
 

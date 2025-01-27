@@ -11,6 +11,9 @@ import org.com.model.enums.Type;
  * The average is calculated by summing all IMDb ratings for cinematics that match the specified
  * types and states, excluding cinematics with an IMDb rating of 0. The result is rounded to two
  * decimal places.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class ImdbRatingAverageStrategy implements StatisticStrategy<Double> {
 

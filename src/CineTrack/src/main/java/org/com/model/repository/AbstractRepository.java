@@ -12,7 +12,6 @@ import org.hibernate.Transaction;
  *
  * @author Umut
  * @version 1.0
- * @since 1.0
  */
 public abstract class AbstractRepository {
 

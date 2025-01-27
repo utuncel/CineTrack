@@ -14,6 +14,9 @@ import org.com.model.enums.Type;
  * This strategy calculates the average ratings for each genre based on the cinematics that match
  * the specified types and states. It considers both the user's rating and IMDb rating for each
  * genre.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class GenreRatingsStrategy implements StatisticStrategy<Map<String, List<Double>>> {
 

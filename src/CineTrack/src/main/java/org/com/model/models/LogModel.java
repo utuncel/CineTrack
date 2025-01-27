@@ -21,6 +21,9 @@ import org.com.service.SessionManagerService;
  *   <li>Adds logs both to the UI and the database asynchronously.</li>
  *   <li>Handles errors during log persistence and provides feedback in the logs.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class LogModel {
 

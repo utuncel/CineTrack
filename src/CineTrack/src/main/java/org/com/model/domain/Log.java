@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
  *   <li>Supports automatic timestamp creation upon initialization.</li>
  *   <li>Provides a builder pattern for convenient log entry construction.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class Log {
 

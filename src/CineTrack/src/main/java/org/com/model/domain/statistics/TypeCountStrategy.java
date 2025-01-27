@@ -9,6 +9,9 @@ import org.com.model.records.TypeCount;
 /**
  * A strategy for calculating the count of cinematics by their type (Movie, Series, Anime).
  * Implements the {@link StatisticStrategy} interface for the {@link TypeCount} result type.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class TypeCountStrategy implements StatisticStrategy<TypeCount> {
 

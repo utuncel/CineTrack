@@ -15,6 +15,9 @@ import java.util.List;
  *   <li>Maintains a list of `Cinematic` objects associated with the user.</li>
  *   <li>Stores activity logs for the user, although currently not utilized.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class User {
 

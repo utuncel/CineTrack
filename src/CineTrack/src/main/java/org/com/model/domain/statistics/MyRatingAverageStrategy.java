@@ -11,6 +11,9 @@ import org.com.model.enums.Type;
  * The average is calculated by summing all the user's ratings for cinematics that match the
  * specified types and states, excluding cinematics with a rating of 0. The result is rounded to two
  * decimal places.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class MyRatingAverageStrategy implements StatisticStrategy<Double> {
 

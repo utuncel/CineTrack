@@ -14,6 +14,9 @@ import org.com.model.enums.Type;
  * This strategy calculates the average of both the user's rating and IMDb rating for each actor in
  * the list of cinematics, considering only the cinematics that match the specified types and
  * states.
+ *
+ * @author umut
+ * @version 1.0
  */
 public class ActorRatingsStrategy implements StatisticStrategy<Map<String, List<Double>>> {
 

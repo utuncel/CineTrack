@@ -11,6 +11,9 @@ package org.com.model.enums;
  *   <li>{@link #MOVIE} - Represents movies.</li>
  *   <li>{@link #SERIES} - Represents TV or web series.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public enum Type {
   /**

@@ -17,6 +17,9 @@ package org.com.model.enums;
  *   <li>{@link #GENRE_RATING_STRATEGY} - Analyzes the average ratings per genre.</li>
  *   <li>{@link #AVERAGE_RATING_STRATEGY} - Calculates the overall average rating of cinematics.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public enum StatisticStrategy {
   /**

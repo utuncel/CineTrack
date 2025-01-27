@@ -13,6 +13,9 @@ package org.com.model.enums;
  *   <li>{@link #DROPPED} - Indicates that the cinematic item was started but not completed.</li>
  *   <li>{@link #TOWATCH} - Indicates that the cinematic item is planned to be watched in the future.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public enum State {
   /**

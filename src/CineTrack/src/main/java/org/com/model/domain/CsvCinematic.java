@@ -15,6 +15,9 @@ import org.com.model.enums.Type;
  *   <li>Supports a fluent builder pattern for convenient object creation.</li>
  *   <li>Integrates enums for `State` and `Type` to enforce valid values.</li>
  * </ul>
+ *
+ * @author umut
+ * @version 1.0
  */
 public class CsvCinematic {
 
