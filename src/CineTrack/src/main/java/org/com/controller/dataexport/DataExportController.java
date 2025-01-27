@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.models.DashboardModel;
 import org.com.service.DialogService;
@@ -19,7 +19,7 @@ import org.com.service.LogService;
  * cinematic data to CSV files, handles file selection, and performs asynchronous export operations
  * with proper CSV formatting.
  *
- * @author [Your Name]
+ * @author umut
  * @version 1.0
  * @see org.com.model.domain.Cinematic
  * @see org.com.model.models.DashboardModel

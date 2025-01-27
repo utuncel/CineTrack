@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
-import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.CsvCinematic;
 import org.com.model.models.DashboardModel;

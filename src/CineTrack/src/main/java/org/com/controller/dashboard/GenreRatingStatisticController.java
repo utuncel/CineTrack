@@ -19,6 +19,13 @@ import org.com.model.enums.State;
 import org.com.model.enums.Type;
 import org.com.service.LogService;
 
+/**
+ * Controller for managing and visualizing genre-based rating statistics in the dashboard. Displays
+ * ratings (e.g., personal and IMDb) for different genres in a bar chart.
+ *
+ * @author Umut
+ * @version 1.0
+ */
 public class GenreRatingStatisticController {
 
   private final LogService logger = LogService.getInstance();
@@ -31,17 +38,34 @@ public class GenreRatingStatisticController {
 
   private VBox chartContainer;
 
+  /**
+   * Default constructor for FXML initialization.
+   */
   public GenreRatingStatisticController() {
   }
+
 
   public GenreRatingStatisticController(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Sets the container for the genre rating chart.
+   *
+   * @param chartContainer The VBox container to hold the chart.
+   */
   public void setChartContainer(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Adds a genre rating statistic chart to the dashboard.
+   *
+   * @param cinematics The list of cinematic objects to analyze.
+   * @param types      The list of media types (e.g., Movie, Series) to filter.
+   * @param states     The list of states (e.g., Watched, ToWatch) to filter.
+   * @throws IOException If the FXML file for the chart view cannot be loaded.
+   */
   public void addGenreRatingStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
@@ -58,6 +82,13 @@ public class GenreRatingStatisticController {
     }
   }
 
+  /**
+   * Initializes the genre rating chart with the provided data and sets up input listeners.
+   *
+   * @param cinematics The list of cinematic objects to analyze.
+   * @param types      The list of media types to filter.
+   * @param states     The list of states to filter.
+   */
   private void initializeChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     updateChart(cinematics, types, states);
 
@@ -70,6 +101,13 @@ public class GenreRatingStatisticController {
     });
   }
 
+  /**
+   * Updates the genre rating chart based on the provided data and filters.
+   *
+   * @param cinematics The list of cinematic objects to analyze.
+   * @param types      The list of media types to filter.
+   * @param states     The list of states to filter.
+   */
   private void updateChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     GenreRatingsStrategy genreRatingStrategy = new GenreRatingsStrategy();
     Map<String, List<Double>> genreRatingData = genreRatingStrategy.calculate(cinematics, types,

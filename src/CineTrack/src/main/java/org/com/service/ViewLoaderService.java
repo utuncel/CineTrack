@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardController;
-import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 
 /**

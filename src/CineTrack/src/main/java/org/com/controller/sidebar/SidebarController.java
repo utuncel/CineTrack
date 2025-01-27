@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
-import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.model.models.DashboardModelSingleton;
 import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
@@ -18,7 +18,7 @@ import org.com.service.ViewLoaderService;
  * Controller for the application's sidebar navigation. Manages navigation between different views
  * (Dashboard, Movies, Series, Anime, etc.) and controls the display in the main content area.
  *
- * @author [Your Name]
+ * @author umut
  * @version 1.0
  * @see org.com.controller.dashboard.DashboardController
  * @see org.com.controller.cinematics.helper.CinematicController

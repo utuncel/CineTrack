@@ -19,6 +19,15 @@ import org.com.model.enums.State;
 import org.com.model.enums.Type;
 import org.com.service.LogService;
 
+/**
+ * Controller for managing and displaying genre count statistics in the dashboard. This class
+ * initializes and updates a bar chart visualization for genre-based data, allowing filtering by
+ * type, state, and minimum count thresholds.
+ *
+ * @author umut
+ * @version 1.0
+ * @see org.com.model.domain.statistics.GenreCountStrategy
+ */
 public class GenreCountStatisticController {
 
   private final LogService logger = LogService.getInstance();
@@ -30,18 +39,39 @@ public class GenreCountStatisticController {
   private CategoryAxis xAxis;
   private VBox chartContainer;
 
-
+  /**
+   * Default constructor for FXML initialization.
+   */
   public GenreCountStatisticController() {
   }
 
+  /**
+   * Constructor with chart container initialization.
+   *
+   * @param chartContainer The VBox container for the statistics chart
+   */
   public GenreCountStatisticController(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Sets the chart container for the statistics view.
+   *
+   * @param chartContainer The VBox container to hold the statistics chart
+   */
   public void setChartContainer(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Creates and adds a genre count statistic view to the chart container. The method initializes
+   * the view, calculates the genre data, and updates the chart accordingly.
+   *
+   * @param cinematics List of cinematic items to analyze
+   * @param types      List of media types to consider in the analysis
+   * @param states     List of states to filter the cinematics
+   * @throws IOException If the FXML file cannot be loaded
+   */
   public void addGenreCountStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
@@ -58,6 +88,14 @@ public class GenreCountStatisticController {
     }
   }
 
+  /**
+   * Initializes the genre count bar chart with provided data and sets up a listener for filtering
+   * by minimum genre count.
+   *
+   * @param cinematics List of cinematic items to analyze
+   * @param types      List of media types to consider in the analysis
+   * @param states     List of states to filter the cinematics
+   */
   private void initializeChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     updateChart(cinematics, types, states);
 
@@ -70,6 +108,14 @@ public class GenreCountStatisticController {
     });
   }
 
+  /**
+   * Updates the genre count bar chart with filtered data based on the provided criteria. Filters by
+   * media type, state, and minimum count threshold.
+   *
+   * @param cinematics List of cinematic items to analyze
+   * @param types      List of media types to consider in the analysis
+   * @param states     List of states to filter the cinematics
+   */
   private void updateChart(List<Cinematic> cinematics, List<Type> types, List<State> states) {
     GenreCountStrategy genreCountStrategy = new GenreCountStrategy();
     Map<String, Integer> genreCountData = genreCountStrategy.calculate(cinematics, types, states);

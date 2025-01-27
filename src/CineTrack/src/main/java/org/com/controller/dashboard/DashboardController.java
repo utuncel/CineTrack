@@ -15,6 +15,13 @@ import org.com.model.enums.Type;
 import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
 
+/**
+ * Controller class for managing the dashboard UI, handling user interactions with checkboxes for
+ * various statistics and type filters, and updating the displayed charts.
+ *
+ * @author umut
+ * @version 1.0
+ */
 public class DashboardController {
 
   private static final Map<StatisticStrategy, Consumer<DashboardController>> STRATEGY_CHART_HANDLERS = Map.of(
@@ -64,6 +71,12 @@ public class DashboardController {
 
   private DashboardModel dashboardModel;
 
+  /**
+   * Sets the DashboardModel for this controller, initializes the checkbox maps, and sets up the
+   * checkbox listeners.
+   *
+   * @param dashboardModel the DashboardModel to be set
+   */
   public void setDashboardModel(DashboardModel dashboardModel) {
     try {
       this.dashboardModel = dashboardModel;
@@ -75,6 +88,10 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Initializes the maps that associate types, states, and statistic strategies with their
+   * corresponding checkboxes.
+   */
   private void initializeCheckBoxMaps() {
     typeCheckBoxMap.put(Type.MOVIE, movieCheckBox);
     typeCheckBoxMap.put(Type.ANIME, animeCheckBox);
@@ -93,28 +110,46 @@ public class DashboardController {
     strategyCheckBoxMap.put(StatisticStrategy.STATE_COUNT_STRATEGY, stateCountCheckBox);
   }
 
+  /**
+   * Sets up listeners for all checkboxes in the UI (types, states, and statistic strategies).
+   */
   private void setupCheckBoxListeners() {
     setupTypeCheckBoxListeners();
     setupStateCheckBoxListeners();
     setupStrategyCheckBoxListeners();
   }
 
+  /**
+   * Sets up listeners for the type-related checkboxes (Movie, Anime, Series).
+   */
   private void setupTypeCheckBoxListeners() {
     typeCheckBoxMap.forEach((type, checkBox) ->
         checkBox.setOnAction(event -> handleTypeCheckBoxAction(type, checkBox.isSelected())));
   }
 
+  /**
+   * Sets up listeners for the state-related checkboxes (Finished, Watching, Dropped, To Watch).
+   */
   private void setupStateCheckBoxListeners() {
     stateCheckBoxMap.forEach((state, checkBox) ->
         checkBox.setOnAction(event -> handleStateCheckBoxAction(state, checkBox.isSelected())));
   }
 
+  /**
+   * Sets up listeners for the statistic strategy checkboxes (Average Rating, Genre Count, etc.).
+   */
   private void setupStrategyCheckBoxListeners() {
     strategyCheckBoxMap.forEach((strategy, checkBox) ->
         checkBox.setOnAction(
             event -> handleStrategyCheckBoxAction(strategy, checkBox.isSelected())));
   }
 
+  /**
+   * Handles the action of a type checkbox being selected or deselected.
+   *
+   * @param type       the type associated with the checkbox
+   * @param isSelected whether the checkbox is selected or not
+   */
   private void handleTypeCheckBoxAction(Type type, boolean isSelected) {
     if (isSelected) {
       dashboardModel.addType(type);
@@ -124,6 +159,12 @@ public class DashboardController {
     updateDashboard();
   }
 
+  /**
+   * Handles the action of a state checkbox being selected or deselected.
+   *
+   * @param state      the state associated with the checkbox
+   * @param isSelected whether the checkbox is selected or not
+   */
   private void handleStateCheckBoxAction(State state, boolean isSelected) {
     if (isSelected) {
       dashboardModel.addState(state);
@@ -133,6 +174,12 @@ public class DashboardController {
     updateDashboard();
   }
 
+  /**
+   * Handles the action of a statistic strategy checkbox being selected or deselected.
+   *
+   * @param strategy   the strategy associated with the checkbox
+   * @param isSelected whether the checkbox is selected or not
+   */
   private void handleStrategyCheckBoxAction(StatisticStrategy strategy, boolean isSelected) {
     try {
       if (isSelected) {
@@ -148,6 +195,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the average rating chart to the dashboard.
+   */
   private void addAverageRatingChart() {
     try {
       new AverageRatingStatisticController(chartContainer)
@@ -159,6 +209,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the genre count chart to the dashboard.
+   */
   private void addGenreCountChart() {
     try {
       new GenreCountStatisticController(chartContainer)
@@ -170,6 +223,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the state count chart to the dashboard.
+   */
   private void addStateCountChart() {
     try {
       new StateCountStatisticController(chartContainer)
@@ -181,6 +237,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the type count chart to the dashboard.
+   */
   private void addTypeCountChart() {
     try {
       new TypeCountStatisticController(chartContainer)
@@ -192,6 +251,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the genre rating chart to the dashboard.
+   */
   private void addGenreRatingChart() {
     try {
       new GenreRatingStatisticController(chartContainer)
@@ -203,6 +265,9 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Adds the actor rating chart to the dashboard.
+   */
   private void addActorRatingChart() {
     try {
       new ActorRatingStatisticController(chartContainer)
@@ -214,11 +279,22 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Removes a chart from the dashboard based on its ID.
+   *
+   * @param chartId the ID of the chart to be removed
+   */
   private void removeChart(String chartId) {
     chartContainer.getChildren()
         .removeIf(node -> node.getId() != null && node.getId().equals(chartId));
   }
 
+  /**
+   * Returns the chart ID associated with a given statistic strategy.
+   *
+   * @param strategy the statistic strategy
+   * @return the chart ID
+   */
   private String getChartIdForStrategy(StatisticStrategy strategy) {
     return switch (strategy) {
       case AVERAGE_RATING_STRATEGY -> "averageRating";
@@ -230,6 +306,10 @@ public class DashboardController {
     };
   }
 
+  /**
+   * Updates the dashboard by clearing the current charts and adding new ones based on the selected
+   * strategies.
+   */
   private void updateDashboard() {
     chartContainer.getChildren().clear();
     dashboardModel.getStatisticStrategies()

@@ -16,7 +16,7 @@ import org.com.service.SessionManagerService;
  * Controller for the log view that displays system logs in a table format. Manages the display and
  * organization of log entries specific to the current user.
  *
- * @author [Your Name]
+ * @author umut
  * @version 1.0
  * @see org.com.model.domain.Log
  * @see org.com.model.models.LogModel

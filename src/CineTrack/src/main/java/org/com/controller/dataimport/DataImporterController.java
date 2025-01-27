@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.com.controller.dashboard.DashboardModelSingleton;
+import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.models.DashboardModel;
 import org.com.model.repository.CinematicRepository;
@@ -25,7 +25,7 @@ import org.com.service.SessionManagerService;
  * cinematic data from CSV files, coordinates with various services for data processing, and updates
  * the application state accordingly.
  *
- * @author [Your Name]
+ * @author umut
  * @version 1.0
  * @see org.com.service.CsvImporterService
  * @see org.com.service.ApiService

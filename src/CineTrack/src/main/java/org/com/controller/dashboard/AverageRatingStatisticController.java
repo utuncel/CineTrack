@@ -13,6 +13,20 @@ import org.com.model.domain.statistics.MyRatingAverageStrategy;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
 
+/**
+ * Controller for managing the display of watch state statistics in the dashboard. Handles the
+ * visualization of counts for different watch states (finished, watching, dropped, to watch) using
+ * a custom statistic view.
+ *
+ * <p>This controller works in conjunction with the StateCountStatisticView FXML file to display
+ * the statistics for various states of the cinematics (e.g., finished, watching, dropped, to
+ * watch). The states are calculated using a strategy pattern and displayed in the dashboard.</p>
+ *
+ * @author umut
+ * @version 1.0
+ * @see org.com.model.domain.statistics.StateCountStrategy
+ * @see org.com.model.records.StateCount
+ */
 public class AverageRatingStatisticController {
 
   @FXML
@@ -22,22 +36,49 @@ public class AverageRatingStatisticController {
 
   private VBox chartContainer;
 
+  /**
+   * Default constructor for FXML initialization.
+   */
   public AverageRatingStatisticController() {
   }
 
+  /**
+   * Constructor with chart container initialization.
+   *
+   * @param chartContainer The VBox container for the statistics chart
+   */
   public AverageRatingStatisticController(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Sets the chart container for the statistics view.
+   *
+   * @param chartContainer The VBox container to hold the statistics chart
+   */
   public void setChartContainer(VBox chartContainer) {
     this.chartContainer = chartContainer;
   }
 
+  /**
+   * Sets the data for personal and IMDb rating values.
+   *
+   * @param myRatingValue   The user's average rating as a string.
+   * @param imdbRatingValue The IMDb average rating as a string.
+   */
   public void setData(String myRatingValue, String imdbRatingValue) {
     this.myRatingValue.setText(myRatingValue);
     this.imdbRatingValue.setText(imdbRatingValue);
   }
 
+  /**
+   * Adds the average rating statistic to the dashboard.
+   *
+   * @param cinematics The list of cinematics to analyze.
+   * @param types      The list of types to filter (e.g., Movie, Anime, Series).
+   * @param states     The list of states to filter (e.g., Watched, Dropped).
+   * @throws IOException If the FXML file cannot be loaded.
+   */
   public void addAverageRatingStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
