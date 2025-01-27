@@ -14,6 +14,16 @@ import org.com.model.models.DashboardModel;
 import org.com.service.DialogService;
 import org.com.service.LogService;
 
+/**
+ * Controller for handling data export operations in the application. Manages the export of
+ * cinematic data to CSV files, handles file selection, and performs asynchronous export operations
+ * with proper CSV formatting.
+ *
+ * @author [Your Name]
+ * @version 1.0
+ * @see org.com.model.domain.Cinematic
+ * @see org.com.model.models.DashboardModel
+ */
 public class DataExportController {
 
   private final DashboardModel dashboardModel;
@@ -22,16 +32,26 @@ public class DataExportController {
   @FXML
   private Button exportButton;
 
+  /**
+   * Constructs a new DataExportController. Initializes the dashboard model and dialog service.
+   */
   public DataExportController() {
     this.dashboardModel = DashboardModelSingleton.getInstance();
     this.dialogService = new DialogService();
   }
 
+  /**
+   * Initializes the controller after FXML loading. Sets up event handler for the export button.
+   */
   @FXML
   public void initialize() {
     exportButton.setOnAction(event -> openSaveFileChooser());
   }
 
+  /**
+   * Opens a file chooser dialog for selecting the export file location. Triggers the export process
+   * if a file location is selected.
+   */
   private void openSaveFileChooser() {
     FileChooser fileChooser = createFileChooser();
     Stage stage = (Stage) exportButton.getScene().getWindow();
@@ -42,6 +62,11 @@ public class DataExportController {
     }
   }
 
+  /**
+   * Creates and configures a FileChooser for CSV files.
+   *
+   * @return Configured FileChooser instance
+   */
   private FileChooser createFileChooser() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save CSV File");
@@ -51,6 +76,12 @@ public class DataExportController {
     return fileChooser;
   }
 
+  /**
+   * Initiates the asynchronous export process for cinematics. Creates and starts a background task
+   * for exporting data.
+   *
+   * @param file The file to export to
+   */
   private void exportCinematics(File file) {
     Task<Void> task = createExportTask(file);
 
@@ -68,6 +99,12 @@ public class DataExportController {
     new Thread(task).start();
   }
 
+  /**
+   * Creates a background task for exporting cinematic data.
+   *
+   * @param file The target file for export
+   * @return Task for asynchronous data export
+   */
   private Task<Void> createExportTask(File file) {
     return new Task<>() {
       @Override
@@ -78,6 +115,13 @@ public class DataExportController {
     };
   }
 
+  /**
+   * Exports cinematic data to a CSV file. Writes header and formatted cinematic data lines to the
+   * file.
+   *
+   * @param file The target file for export
+   * @throws IOException If there's an error writing to the file
+   */
   private void exportToCsv(File file) throws IOException {
     try (FileWriter writer = new FileWriter(file)) {
       writer.write("Title,Type,State,Rating\n");
@@ -88,6 +132,13 @@ public class DataExportController {
     }
   }
 
+  /**
+   * Formats a single cinematic entry as a CSV line. Handles proper formatting of fields including
+   * escaping special characters.
+   *
+   * @param cinematic The cinematic object to format
+   * @return Formatted CSV line for the cinematic
+   */
   private String formatCinematicLine(Cinematic cinematic) {
     return String.format("%s,%s,%s,%s%n",
         escapeSpecialCharacters(cinematic.getTitle()),
@@ -97,6 +148,13 @@ public class DataExportController {
     );
   }
 
+  /**
+   * Escapes special characters in text for CSV format. Handles commas, quotes, and newlines
+   * according to CSV specification.
+   *
+   * @param text The text to escape
+   * @return Escaped text safe for CSV format
+   */
   private String escapeSpecialCharacters(String text) {
     if (text == null || text.isEmpty()) {
       return "";
