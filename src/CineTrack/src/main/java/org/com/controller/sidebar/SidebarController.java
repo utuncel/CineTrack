@@ -14,6 +14,15 @@ import org.com.model.models.DashboardModel;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
 
+/**
+ * Controller for the application's sidebar navigation. Manages navigation between different views
+ * (Dashboard, Movies, Series, Anime, etc.) and controls the display in the main content area.
+ *
+ * @author [Your Name]
+ * @version 1.0
+ * @see org.com.controller.dashboard.DashboardController
+ * @see org.com.controller.cinematics.helper.CinematicController
+ */
 public class SidebarController {
 
   private final LogService logger = LogService.getInstance();
@@ -23,41 +32,66 @@ public class SidebarController {
   private BorderPane mainContentPane;
   private DashboardModel dashboardModel;
 
+  /**
+   * Initializes the controller. Automatically called after FXML loading.
+   */
   @FXML
   public void initialize() {
     dashboardModel = DashboardModelSingleton.getInstance();
   }
 
+  /**
+   * Loads the movie view into the main content area.
+   */
   @FXML
   public void loadMovieView() {
     loadCinematicView("/cinematics/MovieView.fxml");
   }
 
+  /**
+   * Loads the series view into the main content area.
+   */
   @FXML
   public void loadSeriesView() {
     loadCinematicView("/cinematics/SeriesView.fxml");
   }
 
+  /**
+   * Loads the anime view into the main content area.
+   */
   @FXML
   public void loadAnimeView() {
     loadCinematicView("/cinematics/AnimeView.fxml");
   }
 
+  /**
+   * Loads the data importer view into the main content area.
+   */
   @FXML
   public void loadDataImporterView() {
     viewLoaderService.loadView("/dataimport/DataImporterView.fxml", mainContentPane);
   }
 
+  /**
+   * Loads the data export view into the main content area.
+   */
   @FXML
   public void loadDataExportView() {
     viewLoaderService.loadView("/dataexport/DataExportView.fxml", mainContentPane);
   }
 
+  /**
+   * Loads the view for adding new media content.
+   */
   @FXML
   public void loadAddCinematicView() {
     viewLoaderService.loadView("/addcinematic/AddCinematicView.fxml", mainContentPane);
   }
 
+  /**
+   * Loads the logger view to display system logs. If loading fails, an appropriate error message is
+   * logged.
+   */
   @FXML
   public void loadLoggerView() {
     try {
@@ -70,6 +104,10 @@ public class SidebarController {
     }
   }
 
+  /**
+   * Loads the dashboard view and initializes it with the current dashboard model. If loading fails,
+   * an appropriate error message is logged.
+   */
   @FXML
   public void loadDashboardView() {
     try {
@@ -84,6 +122,12 @@ public class SidebarController {
     }
   }
 
+  /**
+   * Helper method for loading movie, series, or anime views. Loads the corresponding view and
+   * initializes its controller with media data.
+   *
+   * @param viewPath The path to the FXML file of the view to be loaded
+   */
   private void loadCinematicView(String viewPath) {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
@@ -97,12 +141,23 @@ public class SidebarController {
     }
   }
 
+  /**
+   * Updates the main content of the application with a new view.
+   *
+   * @param content The new view to be displayed
+   */
   private void updateMainContent(Parent content) {
     Stage stage = (Stage) mainContentPane.getScene().getWindow();
     Scene newScene = new Scene(content);
     stage.setScene(newScene);
   }
 
+  /**
+   * Central error handling for view loading failures.
+   *
+   * @param viewName Name of the view that failed to load
+   * @param e        The exception that occurred
+   */
   private void handleLoadError(String viewName, Exception e) {
     logger.logError("Error loading " + viewName + ": " + e.getMessage());
   }
