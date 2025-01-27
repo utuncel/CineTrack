@@ -20,6 +20,17 @@ import org.com.service.DialogService;
 import org.com.service.LogService;
 import org.com.service.SessionManagerService;
 
+/**
+ * Controller for handling data import operations in the application. Manages the import of
+ * cinematic data from CSV files, coordinates with various services for data processing, and updates
+ * the application state accordingly.
+ *
+ * @author [Your Name]
+ * @version 1.0
+ * @see org.com.service.CsvImporterService
+ * @see org.com.service.ApiService
+ * @see org.com.service.CineFactoryService
+ */
 public class DataImporterController {
 
   private final DashboardModel dashboardModel;
@@ -30,6 +41,11 @@ public class DataImporterController {
   @FXML
   private Button chooseFileButton;
 
+  /**
+   * Constructs a new DataImporterController. Initializes required services and repositories for
+   * data import operations.
+   */
+
   public DataImporterController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
     this.dashboardModel = DashboardModelSingleton.getInstance();
@@ -37,11 +53,19 @@ public class DataImporterController {
     this.dialogService = new DialogService();
   }
 
+  /**
+   * Initializes the controller after FXML loading. Sets up event handlers for the file chooser
+   * button.
+   */
   @FXML
   public void initialize() {
     chooseFileButton.setOnAction(event -> openFileChooser());
   }
 
+  /**
+   * Opens a file chooser dialog for CSV file selection. Triggers the import process if a file is
+   * selected.
+   */
   private void openFileChooser() {
     FileChooser fileChooser = createFileChooser();
     Stage stage = (Stage) chooseFileButton.getScene().getWindow();
@@ -52,15 +76,24 @@ public class DataImporterController {
     }
   }
 
+  /**
+   * Creates and configures a FileChooser for CSV files.
+   *
+   * @return Configured FileChooser instance
+   */
   private FileChooser createFileChooser() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Choose CSV File");
-    fileChooser.getExtensionFilters().add(
-        new FileChooser.ExtensionFilter("CSV Files", "*.csv")
-    );
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
     return fileChooser;
   }
 
+  /**
+   * Initiates the asynchronous import process for cinematics. Creates and starts a background task
+   * for importing data.
+   *
+   * @param selectedFile The CSV file to import
+   */
   private void importCinematics(File selectedFile) {
     Task<List<Cinematic>> importTask = createImportTask(selectedFile);
 
@@ -70,8 +103,7 @@ public class DataImporterController {
     });
 
     importTask.setOnFailed(event -> {
-      dialogService.showErrorAlert("Import Failed",
-          "An error occurred during cinematic import");
+      dialogService.showErrorAlert("Import Failed", "An error occurred during cinematic import");
       Throwable exception = importTask.getException();
       if (exception != null) {
         logger.logError("Error during cinematic import");
@@ -83,6 +115,12 @@ public class DataImporterController {
     new Thread(importTask).start();
   }
 
+  /**
+   * Creates a background task for importing cinematic data.
+   *
+   * @param file The file to import
+   * @return Task for asynchronous data import
+   */
   private Task<List<Cinematic>> createImportTask(File file) {
     return new Task<>() {
       @Override
@@ -92,6 +130,12 @@ public class DataImporterController {
     };
   }
 
+  /**
+   * Updates the repository and model with imported cinematic data. Deletes existing cinematics for
+   * the current user and saves the new ones.
+   *
+   * @param cinematics List of imported cinematics
+   */
   private void updateRepositoryAndModel(List<Cinematic> cinematics) {
     cinematicRepository.deleteAllCinematicsByUser(sessionManager.getCurrentUser());
     cinematicRepository.saveCinematics(cinematics, sessionManager.getCurrentUser());
@@ -99,14 +143,19 @@ public class DataImporterController {
     sessionManager.getCurrentUser().setCinematics(cinematics);
   }
 
+  /**
+   * Processes the imported CSV file and creates cinematic objects. Coordinates between CSV import,
+   * API service, and cinematic factory service.
+   *
+   * @param csvFilePath Path to the CSV file
+   * @return List of created Cinematic objects
+   * @throws IOException If there's an error reading the CSV file
+   */
   private List<Cinematic> getImportedData(String csvFilePath) throws IOException {
     CsvImporterService csvImporterService = new CsvImporterService(csvFilePath);
     ApiService apiService = new ApiService();
-    CineFactoryService cineFactoryService = new CineFactoryService(
-        csvImporterService,
-        apiService,
-        sessionManager.getCurrentUser()
-    );
+    CineFactoryService cineFactoryService = new CineFactoryService(csvImporterService, apiService,
+        sessionManager.getCurrentUser());
     return cineFactoryService.createCinematics();
   }
 }
