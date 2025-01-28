@@ -15,7 +15,7 @@ import org.com.model.enums.Type;
  * fetched from an external API. It provides various utility methods to handle and parse the
  * integrated data effectively.</p>
  *
- * <h3>Features:</h3>
+ * <h2>Features:</h2>
  * <ul>
  *   <li>Integration of user-specific data with API information.</li>
  *   <li>Automatic handling of missing or malformed data using defaults and safe parsing.</li>

@@ -9,7 +9,7 @@ import org.com.model.enums.Type;
  * <p>The `CsvCinematic` class encapsulates the basic details of a cinematic, such as title,
  * rating, state, and type, which are typically extracted from a CSV file.</p>
  *
- * <h3>Features:</h3>
+ * <h2>Features:</h2>
  * <ul>
  *   <li>Immutable design: All fields are final and set through a builder.</li>
  *   <li>Supports a fluent builder pattern for convenient object creation.</li>

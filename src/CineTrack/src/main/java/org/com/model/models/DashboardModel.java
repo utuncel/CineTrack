@@ -15,7 +15,7 @@ import org.com.model.enums.Type;
  * are used in the dashboard. It provides methods to modify these settings while notifying
  * registered listeners about any changes, ensuring a reactive and dynamic UI.</p>
  *
- * <h3>Key Features:</h3>
+ * <h2>Key Features:</h2>
  * <ul>
  *   <li>Maintains a list of types (e.g., MOVIE, ANIME, SERIES) for filtering dashboard data.</li>
  *   <li>Tracks selected states (e.g., FINISHED, WATCHING) for additional filtering options.</li>

@@ -9,7 +9,7 @@ import java.util.List;
  * name, password, associated cinematics, and activity logs. It is designed to manage user-specific
  * data within the application, such as their watched movies and logs of actions.</p>
  *
- * <h3>Features:</h3>
+ * <h2>Features:</h2>
  * <ul>
  *   <li>Tracks the user's ID, name, and password.</li>
  *   <li>Maintains a list of `Cinematic` objects associated with the user.</li>

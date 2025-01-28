@@ -14,14 +14,13 @@ import org.com.service.ViewLoaderService;
  * Controller class responsible for handling user registration in the application. This class
  * manages the registration process and navigation between the registration and login views.
  *
- * <p>Dependencies include:
+ * <p>Dependencies include:</p>
  * <ul>
  *   <li>{@link AuthenticationController} for handling authentication logic.</li>
  *   <li>{@link ViewLoaderService} for managing view transitions.</li>
  *   <li>{@link DialogService} for displaying alerts and error messages.</li>
  *   <li>{@link LogService} for logging application events.</li>
  * </ul>
- * </p>
  *
  * @author umut
  * @version 1.0

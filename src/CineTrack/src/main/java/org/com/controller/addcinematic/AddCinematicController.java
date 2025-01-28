@@ -20,7 +20,7 @@ import org.com.service.SessionManagerService;
  * anime) to the application. This class manages the user input, validates it, and integrates it
  * into the application model and database.
  *
- * <p>Dependencies include:
+ * <p>Dependencies include:</p>
  * <ul>
  *   <li>{@link LogService} for logging application events and errors.</li>
  *   <li>{@link CsvParserService} for parsing user input into valid states and types.</li>
@@ -29,7 +29,6 @@ import org.com.service.SessionManagerService;
  *   <li>{@link SessionManagerService} for managing user sessions.</li>
  *   <li>{@link DashboardModel} for updating the application model with new cinematics.</li>
  * </ul>
- * </p>
  *
  * @author umut
  * @version 1.0

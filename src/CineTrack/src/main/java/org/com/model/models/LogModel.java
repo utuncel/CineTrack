@@ -15,7 +15,7 @@ import org.com.service.SessionManagerService;
  * addition of new logs, and saves logs persistently using a repository. It ensures thread-safe
  * operations for the UI and asynchronous database persistence.</p>
  *
- * <h3>Key Responsibilities:</h3>
+ * <h2>Key Responsibilities:</h2>
  * <ul>
  *   <li>Maintains an observable list of logs for UI binding.</li>
  *   <li>Adds logs both to the UI and the database asynchronously.</li>

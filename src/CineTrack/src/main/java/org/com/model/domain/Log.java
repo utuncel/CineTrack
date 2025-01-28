@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * log level, message content, and the associated user. Logs can be created using a builder pattern
  * for flexibility and clarity.</p>
  *
- * <h3>Features:</h3>
+ * <h2>Features:</h2>
  * <ul>
  *   <li>Tracks log details: ID, timestamp, level, message, and user.</li>
  *   <li>Supports automatic timestamp creation upon initialization.</li>
