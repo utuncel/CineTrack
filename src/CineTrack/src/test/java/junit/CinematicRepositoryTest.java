@@ -1,74 +1,126 @@
 package junit;
 
-import org.com.model.domain.Cinematic;
-import org.com.model.enums.State;
-import org.com.model.enums.Type;
 import org.com.model.repository.CinematicRepository;
-import org.com.model.repository.HibernateUtil;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.*;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.com.model.domain.Cinematic;
+import org.com.model.domain.User;
+import org.com.model.repository.AbstractRepository.RepositoryException;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class CinematicRepositoryTest {
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import static org.mockito.ArgumentMatchers.any;
+
+public class CinematicRepositoryTest {
+
+  @Mock
   private SessionFactory sessionFactory;
+
+  @Mock
+  private Session session;
+
+  @Mock
+  private Transaction transaction;
+
+  @Mock
+  private Query<Cinematic> query;
+
+  @Mock
+  private Cinematic mockCinematic;
+
   private CinematicRepository cinematicRepository;
 
-  @BeforeAll
-  void setUp() {
-    sessionFactory = HibernateUtil.getSessionFactory();
+  @Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
     cinematicRepository = new CinematicRepository(sessionFactory);
-  }
-
-  @AfterAll
-  void tearDown() {
-    if (sessionFactory != null) {
-      sessionFactory.close();
-    }
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.beginTransaction()).thenReturn(transaction);
   }
 
   @Test
-  void testCreateCinematic() {
-    Cinematic cinematic = new Cinematic("Test Movie", "Test Description", 120, 8.5, 5000, "Director Name", State.FINISHED, Type.MOVIE);
-    cinematicRepository.createCinematic(cinematic);
+  public void testSaveSingleCinematic_Successful() {
+    User user = new User("testUser", "password");
 
-    Cinematic retrievedCinematic = cinematicRepository.getCinematicById(cinematic.getId());
-    assertNotNull(retrievedCinematic);
-    assertEquals("Test Movie", retrievedCinematic.getTitle());
-    assertEquals("Test Description", retrievedCinematic.getDescription());
+    cinematicRepository.saveCinematic(mockCinematic, user);
+
+    verify(session).persist(mockCinematic);
+    verify(mockCinematic).setUser(user);
+    verify(transaction).commit();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSaveSingleCinematic_Null() {
+    User user = new User("testUser", "password");
+    cinematicRepository.saveCinematic(null, user);
   }
 
   @Test
-  void testGetCinematicById() {
-    Cinematic cinematic = new Cinematic("Test Movie 2", "Another Description", 130, 7.9, 8000, "Another Director", State.WATCHING, Type.MOVIE);
-    cinematicRepository.createCinematic(cinematic);
+  public void testSaveMultipleCinematics_Successful() {
+    User user = new User("testUser", "password");
+    List<Cinematic> cinematics = Arrays.asList(
+        mock(Cinematic.class),
+        mock(Cinematic.class)
+    );
 
-    Cinematic retrievedCinematic = cinematicRepository.getCinematicById(cinematic.getId());
-    assertNotNull(retrievedCinematic);
-    assertEquals("Test Movie 2", retrievedCinematic.getTitle());
+    cinematicRepository.saveCinematics(cinematics, user);
+
+    verify(session, times(2)).persist(any(Cinematic.class));
+    cinematics.forEach(c -> verify(c).setUser(user));
+    verify(transaction).commit();
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testSaveMultipleCinematics_EmptyList() {
+    User user = new User("testUser", "password");
+    cinematicRepository.saveCinematics(null, user);
   }
 
   @Test
-  void testUpdateCinematic() {
-    Cinematic cinematic = new Cinematic("Movie to Update", "Old Description", 90, 6.0, 2000, "Old Director", State.WATCHING, Type.MOVIE);
-    cinematicRepository.createCinematic(cinematic);
+  public void testGetAllCinematicsByUser_CinemaitcsExist() {
+    User user = new User("testUser", "password");
+    List<Cinematic> expectedCinematics = Arrays.asList(
+        mock(Cinematic.class),
+        mock(Cinematic.class)
+    );
 
-    cinematic.setDescription("Updated Description");
-    cinematicRepository.updateCinematic(cinematic);
+    when(session.createQuery(
+        "SELECT DISTINCT c FROM Cinematic c " +
+            "LEFT JOIN FETCH c.actors " +
+            "LEFT JOIN FETCH c.genres " +
+            "WHERE c.user = :user", Cinematic.class)).thenReturn(query);
+    when(query.setParameter("user", user)).thenReturn(query);
+    when(query.list()).thenReturn(expectedCinematics);
 
-    Cinematic updatedCinematic = cinematicRepository.getCinematicById(cinematic.getId());
-    assertNotNull(updatedCinematic);
-    assertEquals("Updated Description", updatedCinematic.getDescription());
+    List<Cinematic> retrievedCinematics = cinematicRepository.getAllCinematicsByUser(user);
+
+    assertNotNull(retrievedCinematics);
+    assertEquals(2, retrievedCinematics.size());
+    verify(transaction).commit();
   }
 
   @Test
-  void testDeleteCinematic() {
-    Cinematic cinematic = new Cinematic("Movie to Delete", "Description to Delete", 150, 9.0, 10000, "Director to Delete", State.FINISHED, Type.MOVIE);
-    cinematicRepository.createCinematic(cinematic);
+  public void testDeleteAllCinematicsByUser_Successful() {
+    User user = new User("testUser", "password");
 
-    cinematicRepository.deleteCinematic(cinematic.getId());
-    Cinematic deletedCinematic = cinematicRepository.getCinematicById(cinematic.getId());
-    assertNull(deletedCinematic);
+    when(session.createMutationQuery("DELETE FROM Cinematic c WHERE c.user = :user")).thenReturn(
+        query);
+    when(query.setParameter("user", user)).thenReturn(query);
+    when(query.executeUpdate()).thenReturn(1);
+
+    cinematicRepository.deleteAllCinematicsByUser(user);
+
+    verify(query).executeUpdate();
+    verify(transaction).commit();
   }
 }

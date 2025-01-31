@@ -1,165 +1,110 @@
 package junit;
 
-import org.com.model.domain.User;
 import org.com.model.repository.UserRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
-import java.util.List;
+import org.com.model.domain.User;
+import org.com.model.repository.AbstractRepository.RepositoryException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class UserRepositoryTest {
-  private SessionFactory mockSessionFactory;
-  private Session mockSession;
-  private Transaction mockTransaction;
+public class UserRepositoryTest {
+
+  @Mock
+  private SessionFactory sessionFactory;
+
+  @Mock
+  private Session session;
+
+  @Mock
+  private Transaction transaction;
+
+  @Mock
+  private Query<User> query;
+
   private UserRepository userRepository;
 
-  @BeforeEach
-  void setUp() {
-    mockSessionFactory = mock(SessionFactory.class);
-    mockSession = mock(Session.class);
-    mockTransaction = mock(Transaction.class);
-
-    when(mockSessionFactory.openSession()).thenReturn(mockSession);
-    when(mockSession.beginTransaction()).thenReturn(mockTransaction);
-
-    userRepository = new UserRepository(mockSessionFactory);
+  @Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
+    userRepository = new UserRepository(sessionFactory);
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.beginTransaction()).thenReturn(transaction);
   }
 
   @Test
-  void testCreateUser() {
-    User user = new User("TestUser", "password");
+  public void testSaveUser_Successful() {
+    User user = new User("testUser", "password");
+    userRepository.saveUser(user);
 
-    doNothing().when(mockSession).persist(user);
+    verify(session).persist(user);
+    verify(transaction).commit();
+  }
 
-    userRepository.createUser(user);
+  @Test(expected = RepositoryException.class)
+  public void testSaveUser_Failure() {
+    User user = new User("testUser", "password");
+    doThrow(new RuntimeException("Database error")).when(session).persist(user);
 
-    verify(mockSession).persist(user);
-    verify(mockTransaction).commit();
+    userRepository.saveUser(user);
   }
 
   @Test
-  void testGetUserById() {
-    User user = new User("TestUser2", "password2");
+  public void testGetUserByName_UserExists() {
+    String username = "existingUser";
+    User expectedUser = new User(username, "password");
 
-    when(mockSession.get(User.class, user.getId())).thenReturn(user);
+    when(session.createQuery("FROM User u WHERE u.name = :name", User.class)).thenReturn(query);
+    when(query.setParameter("name", username)).thenReturn(query);
+    when(query.uniqueResult()).thenReturn(expectedUser);
 
-    User retrievedUser = userRepository.getUserById(user.getId());
+    User retrievedUser = userRepository.getUserByName(username);
+
     assertNotNull(retrievedUser);
-    assertEquals("TestUser2", retrievedUser.getName());
-
-    verify(mockSession).get(User.class, user.getId());
+    assertEquals(username, retrievedUser.getName());
+    verify(transaction).commit();
   }
 
   @Test
-  public void testGetUserByName_Success() {
-    User mockUser = new User("testuser", "password");
+  public void testAuthenticateUser_Successful() {
+    String username = "validUser";
+    String password = "correctPassword";
+    User expectedUser = new User(username, password);
 
-    Query<User> mockQuery = mock(Query.class);
-    when(mockSession.createQuery("FROM User u WHERE u.username = :username", User.class)).thenReturn(mockQuery);
-    when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
-    when(mockQuery.uniqueResult()).thenReturn(mockUser);
+    when(session.createQuery("FROM User u WHERE u.name = :name", User.class)).thenReturn(query);
+    when(query.setParameter("name", username)).thenReturn(query);
+    when(query.uniqueResult()).thenReturn(expectedUser);
 
-    User result = userRepository.getUserByName("testuser");
+    User authenticatedUser = userRepository.authenticateUser(username, password);
 
-    assertNotNull(result);
-    assertEquals("testuser", result.getName());
+    assertNotNull(authenticatedUser);
+    assertEquals(username, authenticatedUser.getName());
+    verify(transaction).commit();
   }
 
   @Test
-  void testGetAllUsers() {
-    Query<User> mockQuery = mock(Query.class);
-    when(mockSession.createQuery("FROM User", User.class)).thenReturn(mockQuery);
-    when(mockQuery.list()).thenReturn(List.of(new User("John", "password123")));
+  public void testAuthenticateUser_WrongPassword() {
+    String username = "validUser";
+    String correctPassword = "correctPassword";
+    String wrongPassword = "wrongPassword";
+    User expectedUser = new User(username, correctPassword);
 
-    List<User> users = userRepository.getAllUsers();
+    when(session.createQuery("FROM User u WHERE u.name = :name", User.class)).thenReturn(query);
+    when(query.setParameter("name", username)).thenReturn(query);
+    when(query.uniqueResult()).thenReturn(expectedUser);
 
-    assertNotNull(users);
-    assertEquals(1, users.size());
-    assertEquals("John", users.getFirst().getName());
+    User authenticatedUser = userRepository.authenticateUser(username, wrongPassword);
 
-    verify(mockSession).createQuery("FROM User", User.class);
-    verify(mockQuery).list();
+    assertNull(authenticatedUser);
+    verify(transaction).commit();
   }
-
-
-  @Test
-  void testUpdateUser() {
-    User user = new User("UserToUpdate", "oldPassword");
-    user.setId(1L);
-
-    doNothing().when(mockSession).update(user);
-
-    userRepository.updateUser(user);
-
-    verify(mockSession).update(user);
-    verify(mockTransaction).commit();
-  }
-
-
-  @Test
-  void testDeleteUser() {
-    User user = new User("UserToDelete", "password");
-    user.setId(1L);
-
-    when(mockSession.get(User.class, user.getId())).thenReturn(user);
-
-    doNothing().when(mockSession).delete(user);
-
-    userRepository.deleteUser(user.getId());
-
-    verify(mockSession).get(User.class, user.getId());
-    verify(mockSession).delete(user);
-    verify(mockTransaction).commit();
-  }
-
-  @Test
-  public void testAuthenticate_Success() {
-    // Erstellen eines Mock-Users
-    User mockUser = new User("testuser","password123");
-
-
-    Query<User> mockQuery = mock(Query.class);
-    when(mockSession.createQuery("FROM User u WHERE u.username = :username", User.class)).thenReturn(mockQuery);
-    when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
-    when(mockQuery.uniqueResult()).thenReturn(mockUser);
-
-    User result = userRepository.authenticate("testuser", "password123");
-
-    assertNotNull(result);
-    assertEquals("testuser", result.getName());
-  }
-
-  @Test
-  public void testAuthenticate_Failure_WrongPassword() {
-    User mockUser = new User("testuser","password123");
-
-    Query<User> mockQuery = mock(Query.class);
-    when(mockSession.createQuery("FROM User u WHERE u.username = :username", User.class)).thenReturn(mockQuery);
-    when(mockQuery.setParameter("username", "testuser")).thenReturn(mockQuery);
-    when(mockQuery.uniqueResult()).thenReturn(mockUser);
-
-    User result = userRepository.authenticate("testuser", "wrongpassword");
-
-    assertNull(result);
-  }
-
-  @Test
-  public void testAuthenticate_Failure_UserNotFound() {
-    Query<User> mockQuery = mock(Query.class);
-    when(mockSession.createQuery("FROM User u WHERE u.username = :username", User.class)).thenReturn(mockQuery);
-    when(mockQuery.setParameter("username", "nonexistentuser")).thenReturn(mockQuery);
-    when(mockQuery.uniqueResult()).thenReturn(null);
-
-    User result = userRepository.authenticate("nonexistentuser", "password123");
-
-    assertNull(result);
-  }
-
 }

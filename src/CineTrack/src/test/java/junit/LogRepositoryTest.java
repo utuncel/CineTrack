@@ -1,81 +1,101 @@
 package junit;
 
+import org.com.model.repository.LogRepository;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import org.com.model.domain.Log;
 import org.com.model.domain.User;
-import org.com.model.repository.HibernateUtil;
-import org.com.model.repository.LogRepository;
-import org.hibernate.SessionFactory;
-import org.junit.jupiter.api.*;
+import org.com.model.repository.AbstractRepository.RepositoryException;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class LogRepositoryTest {
+public class LogRepositoryTest {
+
+  @Mock
   private SessionFactory sessionFactory;
+
+  @Mock
+  private Session session;
+
+  @Mock
+  private Transaction transaction;
+
+  @Mock
+  private Query<Log> query;
+
   private LogRepository logRepository;
 
-  @BeforeAll
-  void setUp() {
-    sessionFactory =  HibernateUtil.getSessionFactory();
-
+  @Before
+  public void setUp() {
+    MockitoAnnotations.initMocks(this);
     logRepository = new LogRepository(sessionFactory);
-  }
-
-  @AfterAll
-  void tearDown() {
-    if (sessionFactory != null) {
-      sessionFactory.close();
-    }
+    when(sessionFactory.getCurrentSession()).thenReturn(session);
+    when(session.beginTransaction()).thenReturn(transaction);
   }
 
   @Test
-  void testCreateLogger() {
-    User user = new User("TestUser", "password");  // Beispieluser für das Log
+  public void testSaveLogger_Successful() {
+    User user = new User("testUser", "password");
     Log log = new Log("INFO", "Test log message");
-    log.setUser(user);
 
-    logRepository.createLogger(log);
+    logRepository.saveLogger(log, user);
 
-    Log retrievedLog = logRepository.getLoggerById(log.getId());
-    assertNotNull(retrievedLog);
-    assertEquals("Test log message", retrievedLog.getMessage());
-    assertEquals("INFO", retrievedLog.getLevel());
+    verify(session).persist(log);
+    assertEquals(user, log.getUser());
+    verify(transaction).commit();
+  }
+
+  @Test(expected = RepositoryException.class)
+  public void testSaveLogger_Failure() {
+    User user = new User("testUser", "password");
+    Log log = new Log("INFO", "Test log message");
+
+    doThrow(new RuntimeException("Database error")).when(session).persist(log);
+
+    logRepository.saveLogger(log, user);
   }
 
   @Test
-  void testGetLoggerById() {
-    Log log = new Log("INFO", "Another log message");
-    logRepository.createLogger(log);
+  public void testGetLogsByUser_LogsExist() {
+    User user = new User("testUser", "password");
+    List<Log> expectedLogs = Arrays.asList(
+        new Log("INFO", "Log 1"),
+        new Log("ERROR", "Log 2")
+    );
 
-    Log retrievedLog = logRepository.getLoggerById(log.getId());
-    assertNotNull(retrievedLog);
-    assertEquals("Another log message", retrievedLog.getMessage());
+    when(session.createQuery("FROM Log l WHERE l.user = :user", Log.class)).thenReturn(query);
+    when(query.setParameter("user", user)).thenReturn(query);
+    when(query.list()).thenReturn(expectedLogs);
+
+    List<Log> retrievedLogs = logRepository.getLogsByUser(user);
+
+    assertNotNull(retrievedLogs);
+    assertEquals(2, retrievedLogs.size());
+    verify(transaction).commit();
   }
 
   @Test
-  void testGetAllLoggers() {
-    Log log1 = new Log("ERROR", "Error occurred");
-    Log log2 = new Log("DEBUG", "Debugging the app");
+  public void testGetLogsByUser_NoLogsFound() {
+    User user = new User("testUser", "password");
 
-    logRepository.createLogger(log1);
-    logRepository.createLogger(log2);
+    when(session.createQuery("FROM Log l WHERE l.user = :user", Log.class)).thenReturn(query);
+    when(query.setParameter("user", user)).thenReturn(query);
+    when(query.list()).thenReturn(Arrays.asList());
 
-    List<Log> logs = logRepository.getAllLoggers();
-    assertNotNull(logs);
-    assertEquals(2, logs.size());
-  }
+    List<Log> retrievedLogs = logRepository.getLogsByUser(user);
 
-  @Test
-  void testDeleteLogger() {
-    Log log = new Log("WARNING", "Test delete log");
-    logRepository.createLogger(log);
-
-    Long loggerId = log.getId();
-    logRepository.deleteLogger(loggerId);
-
-    Log deletedLog = logRepository.getLoggerById(loggerId);
-    assertNull(deletedLog);
+    assertTrue(retrievedLogs.isEmpty());
+    verify(transaction).commit();
   }
 }
