@@ -1,78 +1,130 @@
 package junit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import javafx.application.Platform;
+import org.com.model.domain.ApiCinematic;
 import org.com.model.domain.Cinematic;
+import org.com.model.domain.CsvCinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 import org.com.service.ApiService;
 import org.com.service.CineFactoryService;
 import org.com.service.CsvImporterService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CineFactoryServiceTest {
 
-  private CineFactoryService cineFactoryService;
+  private ApiService apiService;
   private CsvImporterService csvImporterService;
-  private File tempFile;
+  private CineFactoryService cineFactoryService;
 
-  @BeforeEach
-  void setUp() throws IOException {
-    tempFile = File.createTempFile("Test", ".csv");
-    csvImporterService = new CsvImporterService(tempFile.getAbsolutePath());
-    ApiService apiService = new ApiService();
-    cineFactoryService = new CineFactoryService(csvImporterService, apiService);
+  @Before
+  public void setUp() {
+    apiService = mock(ApiService.class);
+    csvImporterService = mock(CsvImporterService.class);
+    cineFactoryService = new CineFactoryService(csvImporterService, apiService, null);
+  }
+
+  @BeforeClass
+  public static void initJavaFX() {
+    Platform.startup(() -> {
+    });
   }
 
   @Test
-  void testReadCSVValid() throws IOException {
-    String validCSVContent = "Title,Type,State,Rating\n" +
-        "The Fighter,MOVIE,FINISHED,6\n" +
-        "Up,MOVIE,FINISHED,8\n" +
-        "The Curious Case of Benjamin Button,MOVIE,TOWATCH\n" +
-        "Oppenheimer,MOVIE,FINISHED,6\n" +
-        "One Piece,ANIME,WATCHING";
+  public void testCreateCinematic_Success() {
+    CsvCinematic csvCinematic = mock(CsvCinematic.class);
+    when(csvCinematic.getTitle()).thenReturn("Inception");
+    when(csvCinematic.getRating()).thenReturn(5);
+    when(csvCinematic.getState()).thenReturn(State.WATCHING);
+    when(csvCinematic.getType()).thenReturn(Type.MOVIE);
 
-    writeToFile(validCSVContent);
+    ApiCinematic apiCinematic = mock(ApiCinematic.class);
+    when(apiCinematic.getRuntime()).thenReturn("148 min");
+    when(apiCinematic.getImdbRating()).thenReturn(
+        "8.8");
+    when(apiCinematic.getImdbVotes()).thenReturn("2,000");
+    when(apiCinematic.getDirector()).thenReturn("Christopher Nolan");
+    when(apiCinematic.getPlot()).thenReturn("A thief who steals corporate secrets...");
+    when(apiCinematic.getPosterUrl()).thenReturn("https://example.com/inception.jpg");
+    when(apiCinematic.getGenre()).thenReturn("Action, Sci-Fi");
+    when(apiCinematic.getActors()).thenReturn("Leonardo DiCaprio, Joseph Gordon-Levitt");
 
-    List<Cinematic> cinematics = cineFactoryService.createCinematics();
+    when(apiService.fetchMoviesOrSeries("Inception")).thenReturn(apiCinematic);
 
-    assertEquals(5, cinematics.size());
+    Cinematic result = cineFactoryService.createCinematic(csvCinematic);
+
+    assertNotNull(result);
+  }
+
+
+  @Test
+  public void testCreateCinematic_NotFound() {
+    CsvCinematic csvCinematic = mock(CsvCinematic.class);
+    when(csvCinematic.getTitle()).thenReturn("Unknown Movie");
+    when(apiService.fetchMoviesOrSeries("Unknown Movie")).thenReturn(null);
+
+    Cinematic result = cineFactoryService.createCinematic(csvCinematic);
+
+    assertNull(result);
+    verify(apiService).fetchMoviesOrSeries("Unknown Movie");
   }
 
   @Test
-  void testReadCSVValidFromFile() throws IOException {
+  public void testCreateCinematics_Success() throws IOException {
+    CsvCinematic csvCinematic = mock(CsvCinematic.class);
+    when(csvCinematic.getTitle()).thenReturn("Inception");
+    when(csvCinematic.getRating()).thenReturn(5);
+    when(csvCinematic.getState()).thenReturn(State.WATCHING);
+    when(csvCinematic.getType()).thenReturn(Type.MOVIE);
 
-    csvImporterService = new CsvImporterService(
-        "C:\\Users\\umut2\\Desktop\\Programmieren\\Projekte\\CineTrack\\src\\CineTrack\\src\\test\\resources\\Test.csv");
-    ApiService apiService = new ApiService();
-    cineFactoryService = new CineFactoryService(csvImporterService, apiService);
+    ApiCinematic apiCinematic = mock(ApiCinematic.class);
+    when(apiCinematic.getRuntime()).thenReturn("148 min");
+    when(apiCinematic.getImdbRating()).thenReturn("8.8");
+    when(apiCinematic.getImdbVotes()).thenReturn("2,000");
+    when(apiCinematic.getDirector()).thenReturn("Christopher Nolan");
+    when(apiCinematic.getPlot()).thenReturn("A thief who steals corporate secrets...");
+    when(apiCinematic.getPosterUrl()).thenReturn("https://example.com/inception.jpg");
+    when(apiCinematic.getGenre()).thenReturn("Action, Sci-Fi");
+    when(apiCinematic.getActors()).thenReturn("Leonardo DiCaprio, Joseph Gordon-Levitt");
 
-    List<Cinematic> cinematics = cineFactoryService.createCinematics();
+    when(csvImporterService.importData()).thenReturn(Collections.singletonList(csvCinematic));
+    when(apiService.fetchMoviesOrSeries("Inception")).thenReturn(apiCinematic);
 
-    assertEquals(5, cinematics.size());
+    List<Cinematic> result = cineFactoryService.createCinematics();
+
+    assertEquals(1, result.size());
+  }
+
+
+  @Test(expected = IOException.class)
+  public void testCreateCinematics_CsvImportFails() throws IOException {
+    when(csvImporterService.importData()).thenThrow(new IOException());
+    cineFactoryService.createCinematics();
   }
 
   @Test
-  void testReadCSVInvalid() throws IOException {
-    String validCSVContent = "Title,Type,State,Rating\n" +
-        "The Fighter,MOVIE,FINISHED,6\n" +
-        "Txhe Bixg Bxang Theory,SERIES,FINISHED,8";
+  public void testCreateCinematics_EmptyCsv() throws IOException {
+    when(csvImporterService.importData()).thenReturn(Collections.emptyList());
 
-    writeToFile(validCSVContent);
+    List<Cinematic> result = cineFactoryService.createCinematics();
 
-    List<Cinematic> cinematics = cineFactoryService.createCinematics();
-
-    assertEquals(1, cinematics.size());
-  }
-
-  private void writeToFile(String content) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-      writer.write(content);
-    }
+    assertTrue(result.isEmpty());
+    verify(csvImporterService).importData();
   }
 }

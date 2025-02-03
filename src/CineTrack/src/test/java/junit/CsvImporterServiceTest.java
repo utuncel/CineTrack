@@ -1,71 +1,78 @@
 package junit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import javafx.application.Platform;
 import org.com.model.domain.CsvCinematic;
+import org.com.model.enums.State;
+import org.com.model.enums.Type;
 import org.com.service.CsvImporterService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
-class CsvImporterServiceTest {
+public class CsvImporterServiceTest {
 
-  private CsvImporterService csvImporterService;
-  private File tempFile;
+  @Rule
+  public TemporaryFolder folder = new TemporaryFolder();
 
-  @BeforeEach
-  void setUp() throws IOException {
-    tempFile = File.createTempFile("Test", ".csv");
-    csvImporterService = new CsvImporterService(tempFile.getAbsolutePath());
+  @BeforeClass
+  public static void initJavaFX() {
+    Platform.startup(() -> {
+    });
   }
 
   @Test
-  void testImportDataValid() throws IOException {
-    String validCSVContent = """
-        Title,Type,State,Rating
-        The Fighter,MOVIE,FINISHED,1
-        Up,SERIES,TOWATCH
-        Vice,MOVIE,DROPPED,8
-        """;
+  public void testImportData_Success_WithRating() throws IOException {
+    File csvFile = folder.newFile("cinematics_with_rating.csv");
+    FileWriter writer = new FileWriter(csvFile);
+    writer.write("title,type,state,rating\n");
+    writer.write("Inception,MOVIE,FINISHED,5\n");
+    writer.close();
 
-    writeToFile(validCSVContent);
+    CsvImporterService importer = new CsvImporterService(csvFile.getAbsolutePath());
+    List<CsvCinematic> result = importer.importData();
 
-    List<CsvCinematic> cinematics = csvImporterService.importData();
-
-    assertEquals(3, cinematics.size());
-    assertEquals(List.of("The Fighter", "MOVIE", "FINISHED", 1),
-        List.of(cinematics.getFirst().getTitle(), cinematics.getFirst().getType().toString(),
-            cinematics.getFirst().getState().toString(), cinematics.getFirst().getRating()));
-    assertEquals(List.of("Up", "SERIES", "TOWATCH"),
-        List.of(cinematics.get(1).getTitle(), cinematics.get(1).getType().toString(),
-            cinematics.get(1).getState().toString()));
-    assertEquals(List.of("Vice", "MOVIE", "DROPPED"),
-        List.of(cinematics.get(2).getTitle(), cinematics.get(2).getType().toString(),
-            cinematics.get(2).getState().toString()));
+    assertNotNull(result);
+    assertEquals(1, result.size());
+    CsvCinematic cinematic = result.get(0);
+    assertEquals("Inception", cinematic.getTitle());
+    assertEquals(5, cinematic.getRating());
+    assertEquals(State.FINISHED, cinematic.getState());
+    assertEquals(Type.MOVIE, cinematic.getType());
   }
+
 
   @Test
-  void testImportDataInvalid() throws IOException {
-    String invalidCSVContent = """
-        tooFew
-        justTwo,columns
-        valid1,valid2,valid3
-        """;
+  public void testImportData_Success_WithoutRating() throws IOException {
+    File csvFile = folder.newFile("cinematics_without_rating.csv");
+    FileWriter writer = new FileWriter(csvFile);
+    writer.write("title,type,state,rating\n");
+    writer.write("Inception,MOVIE,FINISHED\n");
+    writer.close();
 
-    writeToFile(invalidCSVContent);
+    CsvImporterService importer = new CsvImporterService(csvFile.getAbsolutePath());
+    List<CsvCinematic> result = importer.importData();
 
-    assertThrows(RuntimeException.class, () -> csvImporterService.importData());
+    assertNotNull(result);
+    assertEquals(1, result.size());
+    CsvCinematic cinematic = result.get(0);
+    assertEquals("Inception", cinematic.getTitle());
+    assertEquals(0, cinematic.getRating());
+    assertEquals(State.FINISHED, cinematic.getState());
+    assertEquals(Type.MOVIE, cinematic.getType());
   }
 
-  // help-method that I can write some csv content into a file
-  private void writeToFile(String content) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile))) {
-      writer.write(content);
-    }
+
+  @Test(expected = IOException.class)
+  public void testImportData_FileNotFound() throws IOException {
+    CsvImporterService importer = new CsvImporterService("non_existent_file.csv");
+    importer.importData();
   }
 }
