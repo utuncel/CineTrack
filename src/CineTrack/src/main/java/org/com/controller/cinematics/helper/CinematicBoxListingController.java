@@ -131,7 +131,7 @@ public class CinematicBoxListingController {
   private void createAndCacheView(Cinematic cinematic) {
     try {
       FXMLLoader loader = new FXMLLoader(
-          getClass().getResource("/cinematics/helper/CinematicBoxView.fxml"));
+          getClass().getResource("/org/com/view/cinematics/helper/CinematicBoxView.fxml"));
       StackPane cinematicPane = loader.load();
       CinematicBoxController controller = loader.getController();
       controller.setCinematicView(cinematic);

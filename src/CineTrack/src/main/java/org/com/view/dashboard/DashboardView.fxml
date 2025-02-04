@@ -76,7 +76,7 @@
 
       <!-- Sidebar bleibt erhalten -->
       <left>
-        <fx:include source="../SidebarView.fxml" />
+        <fx:include source="../sidebar/SidebarView.fxml" />
       </left>
 
     </BorderPane>

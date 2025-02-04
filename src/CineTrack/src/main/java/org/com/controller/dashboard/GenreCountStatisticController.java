@@ -75,7 +75,7 @@ public class GenreCountStatisticController {
   public void addGenreCountStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/dashboard/GenreCountStatisticView.fxml"));
+        getClass().getResource("/org/com/view/dashboard/GenreCountStatisticView.fxml"));
     HBox genreCountStatistic = loader.load();
 
     GenreCountStatisticController controller = loader.getController();

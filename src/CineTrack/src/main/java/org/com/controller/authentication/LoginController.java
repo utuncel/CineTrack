@@ -80,7 +80,7 @@ public class LoginController {
   @FXML
   private void switchToRegister() {
     try {
-      viewLoaderService.loadView("/authentication/RegisterView.fxml",
+      viewLoaderService.loadView("/org/com/view/authentication/RegisterView.fxml",
           (Stage) usernameField.getScene().getWindow());
     } catch (Exception e) {
       dialogService.showErrorAlert("Navigation Error", "Could not switch to registration view");

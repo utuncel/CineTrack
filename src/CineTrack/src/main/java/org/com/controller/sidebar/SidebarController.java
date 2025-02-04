@@ -45,7 +45,7 @@ public class SidebarController {
    */
   @FXML
   public void loadMovieView() {
-    loadCinematicView("/cinematics/MovieView.fxml");
+    loadCinematicView("/org/com/view/cinematics/MovieView.fxml");
   }
 
   /**
@@ -53,7 +53,7 @@ public class SidebarController {
    */
   @FXML
   public void loadSeriesView() {
-    loadCinematicView("/cinematics/SeriesView.fxml");
+    loadCinematicView("/org/com/view/cinematics/SeriesView.fxml");
   }
 
   /**
@@ -61,7 +61,7 @@ public class SidebarController {
    */
   @FXML
   public void loadAnimeView() {
-    loadCinematicView("/cinematics/AnimeView.fxml");
+    loadCinematicView("/org/com/view/cinematics/AnimeView.fxml");
   }
 
   /**
@@ -69,7 +69,7 @@ public class SidebarController {
    */
   @FXML
   public void loadDataImporterView() {
-    viewLoaderService.loadView("/dataimport/DataImporterView.fxml", mainContentPane);
+    viewLoaderService.loadView("/org/com/view/dataimport/DataImporterView.fxml", mainContentPane);
   }
 
   /**
@@ -77,7 +77,7 @@ public class SidebarController {
    */
   @FXML
   public void loadDataExportView() {
-    viewLoaderService.loadView("/dataexport/DataExportView.fxml", mainContentPane);
+    viewLoaderService.loadView("/org/com/view/dataexport/DataExportView.fxml", mainContentPane);
   }
 
   /**
@@ -85,7 +85,7 @@ public class SidebarController {
    */
   @FXML
   public void loadAddCinematicView() {
-    viewLoaderService.loadView("/addcinematic/AddCinematicView.fxml", mainContentPane);
+    viewLoaderService.loadView("/org/com/view/addcinematic/AddCinematicView.fxml", mainContentPane);
   }
 
   /**
@@ -95,7 +95,7 @@ public class SidebarController {
   @FXML
   public void loadLoggerView() {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/log/LogView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/com/view/log/LogView.fxml"));
       Parent view = loader.load();
       updateMainContent(view);
       logger.logInfo("Log View successfully loaded");
@@ -111,7 +111,8 @@ public class SidebarController {
   @FXML
   public void loadDashboardView() {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(
+          "/org/com/view/dashboard/DashboardView.fxml"));
       Parent view = loader.load();
       DashboardController controller = loader.getController();
       controller.setDashboardModel(dashboardModel);

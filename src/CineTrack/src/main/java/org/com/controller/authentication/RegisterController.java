@@ -84,7 +84,7 @@ public class RegisterController {
   @FXML
   private void switchToLogin(ActionEvent event) {
     try {
-      viewLoader.loadView("/authentication/LoginView.fxml",
+      viewLoader.loadView("/org/com/view/authentication/LoginView.fxml",
           (Stage) usernameField.getScene().getWindow());
     } catch (Exception e) {
       logger.logError("Navigation error: " + e.getMessage());

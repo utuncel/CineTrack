@@ -50,7 +50,8 @@ public class CineTrackApplication extends Application {
    * @throws IOException If FXML loading fails
    */
   private Scene createScene() throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("/authentication/LoginView.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource(
+        "/org/com/view/authentication/LoginView.fxml"));
     Parent root = loader.load();
     return new Scene(root);
   }

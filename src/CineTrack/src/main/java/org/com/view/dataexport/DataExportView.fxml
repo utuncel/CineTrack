@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-  fx:controller="org.com.controller.dataimport.DataImporterController"
-  stylesheets="@DataImporterStyle.css" prefHeight="800.0" prefWidth="1200.0">
+  fx:controller="org.com.controller.dataexport.DataExportController"
+  stylesheets="@DataExportStyle.css" prefHeight="800.0" prefWidth="1200.0">
   <center>
     <VBox alignment="CENTER" spacing="20" styleClass="vbox">
       <VBox styleClass="import-area" alignment="CENTER" spacing="15">
-        <Button text="Import CSV File" fx:id="chooseFileButton"/>
+        <Button text="Export Cinematics" fx:id="exportButton"/>
       </VBox>
     </VBox>
   </center>
 
   <left>
-    <fx:include source="../SidebarView.fxml"/>
+    <fx:include source="../sidebar/SidebarView.fxml"/>
   </left>
 </BorderPane>

@@ -60,7 +60,8 @@ public class ViewLoaderService {
    */
   public void loadDashboardView(List<Cinematic> cinematics, TextField usernameField) {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/dashboard/DashboardView.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource(
+          "/org/com/view/dashboard/DashboardView.fxml"));
       Parent dashboardView = loader.load();
 
       DashboardModelSingleton.getInstance().setCinematics(cinematics);
@@ -73,10 +74,10 @@ public class ViewLoaderService {
       Stage primaryStage = (Stage) usernameField.getScene().getWindow();
       primaryStage.setScene(scene);
       primaryStage.show();
-      logger.logInfo("View successfully loaded: " + "/dashboard/DashboardView.fxml");
+      logger.logInfo("View successfully loaded: " + "/org/com/view/dashboard/DashboardView.fxml");
     } catch (IOException e) {
       logger.logError(
-          "Error loading view " + "/dashboard/DashboardView.fxml" + ": " + e.getMessage());
+          "Error loading view " + "/org/com/view/dashboard/DashboardView.fxml" + ": " + e.getMessage());
     }
   }
 

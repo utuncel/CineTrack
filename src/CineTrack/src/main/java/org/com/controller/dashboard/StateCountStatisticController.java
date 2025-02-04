@@ -72,7 +72,7 @@ public class StateCountStatisticController {
   public void addStateCountStatistic(List<Cinematic> cinematics, List<Type> types,
       List<State> states) throws IOException {
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/dashboard/StateCountStatisticView.fxml"));
+        getClass().getResource("/org/com/view/dashboard/StateCountStatisticView.fxml"));
     HBox fourBlockStatistic = loader.load();
 
     StateCountStatisticController controller = loader.getController();
