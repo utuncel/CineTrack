@@ -39,8 +39,8 @@
     <property name="hibernate.bytecode.provider">bytebuddy</property>
 
     <!-- Mapping Files -->
-    <mapping resource="persistence/User.hbm.xml" />
-    <mapping resource="persistence/Cinematic.hbm.xml" />
-    <mapping resource="persistence/Logger.hbm.xml" />
+    <mapping resource="db_config/User.hbm.xml" />
+    <mapping resource="db_config/Cinematic.hbm.xml" />
+    <mapping resource="db_config/Logger.hbm.xml" />
   </session-factory>
 </hibernate-configuration>

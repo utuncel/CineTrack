@@ -8,10 +8,10 @@ import org.hibernate.cfg.Configuration;
  * Utility class for creating and managing Hibernate SessionFactory.
  * <p>
  * Provides a singleton SessionFactory configured from a hibernate configuration file and uses an
- * environment variable for database password.
+ * environment variable for database password. You can find the config files under in the resources folder.
  *
  * @author Umut
- * @version 1.0
+ * @version 1.1
  */
 public class HibernateUtil {
 
@@ -42,7 +42,7 @@ public class HibernateUtil {
 
       return new Configuration()
           .configure(
-              HibernateUtil.class.getClassLoader().getResource("persistence/hibernate.cfg.xml"))
+              HibernateUtil.class.getClassLoader().getResource("db_config/hibernate.cfg.xml"))
           .setProperty("hibernate.connection.password", dbPassword)
           .buildSessionFactory();
     } catch (Exception e) {
