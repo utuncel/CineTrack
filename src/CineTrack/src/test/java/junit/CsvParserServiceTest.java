@@ -9,13 +9,7 @@ import org.com.service.CsvParserService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvParserServiceTest {
-
-  @BeforeClass
-  public static void initJavaFX() {
-    Platform.startup(() -> {
-    });
-  }
+public class CsvParserServiceTest extends JavaFXTestBase{
 
   @Test
   public void testParseTypes_ValidType() {

@@ -27,7 +27,7 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CineFactoryServiceTest {
+public class CineFactoryServiceTest extends JavaFXTestBase {
 
   private ApiService apiService;
   private CsvImporterService csvImporterService;
@@ -38,12 +38,6 @@ public class CineFactoryServiceTest {
     apiService = mock(ApiService.class);
     csvImporterService = mock(CsvImporterService.class);
     cineFactoryService = new CineFactoryService(csvImporterService, apiService, null);
-  }
-
-  @BeforeClass
-  public static void initJavaFX() {
-    Platform.startup(() -> {
-    });
   }
 
   @Test

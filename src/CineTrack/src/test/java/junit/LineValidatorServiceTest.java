@@ -8,15 +8,9 @@ import org.com.service.LineValidatorService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class LineValidatorServiceTest {
+public class LineValidatorServiceTest extends JavaFXTestBase{
 
   private LineValidatorService validatorService = new LineValidatorService();
-
-  @BeforeClass
-  public static void initJavaFX() {
-    Platform.startup(() -> {
-    });
-  }
 
   @Test
   public void testValidHeaderLength_Correct() {

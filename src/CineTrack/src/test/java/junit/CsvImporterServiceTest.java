@@ -17,16 +17,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-public class CsvImporterServiceTest {
+public class CsvImporterServiceTest extends JavaFXTestBase {
 
   @Rule
   public TemporaryFolder folder = new TemporaryFolder();
-
-  @BeforeClass
-  public static void initJavaFX() {
-    Platform.startup(() -> {
-    });
-  }
 
   @Test
   public void testImportData_Success_WithRating() throws IOException {
