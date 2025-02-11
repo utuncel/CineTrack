@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.com.model.models.CinematicModel;
 import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
-import org.com.model.models.DashboardModel;
 import org.com.model.repository.CinematicRepository;
 import org.com.model.repository.HibernateUtil;
 import org.com.service.ApiService;
@@ -33,7 +33,7 @@ import org.com.service.SessionManagerService;
  */
 public class DataImporterController {
 
-  private final DashboardModel dashboardModel;
+  private final CinematicModel cinematicModel;
   private final CinematicRepository cinematicRepository;
   private final SessionManagerService sessionManager;
   private final DialogService dialogService;
@@ -48,7 +48,7 @@ public class DataImporterController {
 
   public DataImporterController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
-    this.dashboardModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = DashboardModelSingleton.getInstance();
     this.sessionManager = SessionManagerService.getInstance();
     this.dialogService = new DialogService();
   }
@@ -139,7 +139,7 @@ public class DataImporterController {
   private void updateRepositoryAndModel(List<Cinematic> cinematics) {
     cinematicRepository.deleteAllCinematicsByUser(sessionManager.getCurrentUser());
     cinematicRepository.saveCinematics(cinematics, sessionManager.getCurrentUser());
-    dashboardModel.setCinematics(cinematics);
+    cinematicModel.setCinematics(cinematics);
     sessionManager.getCurrentUser().setCinematics(cinematics);
   }
 

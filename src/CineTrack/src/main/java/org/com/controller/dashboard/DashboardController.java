@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import org.com.model.enums.State;
 import org.com.model.enums.StatisticStrategy;
 import org.com.model.enums.Type;
-import org.com.model.models.DashboardModel;
+import org.com.model.models.CinematicModel;
 import org.com.service.LogService;
 
 /**
@@ -69,18 +69,18 @@ public class DashboardController {
   @FXML
   private StackPane contentPane;
 
-  private DashboardModel dashboardModel;
+  private CinematicModel cinematicModel;
 
   /**
-   * Sets the DashboardModel for this controller, initializes the checkbox maps, and sets up the
+   * Sets the CinematicModel for this controller, initializes the checkbox maps, and sets up the
    * checkbox listeners.
    *
-   * @param dashboardModel the DashboardModel to be set
+   * @param cinematicModel the CinematicModel to be set
    */
-  public void setDashboardModel(DashboardModel dashboardModel) {
+  public void setDashboardModel(CinematicModel cinematicModel) {
     try {
-      this.dashboardModel = dashboardModel;
-      dashboardModel.removeAllStatisticStrategies();
+      this.cinematicModel = cinematicModel;
+      cinematicModel.removeAllStatisticStrategies();
       initializeCheckBoxMaps();
       setupCheckBoxListeners();
     } catch (Exception e) {
@@ -152,9 +152,9 @@ public class DashboardController {
    */
   private void handleTypeCheckBoxAction(Type type, boolean isSelected) {
     if (isSelected) {
-      dashboardModel.addType(type);
+      cinematicModel.addType(type);
     } else {
-      dashboardModel.removeType(type);
+      cinematicModel.removeType(type);
     }
     updateDashboard();
   }
@@ -167,9 +167,9 @@ public class DashboardController {
    */
   private void handleStateCheckBoxAction(State state, boolean isSelected) {
     if (isSelected) {
-      dashboardModel.addState(state);
+      cinematicModel.addState(state);
     } else {
-      dashboardModel.removeState(state);
+      cinematicModel.removeState(state);
     }
     updateDashboard();
   }
@@ -183,11 +183,11 @@ public class DashboardController {
   private void handleStrategyCheckBoxAction(StatisticStrategy strategy, boolean isSelected) {
     try {
       if (isSelected) {
-        dashboardModel.addStatisticStrategy(strategy);
+        cinematicModel.addStatisticStrategy(strategy);
         Optional.ofNullable(STRATEGY_CHART_HANDLERS.get(strategy))
             .ifPresent(handler -> handler.accept(this));
       } else {
-        dashboardModel.removeStatisticStrategy(strategy);
+        cinematicModel.removeStatisticStrategy(strategy);
         removeChart(getChartIdForStrategy(strategy));
       }
     } catch (Exception e) {
@@ -201,9 +201,9 @@ public class DashboardController {
   private void addAverageRatingChart() {
     try {
       new AverageRatingStatisticController(chartContainer)
-          .addAverageRatingStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addAverageRatingStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding Average Rating chart: " + e.getMessage());
     }
@@ -215,9 +215,9 @@ public class DashboardController {
   private void addGenreCountChart() {
     try {
       new GenreCountStatisticController(chartContainer)
-          .addGenreCountStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addGenreCountStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding Genre Count chart: " + e.getMessage());
     }
@@ -229,9 +229,9 @@ public class DashboardController {
   private void addStateCountChart() {
     try {
       new StateCountStatisticController(chartContainer)
-          .addStateCountStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addStateCountStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding State Count chart: " + e.getMessage());
     }
@@ -243,9 +243,9 @@ public class DashboardController {
   private void addTypeCountChart() {
     try {
       new TypeCountStatisticController(chartContainer)
-          .addTypeCountStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addTypeCountStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding Type Count chart: " + e.getMessage());
     }
@@ -257,9 +257,9 @@ public class DashboardController {
   private void addGenreRatingChart() {
     try {
       new GenreRatingStatisticController(chartContainer)
-          .addGenreRatingStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addGenreRatingStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding Genre Rating chart: " + e.getMessage());
     }
@@ -271,9 +271,9 @@ public class DashboardController {
   private void addActorRatingChart() {
     try {
       new ActorRatingStatisticController(chartContainer)
-          .addActorRatingStatistic(dashboardModel.getCinematics(),
-              dashboardModel.getTypes(),
-              dashboardModel.getStates());
+          .addActorRatingStatistic(cinematicModel.getCinematics(),
+              cinematicModel.getTypes(),
+              cinematicModel.getStates());
     } catch (IOException e) {
       logger.logError("Error adding Actor Rating chart: " + e.getMessage());
     }
@@ -312,7 +312,7 @@ public class DashboardController {
    */
   private void updateDashboard() {
     chartContainer.getChildren().clear();
-    dashboardModel.getStatisticStrategies()
+    cinematicModel.getStatisticStrategies()
         .forEach(strategy ->
             Optional.ofNullable(STRATEGY_CHART_HANDLERS.get(strategy))
                 .ifPresent(handler -> handler.accept(this)));

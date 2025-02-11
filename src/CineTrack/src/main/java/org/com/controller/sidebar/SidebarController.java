@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
 import org.com.model.models.DashboardModelSingleton;
-import org.com.model.models.DashboardModel;
+import org.com.model.models.CinematicModel;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
 
@@ -30,14 +30,14 @@ public class SidebarController {
 
   @FXML
   private BorderPane mainContentPane;
-  private DashboardModel dashboardModel;
+  private CinematicModel cinematicModel;
 
   /**
    * Initializes the controller. Automatically called after FXML loading.
    */
   @FXML
   public void initialize() {
-    dashboardModel = DashboardModelSingleton.getInstance();
+    cinematicModel = DashboardModelSingleton.getInstance();
   }
 
   /**
@@ -115,7 +115,7 @@ public class SidebarController {
           "/org/com/view/dashboard/DashboardView.fxml"));
       Parent view = loader.load();
       DashboardController controller = loader.getController();
-      controller.setDashboardModel(dashboardModel);
+      controller.setDashboardModel(cinematicModel);
       updateMainContent(view);
       logger.logInfo("Dashboard View successfully loaded");
     } catch (IOException e) {
@@ -134,7 +134,7 @@ public class SidebarController {
       FXMLLoader loader = new FXMLLoader(getClass().getResource(viewPath));
       Parent view = loader.load();
       CinematicController controller = loader.getController();
-      controller.loadData(dashboardModel.getCinematics());
+      controller.loadData(cinematicModel.getCinematics());
       updateMainContent(view);
       logger.logInfo("Media View successfully loaded: " + viewPath);
     } catch (IOException e) {

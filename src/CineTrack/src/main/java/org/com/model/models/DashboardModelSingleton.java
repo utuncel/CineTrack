@@ -2,14 +2,14 @@ package org.com.model.models;
 
 public class DashboardModelSingleton {
 
-  private static DashboardModel instance;
+  private static CinematicModel instance;
 
   private DashboardModelSingleton() {
   }
 
-  public static DashboardModel getInstance() {
+  public static CinematicModel getInstance() {
     if (instance == null) {
-      instance = new DashboardModel();
+      instance = new CinematicModel();
     }
     return instance;
   }

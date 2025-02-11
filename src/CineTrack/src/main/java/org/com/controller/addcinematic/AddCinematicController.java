@@ -6,7 +6,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.CsvCinematic;
-import org.com.model.models.DashboardModel;
+import org.com.model.models.CinematicModel;
 import org.com.model.models.DashboardModelSingleton;
 import org.com.model.repository.CinematicRepository;
 import org.com.model.repository.HibernateUtil;
@@ -27,7 +27,7 @@ import org.com.service.SessionManagerService;
  *   <li>{@link CineFactoryService} for creating {@link Cinematic} objects from parsed input.</li>
  *   <li>{@link CinematicRepository} for saving cinematics to the database.</li>
  *   <li>{@link SessionManagerService} for managing user sessions.</li>
- *   <li>{@link DashboardModel} for updating the application model with new cinematics.</li>
+ *   <li>{@link CinematicModel} for updating the application model with new cinematics.</li>
  * </ul>
  *
  * @author umut
@@ -40,7 +40,7 @@ public class AddCinematicController {
   private final CineFactoryService cineFactoryService = new CineFactoryService();
   private final CinematicRepository cinematicRepository;
   private final SessionManagerService sessionManager;
-  private final DashboardModel dashboardModel;
+  private final CinematicModel cinematicModel;
 
   @FXML
   private TextField titleField;
@@ -60,7 +60,7 @@ public class AddCinematicController {
   public AddCinematicController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
     this.sessionManager = SessionManagerService.getInstance();
-    this.dashboardModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = DashboardModelSingleton.getInstance();
   }
 
   /**
@@ -95,7 +95,7 @@ public class AddCinematicController {
   private void handleAddCinematic() {
     try {
       Cinematic cinematic = processCinematic();
-      dashboardModel.addCinematic(cinematic);
+      cinematicModel.addCinematic(cinematic);
     } catch (Exception e) {
       logger.logError("Error adding cinematic: " + e.getMessage());
     }

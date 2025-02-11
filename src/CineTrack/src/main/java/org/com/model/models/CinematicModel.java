@@ -9,7 +9,7 @@ import org.com.model.enums.StatisticStrategy;
 import org.com.model.enums.Type;
 
 /**
- * The `DashboardModel` class represents the data model for the dashboard in the application.
+ * The `CinematicModel` class represents the data model for the dashboard in the application.
  *
  * <p>This class manages the state of various filters, strategies, and cinematics that
  * are used in the dashboard. It provides methods to modify these settings while notifying
@@ -27,7 +27,7 @@ import org.com.model.enums.Type;
  * @author umut
  * @version 1.0
  */
-public class DashboardModel {
+public class CinematicModel {
 
   private final List<Type> types = new ArrayList<>();
   private final List<StatisticStrategy> statisticStrategies = new ArrayList<>();
@@ -36,14 +36,14 @@ public class DashboardModel {
   private final List<Cinematic> cinematics = new ArrayList<>();
 
   /**
-   * Constructs a new `DashboardModel` with default settings.
+   * Constructs a new `CinematicModel` with default settings.
    * <p>Default settings include:</p>
    * <ul>
    *   <li>All types (MOVIE, ANIME, SERIES) are enabled.</li>
    *   <li>States FINISHED, WATCHING, and DROPPED are enabled.</li>
    * </ul>
    */
-  public DashboardModel() {
+  public CinematicModel() {
     Collections.addAll(types, Type.MOVIE, Type.ANIME, Type.SERIES);
     Collections.addAll(states, State.FINISHED, State.WATCHING, State.DROPPED);
   }
@@ -195,15 +195,15 @@ public class DashboardModel {
 
 
   /**
-   * A listener interface for observing changes in the `DashboardModel`.
+   * A listener interface for observing changes in the `CinematicModel`.
    */
   public interface Listener {
 
     /**
-     * Called when the `DashboardModel` has changed.
+     * Called when the `CinematicModel` has changed.
      *
-     * @param dashboardModel The updated `DashboardModel` instance.
+     * @param cinematicModel The updated `CinematicModel` instance.
      */
-    void onChange(DashboardModel dashboardModel);
+    void onChange(CinematicModel cinematicModel);
   }
 }

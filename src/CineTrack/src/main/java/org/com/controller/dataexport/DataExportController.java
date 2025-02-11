@@ -10,7 +10,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.com.model.models.DashboardModelSingleton;
 import org.com.model.domain.Cinematic;
-import org.com.model.models.DashboardModel;
+import org.com.model.models.CinematicModel;
 import org.com.service.DialogService;
 import org.com.service.LogService;
 
@@ -22,11 +22,11 @@ import org.com.service.LogService;
  * @author umut
  * @version 1.0
  * @see org.com.model.domain.Cinematic
- * @see org.com.model.models.DashboardModel
+ * @see CinematicModel
  */
 public class DataExportController {
 
-  private final DashboardModel dashboardModel;
+  private final CinematicModel cinematicModel;
   private final DialogService dialogService;
   private final LogService logger = LogService.getInstance();
   @FXML
@@ -36,7 +36,7 @@ public class DataExportController {
    * Constructs a new DataExportController. Initializes the dashboard model and dialog service.
    */
   public DataExportController() {
-    this.dashboardModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = DashboardModelSingleton.getInstance();
     this.dialogService = new DialogService();
   }
 
@@ -126,7 +126,7 @@ public class DataExportController {
     try (FileWriter writer = new FileWriter(file)) {
       writer.write("Title,Type,State,Rating\n");
 
-      for (Cinematic cinematic : dashboardModel.getCinematics()) {
+      for (Cinematic cinematic : cinematicModel.getCinematics()) {
         writer.write(formatCinematicLine(cinematic));
       }
     }
