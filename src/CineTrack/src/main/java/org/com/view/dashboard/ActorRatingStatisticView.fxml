@@ -8,18 +8,18 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="373.0"
+  prefWidth="256.0"
+  spacing="20"
+  styleClass="strategy-container" xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.ActorRatingStatisticController"
+  fx:id="actorRating">
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22"
-  fx:controller="org.com.controller.dashboard.ActorRatingStatisticController"
-  fx:id="actorRating" prefWidth="256.0" prefHeight="373.0"
-  styleClass="strategy-container">
+  <Label styleClass="statistic-name" text="Actor Ratings:"/>
 
-  <Label styleClass="statistic-name" text="Actor Ratings:" />
+  <VBox alignment="CENTER" prefHeight="450.0" prefWidth="1000.0" spacing="10">
 
-  <VBox alignment="CENTER" spacing="10" prefWidth="1000.0" prefHeight="450.0">
-
-    <BarChart prefHeight="350.0" prefWidth="950.0" styleClass="bar-chart" fx:id="actorRatingBarChart">
+    <BarChart prefHeight="350.0" prefWidth="950.0" styleClass="bar-chart"
+      fx:id="actorRatingBarChart">
       <xAxis>
         <CategoryAxis label="Actor" fx:id="xAxis"/>
       </xAxis>
@@ -30,7 +30,8 @@
 
     <HBox alignment="CENTER" spacing="5">
       <Label styleClass="label-min-rating" text="Minimal Rating:"/>
-      <TextField styleClass="input-min-rating" fx:id="minRatingInput" prefWidth="150.0" promptText="0"/>
+      <TextField prefWidth="150.0" promptText="0" styleClass="input-min-rating"
+        fx:id="minRatingInput"/>
     </HBox>
 
   </VBox>

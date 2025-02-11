@@ -10,8 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardController;
-import org.com.model.models.CinematicModelSingleton;
 import org.com.model.domain.Cinematic;
+import org.com.model.models.CinematicModelSingleton;
 
 /**
  * Service for loading and managing JavaFX views and scenes. Handles view transitions and scene
@@ -77,7 +77,8 @@ public class ViewLoaderService {
       logger.logInfo("View successfully loaded: " + "/org/com/view/dashboard/DashboardView.fxml");
     } catch (IOException e) {
       logger.logError(
-          "Error loading view " + "/org/com/view/dashboard/DashboardView.fxml" + ": " + e.getMessage());
+          "Error loading view " + "/org/com/view/dashboard/DashboardView.fxml" + ": "
+              + e.getMessage());
     }
   }
 

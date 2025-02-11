@@ -4,8 +4,7 @@ package org.com.model.enums;
  * An enumeration representing the state of a cinematic item.
  *
  * <p>This enum is used to track the viewing status of a movie, anime, or series in the
- * application.
- * Each state indicates the user's progress or intent regarding the item.</p>
+ * application. Each state indicates the user's progress or intent regarding the item.</p>
  *
  * <ul>
  *   <li>{@link #FINISHED} - Indicates that the cinematic item has been fully watched.</li>

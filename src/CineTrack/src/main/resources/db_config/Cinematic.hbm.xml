@@ -6,46 +6,47 @@
 <hibernate-mapping package="org.com.model">
 
   <class name="org.com.model.domain.Cinematic" table="cinematics">
-    <id name="id" column="id">
+    <id column="id" name="id">
       <generator class="identity"/>
     </id>
 
-    <property name="title" column="title" not-null="true"/>
-    <property name="myRating" column="my_rating"/>
-    <property name="description" column="description"/>
-    <property name="imageUrl" column="image_url"/>
-    <property name="runtime" column="runtime"/>
-    <property name="imdbRating" column="imdb_rating"/>
-    <property name="imdbVotes" column="imdb_votes"/>
-    <property name="directorName" column="director_name"/>
+    <list cascade="all-delete-orphan" fetch="join" name="actors" table="actors">
+      <element column="actor" type="string"/>
+      <key column="cinematic_id"/>
+      <list-index column="actor_index"/>
+    </list>
+    <list cascade="all-delete-orphan" fetch="join" name="genres" table="genres">
+      <element column="genre" type="string"/>
+      <key column="cinematic_id"/>
+      <list-index column="genre_index"/>
+    </list>
+    <many-to-one class="org.com.model.domain.User" column="user_id" fetch="join" name="user"
+      not-null="true"/>
+    <property column="title" name="title" not-null="true"/>
+    <property column="my_rating" name="myRating"/>
+    <property column="description" name="description"/>
+    <property column="image_url" name="imageUrl"/>
+    <property column="runtime" name="runtime"/>
 
-    <property name="state" column="state" not-null="true">
+    <property column="imdb_rating" name="imdbRating"/>
+
+    <property column="imdb_votes" name="imdbVotes"/>
+
+    <property column="director_name" name="directorName"/>
+
+    <property column="state" name="state" not-null="true">
       <type name="org.hibernate.type.EnumType">
         <param name="enumClass">org.com.model.enums.State</param>
         <param name="useNamed">true</param>
       </type>
     </property>
 
-    <property name="type" column="type" not-null="true">
+    <property column="type" name="type" not-null="true">
       <type name="org.hibernate.type.EnumType">
         <param name="enumClass">org.com.model.enums.Type</param>
         <param name="useNamed">true</param>
       </type>
     </property>
-
-    <many-to-one name="user" class="org.com.model.domain.User" column="user_id" not-null="true" fetch="join"/>
-
-    <list name="actors" table="actors" cascade="all-delete-orphan" fetch="join">
-      <key column="cinematic_id"/>
-      <list-index column="actor_index"/>
-      <element column="actor" type="string"/>
-    </list>
-
-    <list name="genres" table="genres" cascade="all-delete-orphan" fetch="join">
-      <key column="cinematic_id"/>
-      <list-index column="genre_index"/>
-      <element column="genre" type="string"/>
-    </list>
 
 
   </class>

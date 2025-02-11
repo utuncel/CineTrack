@@ -1,5 +1,17 @@
 package junit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.Arrays;
+import java.util.List;
+import org.com.model.domain.Cinematic;
+import org.com.model.domain.User;
 import org.com.model.repository.CinematicRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,17 +21,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-
-import org.com.model.domain.Cinematic;
-import org.com.model.domain.User;
-import org.com.model.repository.AbstractRepository.RepositoryException;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-import static org.mockito.ArgumentMatchers.any;
 
 public class CinematicRepositoryTest {
 

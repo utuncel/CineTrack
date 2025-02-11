@@ -4,28 +4,30 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200.0"
+  prefWidth="256.0"
+  spacing="20"
+  styleClass="strategy-container" xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.TypeCountStatisticController"
+  fx:id="typeCount">
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22"
-  fx:controller="org.com.controller.dashboard.TypeCountStatisticController"
-  fx:id="typeCount" prefWidth="256.0" prefHeight="200.0"
-  styleClass="strategy-container">
+  <Label styleClass="statistic-name" text="Type Count:"/>
 
-  <Label styleClass="statistic-name" text="Type Count:" />
-
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Movies"/>
     <Label styleClass="statistic-value" fx:id="movie"/>
   </VBox>
 
   <!-- Box für Block 1 -->
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Series"/>
     <Label styleClass="statistic-value" fx:id="series"/>
   </VBox>
 
   <!-- Box für Block 2 -->
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Anime"/>
     <Label styleClass="statistic-value" fx:id="anime"/>
   </VBox>

@@ -4,23 +4,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22"
-  fx:controller="org.com.controller.dashboard.AverageRatingStatisticController"
-  fx:id="averageRating" prefWidth="256.0" prefHeight="200.0"
-  styleClass="strategy-container">
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200.0"
+  prefWidth="256.0"
+  spacing="20"
+  styleClass="strategy-container" xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.AverageRatingStatisticController"
+  fx:id="averageRating">
 
   <!-- Label für die Statistikbezeichnung oben links -->
-  <Label styleClass="statistic-name" text="Average Ratings:" />
+  <Label styleClass="statistic-name" text="Average Ratings:"/>
 
   <!-- Boxen für den Inhalt (wieder zentriert) -->
-  <VBox alignment="CENTER" spacing="10" styleClass="rating-box" prefWidth="200.0" prefHeight="150.0">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="rating-box">
     <Label styleClass="rating-name" text="MyRating"/>
     <Label styleClass="rating-value" fx:id="myRatingValue"/>
   </VBox>
 
-  <VBox alignment="CENTER" spacing="10" styleClass="rating-box" prefWidth="200.0" prefHeight="150.0">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="rating-box">
     <Label styleClass="rating-name" text="IMDbRating"/>
     <Label styleClass="rating-value" fx:id="imdbRatingValue"/>
   </VBox>

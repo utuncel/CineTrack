@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.Region?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
   xmlns="http://javafx.com/javafx"
   fx:controller="org.com.controller.sidebar.SidebarController"
@@ -15,46 +14,46 @@
   <left>
     <VBox styleClass="sidebar">
       <!-- Logo or Title Area -->
-      <Label text="CINEMATIC TRACKER" styleClass="sidebar-title"/>
+      <Label styleClass="sidebar-title" text="CINEMATIC TRACKER"/>
 
       <!-- Navigation Section -->
-      <VBox styleClass="nav-section" spacing="8">
-        <Button onAction="#loadDashboardView"
-          text="Dashboard"
-          styleClass="nav-button"/>
-        <Button onAction="#loadMovieView"
-          text="Movies"
-          styleClass="nav-button"/>
-        <Button onAction="#loadSeriesView"
-          text="Series"
-          styleClass="nav-button"/>
-        <Button onAction="#loadAnimeView"
-          text="Anime"
-          styleClass="nav-button"/>
-      </VBox>
-
-      <!-- Spacer -->
       <Region VBox.vgrow="ALWAYS"/>
 
+      <!-- Spacer -->
+      <VBox spacing="8" styleClass="nav-section">
+        <Button onAction="#loadDashboardView"
+          styleClass="nav-button"
+          text="Dashboard"/>
+        <Button onAction="#loadMovieView"
+          styleClass="nav-button"
+          text="Movies"/>
+        <Button onAction="#loadSeriesView"
+          styleClass="nav-button"
+          text="Series"/>
+        <Button onAction="#loadAnimeView"
+          styleClass="nav-button"
+          text="Anime"/>
+      </VBox>
+
       <!-- Management Section -->
-      <VBox styleClass="nav-section" spacing="8">
-        <Label text="MANAGEMENT" styleClass="section-title"/>
+      <VBox spacing="8" styleClass="nav-section">
         <Button onAction="#loadDataImporterView"
-          text="Data Importer"
-          styleClass="nav-button"/>
+          styleClass="nav-button"
+          text="Data Importer"/>
         <Button onAction="#loadDataExportView"
-          text="Data Export"
-          styleClass="nav-button"/>
+          styleClass="nav-button"
+          text="Data Export"/>
         <Button onAction="#loadAddCinematicView"
-          text="Add Cinematic"
-          styleClass="nav-button"/>
+          styleClass="nav-button"
+          text="Add Cinematic"/>
         <Button onAction="#loadLoggerView"
-          text="Logs"
-          styleClass="nav-button"/>
+          styleClass="nav-button"
+          text="Logs"/>
+        <Label styleClass="section-title" text="MANAGEMENT"/>
       </VBox>
     </VBox>
   </left>
   <stylesheets>
-    <URL value="@SidebarStyle.css" />
+    <URL value="@SidebarStyle.css"/>
   </stylesheets>
 </BorderPane>

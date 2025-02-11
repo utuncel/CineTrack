@@ -4,34 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" prefHeight="200.0"
+  prefWidth="256.0"
+  spacing="20"
+  styleClass="strategy-container" xmlns="http://javafx.com/javafx/22" fx:controller="org.com.controller.dashboard.StateCountStatisticController"
+  fx:id="stateCount">
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" spacing="20"
-  xmlns="http://javafx.com/javafx/22"
-  fx:controller="org.com.controller.dashboard.StateCountStatisticController"
-  fx:id="stateCount" prefWidth="256.0" prefHeight="200.0"
-  styleClass="strategy-container">
+  <Label styleClass="statistic-name" text="State Count:"/>
 
-  <Label styleClass="statistic-name" text="State Count:" />
-
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Finished"/>
     <Label styleClass="statistic-value" fx:id="finished"/>
   </VBox>
 
   <!-- Box für Block 1 -->
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Watching"/>
     <Label styleClass="statistic-value" fx:id="watching"/>
   </VBox>
 
   <!-- Box für Block 2 -->
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="Dropped"/>
     <Label styleClass="statistic-value" fx:id="dropped"/>
   </VBox>
 
   <!-- Box für Block 3 -->
-  <VBox alignment="CENTER" spacing="10" prefWidth="200.0" prefHeight="150.0" styleClass="statistic-box">
+  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="200.0" spacing="10"
+    styleClass="statistic-box">
     <Label styleClass="statistic-name" text="ToWatch"/>
     <Label styleClass="statistic-value" fx:id="toWatch"/>
   </VBox>

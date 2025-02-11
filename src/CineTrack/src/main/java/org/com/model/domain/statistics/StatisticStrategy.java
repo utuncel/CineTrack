@@ -10,7 +10,6 @@ import org.com.model.enums.Type;
  * cinematics and filtering criteria.
  *
  * @param <T> The type of the result produced by the strategy.
- *
  * @author umut
  * @version 1.0
  */

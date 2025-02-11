@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ScrollPane?>
@@ -7,7 +8,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 <ScrollPane xmlns:fx="http://javafx.com/fxml"
   fitToWidth="true"
   styleClass="cinematic-listing-scroll"
@@ -22,24 +22,24 @@
         styleClass="search-controls">
 
         <ComboBox prefWidth="150"
-          fx:id="sortComboBox"
+          promptText="Sortieren nach..."
           styleClass="modern-combo-box"
-          promptText="Sortieren nach..."/>
+          fx:id="sortComboBox"/>
 
         <TextField HBox.hgrow="ALWAYS"
           promptText="Suchen..."
-          fx:id="searchField"
-          styleClass="modern-search-field"/>
+          styleClass="modern-search-field"
+          fx:id="searchField"/>
       </HBox>
 
       <!-- Movies Grid -->
-      <TilePane hgap="30"
-        vgap="40"
+      <TilePane alignment="TOP_LEFT"
+        hgap="30"
         styleClass="cinematics-tile-pane"
-        fx:id="cinematicsContainer"
-        alignment="TOP_LEFT">
+        vgap="40"
+        fx:id="cinematicsContainer">
         <padding>
-          <Insets top="10" right="10" bottom="10" left="10"/>
+          <Insets bottom="10" left="10" right="10" top="10"/>
         </padding>
       </TilePane>
 
@@ -49,6 +49,6 @@
     </VBox>
   </content>
   <stylesheets>
-    <URL value="@CinematicBoxListingStyle.css" />
+    <URL value="@CinematicBoxListingStyle.css"/>
   </stylesheets>
 </ScrollPane>

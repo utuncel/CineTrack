@@ -3,12 +3,10 @@ package junit;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javafx.application.Platform;
 import org.com.service.LineValidatorService;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class LineValidatorServiceTest extends JavaFXTestBase{
+public class LineValidatorServiceTest extends JavaFXTestBase {
 
   private LineValidatorService validatorService = new LineValidatorService();
 

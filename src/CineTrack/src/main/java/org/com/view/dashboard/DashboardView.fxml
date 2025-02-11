@@ -10,20 +10,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
-<StackPane fx:id="contentPane"   prefHeight="800.0" prefWidth="1550.0" style="-fx-background-color: #2B2B2B;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.dashboard.DashboardController"> <!-- Hintergrundfarbe -->
+<StackPane xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #2B2B2B;" prefHeight="800.0"
+  prefWidth="1550.0" xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.com.controller.dashboard.DashboardController"
+  fx:id="contentPane"> <!-- Hintergrundfarbe -->
 
   <AnchorPane>
-    <BorderPane styleClass="semi-top-form" stylesheets="@DashboardStyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+      AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" styleClass="semi-top-form"
+      stylesheets="@DashboardStyle.css">
 
       <!-- Hauptinhalt -->
       <center>
         <AnchorPane prefHeight="768.0" prefWidth="1120.0">
-          <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="-4.0" prefHeight="958.0" prefWidth="1771.0" styleClass="scroll-pane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+          <ScrollPane AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0"
+            fitToHeight="true" fitToWidth="true" layoutX="-4.0"
+            prefHeight="958.0" prefWidth="1771.0" styleClass="scroll-pane">
             <content>
-              <VBox fx:id="chartContainer" alignment="TOP_CENTER" spacing="15.0" maxHeight="Infinity">
+              <VBox alignment="TOP_CENTER" maxHeight="Infinity" spacing="15.0"
+                fx:id="chartContainer">
                 <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
                 </padding>
               </VBox>
             </content>
@@ -32,52 +39,65 @@
       </center>
 
       <!-- Checkbox-Gruppen im oberen Bereich -->
+      <left>
+        <fx:include source="../sidebar/SidebarView.fxml"/>
+      </left>
+
+      <!-- Sidebar bleibt erhalten -->
       <top>
         <AnchorPane prefHeight="202.0" prefWidth="1900.0" styleClass="top-form">
-          <HBox alignment="CENTER" prefHeight="188.0" prefWidth="1860.0" spacing="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+          <HBox AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" alignment="CENTER"
+            prefHeight="188.0" prefWidth="1860.0" spacing="50.0">
 
             <!-- State-Gruppe -->
             <VBox alignment="TOP_CENTER" spacing="10.0">
-              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="State" />
-              <FlowPane alignment="CENTER" hgap="10.0" prefHeight="71.0" prefWidth="261.0" vgap="10.0">
-                <CheckBox fx:id="watchingCheckBox" styleClass="check-box" text="Watching" selected="true"/>
-                <CheckBox fx:id="droppedCheckBox" styleClass="check-box" text="Dropped" selected="true"/>
-                <CheckBox fx:id="finishedCheckBox" styleClass="check-box" text="Finished" selected="true"/>
-                <CheckBox fx:id="toWatchCheckBox" styleClass="check-box" text="To Watch" />
+              <FlowPane alignment="CENTER" hgap="10.0" prefHeight="71.0" prefWidth="261.0"
+                vgap="10.0">
+                <CheckBox selected="true" styleClass="check-box" text="Watching"
+                  fx:id="watchingCheckBox"/>
+                <CheckBox selected="true" styleClass="check-box" text="Dropped"
+                  fx:id="droppedCheckBox"/>
+                <CheckBox selected="true" styleClass="check-box" text="Finished"
+                  fx:id="finishedCheckBox"/>
+                <CheckBox styleClass="check-box" text="To Watch" fx:id="toWatchCheckBox"/>
               </FlowPane>
+              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="State"/>
             </VBox>
 
             <!-- Statistic-Gruppe -->
             <VBox alignment="TOP_CENTER" spacing="10.0">
-              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="Statistics" />
               <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0">
-                <CheckBox fx:id="averageRatingCheckBox" styleClass="check-box" text="Average Ratings" />
-                <CheckBox fx:id="actorRatingCheckBox" styleClass="check-box" text="Actor Ratings" />
-                <CheckBox fx:id="genreRatingCheckBox" prefHeight="34.0" prefWidth="148.0" styleClass="check-box" text="Genre Ratings" />
-                <CheckBox fx:id="genreCountCheckBox" styleClass="check-box" text="Genre Count" />
-                <CheckBox fx:id="typeCountCheckBox" prefHeight="34.0" prefWidth="152.0" styleClass="check-box" text="Type Count" />
-                <CheckBox fx:id="stateCountCheckBox" prefHeight="34.0" prefWidth="125.0" styleClass="check-box" text="State Count" />
+                <CheckBox styleClass="check-box" text="Average Ratings"
+                  fx:id="averageRatingCheckBox"/>
+                <CheckBox styleClass="check-box" text="Actor Ratings" fx:id="actorRatingCheckBox"/>
+                <CheckBox prefHeight="34.0" prefWidth="148.0" styleClass="check-box"
+                  text="Genre Ratings" fx:id="genreRatingCheckBox"/>
+                <CheckBox styleClass="check-box" text="Genre Count" fx:id="genreCountCheckBox"/>
+                <CheckBox prefHeight="34.0" prefWidth="152.0" styleClass="check-box"
+                  text="Type Count" fx:id="typeCountCheckBox"/>
+                <CheckBox prefHeight="34.0" prefWidth="125.0" styleClass="check-box"
+                  text="State Count" fx:id="stateCountCheckBox"/>
               </FlowPane>
+              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="Statistics"/>
             </VBox>
 
             <!-- Cinematic-Gruppe -->
             <VBox alignment="TOP_CENTER" prefHeight="182.0" prefWidth="307.0" spacing="10.0">
-              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="Cinematic" />
-              <FlowPane alignment="CENTER" hgap="10.0" prefHeight="34.0" prefWidth="262.0" vgap="10.0">
-                <CheckBox fx:id="movieCheckBox" styleClass="check-box" text="Movies" selected="true"/>
-                <CheckBox fx:id="seriesCheckBox" styleClass="check-box" text="Series" selected="true"/>
-                <CheckBox fx:id="animeCheckBox" styleClass="check-box" text="Anime" selected="true"/>
+              <FlowPane alignment="CENTER" hgap="10.0" prefHeight="34.0" prefWidth="262.0"
+                vgap="10.0">
+                <CheckBox selected="true" styleClass="check-box" text="Movies"
+                  fx:id="movieCheckBox"/>
+                <CheckBox selected="true" styleClass="check-box" text="Series"
+                  fx:id="seriesCheckBox"/>
+                <CheckBox selected="true" styleClass="check-box" text="Anime"
+                  fx:id="animeCheckBox"/>
               </FlowPane>
+              <Label style="-fx-font-size: 14px;" styleClass="group-label" text="Cinematic"/>
             </VBox>
 
           </HBox>
         </AnchorPane>
       </top>
-
-      <!-- Sidebar bleibt erhalten -->
-      <left>
-        <fx:include source="../sidebar/SidebarView.fxml" />
-      </left>
 
     </BorderPane>
   </AnchorPane>

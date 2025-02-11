@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.com.model.models.CinematicModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.models.CinematicModel;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.service.DialogService;
 import org.com.service.LogService;
 

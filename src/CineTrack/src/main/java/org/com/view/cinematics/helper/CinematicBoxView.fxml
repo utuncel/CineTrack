@@ -6,26 +6,29 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<StackPane xmlns:fx="http://javafx.com/fxml/1" styleClass="movie-preview"
+  xmlns="http://javafx.com/javafx/22"
+  fx:controller="org.com.controller.cinematics.helper.CinematicBoxController">
 
-<StackPane styleClass="movie-preview" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.com.controller.cinematics.helper.CinematicBoxController">
-
-  <VBox spacing="15" style="-fx-padding: 0;">
+  <VBox style="-fx-padding: 0;" spacing="15">
     <StackPane>
-      <ImageView fx:id="posterImage" fitHeight="300" fitWidth="200" preserveRatio="true" styleClass="poster-image" />
+      <ImageView fitHeight="300" fitWidth="200" preserveRatio="true" styleClass="poster-image"
+        fx:id="posterImage"/>
     </StackPane>
 
-    <VBox spacing="8" style="-fx-padding: 0 10 10 10;">
-      <Label fx:id="titleLabel" styleClass="title" />
-      <Label fx:id="runtimeLabel" styleClass="info" />
-      <Label fx:id="directorLabel" styleClass="info" />
-      <Label fx:id="imdbRatingLabel" styleClass="info" />
-      <Label fx:id="myRatingLabel" styleClass="info" />
-      <Label fx:id="stateLabel" styleClass="info" />
+    <VBox style="-fx-padding: 0 10 10 10;" spacing="8">
+      <Label styleClass="title" fx:id="titleLabel"/>
+      <Label styleClass="info" fx:id="runtimeLabel"/>
+      <Label styleClass="info" fx:id="directorLabel"/>
+      <Label styleClass="info" fx:id="imdbRatingLabel"/>
+      <Label styleClass="info" fx:id="myRatingLabel"/>
+      <Label styleClass="info" fx:id="stateLabel"/>
 
-      <TextArea fx:id="descriptionArea" editable="false" maxWidth="393.0" prefHeight="189.0" prefRowCount="6" prefWidth="393.0" styleClass="modern-description" wrapText="true"/>
+      <TextArea editable="false" maxWidth="393.0" prefHeight="189.0" prefRowCount="6"
+        prefWidth="393.0" styleClass="modern-description" wrapText="true" fx:id="descriptionArea"/>
     </VBox>
   </VBox>
   <stylesheets>
-    <URL value="@CinematicBoxStyle.css" />
+    <URL value="@CinematicBoxStyle.css"/>
   </stylesheets>
 </StackPane>

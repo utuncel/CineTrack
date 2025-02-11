@@ -6,15 +6,16 @@
 <hibernate-mapping package="org.com.model.models">
 
   <class name="org.com.model.domain.Log" table="logs">
-    <id name="id" column="id">
+    <id column="id" name="id">
       <generator class="identity"/>
     </id>
 
-    <property name="timestamp" column="timestamp" type="org.hibernate.type.LocalDateTimeType"/>
-    <property name="level" column="level" not-null="true"/>
-    <property name="message" column="message" not-null="true"/>
+    <many-to-one class="org.com.model.domain.User" column="user_id" fetch="join" name="user"
+      not-null="false"/>
+    <property column="level" name="level" not-null="true"/>
+    <property column="message" name="message" not-null="true"/>
 
-    <many-to-one name="user" class="org.com.model.domain.User" column="user_id" fetch="join" not-null="false"/>
+    <property column="timestamp" name="timestamp" type="org.hibernate.type.LocalDateTimeType"/>
 
   </class>
 

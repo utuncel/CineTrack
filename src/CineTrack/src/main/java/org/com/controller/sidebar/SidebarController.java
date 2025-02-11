@@ -9,8 +9,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
-import org.com.model.models.CinematicModelSingleton;
 import org.com.model.models.CinematicModel;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
 

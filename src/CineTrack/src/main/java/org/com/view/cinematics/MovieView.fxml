@@ -4,9 +4,9 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml"
   prefHeight="800.0"
   prefWidth="1200.0"
+  stylesheets="@CinematicStyle.css"
   xmlns="http://javafx.com/javafx"
-  fx:controller="org.com.controller.cinematics.MovieController"
-  stylesheets="@CinematicStyle.css">
+  fx:controller="org.com.controller.cinematics.MovieController">
   <center>
     <fx:include source="helper/CinematicBoxListingView.fxml" fx:id="cinematicListing"/>
   </center>

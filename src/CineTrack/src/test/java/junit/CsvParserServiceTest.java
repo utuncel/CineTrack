@@ -2,14 +2,12 @@ package junit;
 
 import static org.junit.Assert.assertEquals;
 
-import javafx.application.Platform;
 import org.com.model.enums.State;
 import org.com.model.enums.Type;
 import org.com.service.CsvParserService;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class CsvParserServiceTest extends JavaFXTestBase{
+public class CsvParserServiceTest extends JavaFXTestBase {
 
   @Test
   public void testParseTypes_ValidType() {
