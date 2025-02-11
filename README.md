@@ -4,7 +4,7 @@
 
 Cinetracker is a JavaFX-based application that allows users to catalog and analyze their watched cinematics, including movies, anime, and series. Users can import their personal cinematics with some data like the rating and the title and view additional details fetched from the OMDb API, such as cover images, director information, and IMDb ratings. The application also provides various statistical insights about the cinematics.
 
-This project serves as a learning experience for developing GUI applications using JavaFX with the MVC architecture.
+This project serves as a learning experience for developing GUI applications using JavaFX with the MVCS architecture.
 
 ## Features
 
@@ -34,7 +34,7 @@ This project serves as a learning experience for developing GUI applications usi
 
 ## Dataflow
 
-![Here you can see how the data flows](Pfad_zum_Bild)
+![Here you can see how the data flows](images/dataflow.png)
 
 ## Prerequisites
 To run this project, ensure you have the following installed:
