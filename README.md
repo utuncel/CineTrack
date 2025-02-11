@@ -32,6 +32,10 @@ This project serves as a learning experience for developing GUI applications usi
 - **Build & Development Tools:** Maven, IntelliJ IDEA
 - **Database:** Local MySQL database running in a Docker container
 
+## Dataflow
+
+![Here you can see how the data flows](Pfad_zum_Bild)
+
 ## Prerequisites
 To run this project, ensure you have the following installed:
 
