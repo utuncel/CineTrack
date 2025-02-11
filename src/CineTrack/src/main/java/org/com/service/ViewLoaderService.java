@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.dashboard.DashboardController;
-import org.com.model.models.DashboardModelSingleton;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.model.domain.Cinematic;
 
 /**
@@ -64,11 +64,11 @@ public class ViewLoaderService {
           "/org/com/view/dashboard/DashboardView.fxml"));
       Parent dashboardView = loader.load();
 
-      DashboardModelSingleton.getInstance().setCinematics(cinematics);
+      CinematicModelSingleton.getInstance().setCinematics(cinematics);
       SessionManagerService.getInstance().getCurrentUser().setCinematics(cinematics);
 
       DashboardController controller = loader.getController();
-      controller.setDashboardModel(DashboardModelSingleton.getInstance());
+      controller.setDashboardModel(CinematicModelSingleton.getInstance());
 
       Scene scene = new Scene(dashboardView);
       Stage primaryStage = (Stage) usernameField.getScene().getWindow();

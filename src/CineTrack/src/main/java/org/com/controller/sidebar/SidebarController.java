@@ -9,7 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import org.com.controller.cinematics.helper.CinematicController;
 import org.com.controller.dashboard.DashboardController;
-import org.com.model.models.DashboardModelSingleton;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.model.models.CinematicModel;
 import org.com.service.LogService;
 import org.com.service.ViewLoaderService;
@@ -37,7 +37,7 @@ public class SidebarController {
    */
   @FXML
   public void initialize() {
-    cinematicModel = DashboardModelSingleton.getInstance();
+    cinematicModel = CinematicModelSingleton.getInstance();
   }
 
   /**

@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.com.model.models.DashboardModelSingleton;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.models.CinematicModel;
 import org.com.service.DialogService;
@@ -36,7 +36,7 @@ public class DataExportController {
    * Constructs a new DataExportController. Initializes the dashboard model and dialog service.
    */
   public DataExportController() {
-    this.cinematicModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = CinematicModelSingleton.getInstance();
     this.dialogService = new DialogService();
   }
 

@@ -1,10 +1,10 @@
 package org.com.model.models;
 
-public class DashboardModelSingleton {
+public class CinematicModelSingleton {
 
   private static CinematicModel instance;
 
-  private DashboardModelSingleton() {
+  private CinematicModelSingleton() {
   }
 
   public static CinematicModel getInstance() {

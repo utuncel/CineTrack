@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.com.model.models.CinematicModel;
-import org.com.model.models.DashboardModelSingleton;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.model.domain.Cinematic;
 import org.com.model.repository.CinematicRepository;
 import org.com.model.repository.HibernateUtil;
@@ -48,7 +48,7 @@ public class DataImporterController {
 
   public DataImporterController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
-    this.cinematicModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = CinematicModelSingleton.getInstance();
     this.sessionManager = SessionManagerService.getInstance();
     this.dialogService = new DialogService();
   }

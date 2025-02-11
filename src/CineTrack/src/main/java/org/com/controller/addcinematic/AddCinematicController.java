@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import org.com.model.domain.Cinematic;
 import org.com.model.domain.CsvCinematic;
 import org.com.model.models.CinematicModel;
-import org.com.model.models.DashboardModelSingleton;
+import org.com.model.models.CinematicModelSingleton;
 import org.com.model.repository.CinematicRepository;
 import org.com.model.repository.HibernateUtil;
 import org.com.service.CineFactoryService;
@@ -60,7 +60,7 @@ public class AddCinematicController {
   public AddCinematicController() {
     this.cinematicRepository = new CinematicRepository(HibernateUtil.getSessionFactory());
     this.sessionManager = SessionManagerService.getInstance();
-    this.cinematicModel = DashboardModelSingleton.getInstance();
+    this.cinematicModel = CinematicModelSingleton.getInstance();
   }
 
   /**
